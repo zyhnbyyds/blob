@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@vite-pwa/nuxt',
     '@nuxt/devtools',
+    '@ant-design-vue/nuxt',
   ],
 
   experimental: {
@@ -18,8 +19,10 @@ export default defineNuxtConfig({
   },
 
   css: [
-    '@unocss/reset/tailwind.css',
+    'ant-design-vue/dist/reset.css',
   ],
+
+  ssr: false,
 
   colorMode: {
     classSuffix: '',
