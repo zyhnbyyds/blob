@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@nuxt/devtools',
     '@ant-design-vue/nuxt',
+    '@sidebase/nuxt-auth',
   ],
 
   experimental: {
@@ -22,22 +23,17 @@ export default defineNuxtConfig({
     'ant-design-vue/dist/reset.css',
   ],
 
-  ssr: false,
-
   colorMode: {
     classSuffix: '',
   },
+
+  ssr: false,
 
   nitro: {
     esbuild: {
       options: {
         target: 'esnext',
       },
-    },
-    prerender: {
-      crawlLinks: false,
-      routes: ['/'],
-      ignore: ['/hi'],
     },
   },
 
@@ -49,5 +45,9 @@ export default defineNuxtConfig({
     timeline: {
       enabled: true,
     },
+  },
+
+  auth: {
+    isEnabled: true,
   },
 })
