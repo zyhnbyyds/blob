@@ -1,18 +1,22 @@
 <script lang='ts' setup>
-const isDark = useDark()
-const toggleDark = useToggle(isDark)
+const colorMode = useColorMode()
+
+const isDark = computed({
+  get: () => colorMode.value === 'dark',
+  set: (value) => {
+    colorMode.preference = value ? 'dark' : 'light'
+  },
+})
 </script>
 
 <template>
-  <a-switch
-    v-model:checked="isDark"
-    absolute
-    right-20px
-    top-20px
-    checked-children="🌙"
-    un-checked-children="🌞"
-    @change="toggleDark"
-  />
+  <div class="text-red">
+    <UToggle
+      v-model="isDark"
+      on-icon="i-streamline-emojis-sleeping-face"
+      off-icon="i-streamline-emojis-grimacing-face"
+    />
+  </div>
 </template>
 
 <style scoped></style>

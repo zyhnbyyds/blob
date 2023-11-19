@@ -1,10 +1,24 @@
 {
   "prettier.enable": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
   "files.associations": {
-    "*.css": "postcss"
+    "*.css": "tailwindcss"
   },
-  "editor.formatOnSave": false
+  "tailwindCSS.experimental.configFile": "tailwind.config.ts",
+  "tailwindCSS.experimental.classRegex": [
+    ["ui:\\s*{([^)]*)\\s*}", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["/\\*ui\\*/\\s*{([^;]*)}", ":\\s*[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "ngClass",
+    "ui"
+  ],
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "testing.automaticallyOpenPeekView": "never",
+  "cSpell.words": [
+    "tailwindcss"
+  ]
 }

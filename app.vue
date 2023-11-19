@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import { theme } from 'ant-design-vue'
+onNuxtReady(() => {
+  const colorMode = useColorMode()
+  const isPrefersDark = usePreferredDark()
 
-const isDark = useDark()
+  watchEffect(() => {
+    colorMode.preference = isPrefersDark.value ? 'dark' : 'light'
+  })
+})
 </script>
 
 <template>
-  <VitePwaManifest />
-  <AConfigProvider :theme="{ algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm }">
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-  </AConfigProvider>
-
-  <DarkToggle />
+  <div>
+    <NuxtPage />
+    <DarkToggle />
+  </div>
 </template>
 
 <style>
