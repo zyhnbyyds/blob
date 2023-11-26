@@ -1,7 +1,9 @@
-<script lang='ts' setup></script>
+<script lang='ts' setup>
+// const { data, status } = await useFetch('/api/article/list', { method: 'GET' })
+</script>
 
 <template>
-  <div>大干一场吧</div>
+  <div>123</div>
 </template>
 
 <style scoped></style>

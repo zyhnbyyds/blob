@@ -14,10 +14,9 @@ export default defineNuxtConfig({
 
   nitro: {
     devStorage: {
-      redis: {
-        driver: 'redis',
-        host: 'localhost',
-        port: 6379,
+      db: {
+        driver: 'fs',
+        base: './data/db',
       },
     },
   },
