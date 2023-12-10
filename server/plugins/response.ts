@@ -13,14 +13,10 @@ export default defineNitroPlugin((nitroApp) => {
 
   nitroApp.hooks.hook('afterResponse', async (event, data) => {
     const { status, dateNow, method, path } = handleNitroHookEvent(event)
-    let body: any
-
-    if (method !== 'GET')
-      body = await readBody(event)
 
     if (status >= 400)
       logger.withTag(dateNow).withTag(` ${method.toUpperCase()} -> ${status} ${path}`).error(data?.body)
     else
-      logger.withTag(dateNow).withTag(` ${method.toUpperCase()} -> ${status} ${path}`).success(body ?? 'success')
+      logger.withTag(dateNow).withTag(` ${method.toUpperCase()} -> ${status} ${path}`).success('success')
   })
 })

@@ -19,6 +19,8 @@
   },
   "testing.automaticallyOpenPeekView": "never",
   "cSpell.words": [
+    "datacenter",
+    "Millis",
     "tailwindcss"
   ],
   // Enable the ESlint flat config support
