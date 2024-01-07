@@ -1,3 +1,5 @@
+import { redisConfig } from './config/redis'
+
 export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
@@ -5,20 +7,24 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxt/devtools',
     'nuxt-lodash',
-    '@nuxt/ui',
+    '@sidebase/nuxt-auth',
+    '@unocss/nuxt',
   ],
 
   colorMode: {
     classSuffix: '',
   },
-
+  auth: {
+    provider: {
+      type: 'authjs',
+      defaultProvider: 'github',
+      trustHost: true,
+    },
+    globalAppMiddleware: true,
+  },
   nitro: {
     devStorage: {
-      redis: {
-        driver: 'redis',
-        host: '127.0.0.1',
-        port: 6379,
-      },
+      redis: redisConfig,
     },
   },
 
@@ -27,10 +33,5 @@ export default defineNuxtConfig({
     timeline: {
       enabled: true,
     },
-  },
-
-  ui: {
-    global: true,
-    icons: 'all',
   },
 })

@@ -10,10 +10,7 @@ onNuxtReady(() => {
 </script>
 
 <template>
-  <div>
-    <NuxtPage />
-    <DarkToggle />
-  </div>
+  <NuxtPage />
 </template>
 
 <style>

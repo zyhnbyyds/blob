@@ -19,9 +19,13 @@
   },
   "testing.automaticallyOpenPeekView": "never",
   "cSpell.words": [
+    "aliyuncs",
+    "authjs",
     "datacenter",
     "Millis",
-    "tailwindcss"
+    "octocat",
+    "tailwindcss",
+    "yujiezhang"
   ],
   // Enable the ESlint flat config support
   "eslint.experimental.useFlatConfig": true,
