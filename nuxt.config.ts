@@ -1,5 +1,7 @@
 import { redisConfig } from './config/redis'
 
+const baseUrl = (import.meta.env.AUTH_ORIGIN || 'http://localhost:3000')
+
 export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
@@ -15,15 +17,20 @@ export default defineNuxtConfig({
     classSuffix: '',
   },
   auth: {
+    isEnabled: true,
     provider: {
       type: 'authjs',
       defaultProvider: 'github',
       trustHost: true,
     },
     globalAppMiddleware: true,
+    baseUrl,
   },
   nitro: {
     devStorage: {
+      redis: redisConfig,
+    },
+    storage: {
       redis: redisConfig,
     },
   },

@@ -9,5 +9,7 @@ interface ImportMeta {
     REDIS_HOST: string
     REDIS_AUTH_USER: string
     REDIS_AUTH_PASS: string
+    AUTH_SECRET: string
+    AUTH_ORIGIN: string
   }
 }
