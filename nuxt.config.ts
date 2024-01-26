@@ -1,7 +1,5 @@
 import { redisConfig } from './config/redis'
 
-const baseUrl = (import.meta.env.AUTH_ORIGIN || 'http://localhost:3000')
-
 export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
@@ -16,6 +14,9 @@ export default defineNuxtConfig({
   colorMode: {
     classSuffix: '',
   },
+
+  css: ['@unocss/reset/tailwind-compat.css'],
+
   auth: {
     isEnabled: true,
     provider: {
@@ -24,7 +25,6 @@ export default defineNuxtConfig({
       trustHost: true,
     },
     globalAppMiddleware: true,
-    baseUrl,
   },
   nitro: {
     devStorage: {

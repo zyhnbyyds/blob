@@ -10,27 +10,28 @@ definePageMeta({
 </script>
 
 <template>
-  {{ data }}
-  <button v-if="status === 'unauthenticated'" @click="signIn('github', { redirect: true, callbackUrl: '/article/list' })">
-    登录
-  </button>
-  <div v-else>
-    <img :src="data?.user?.image ?? ''">
-    <span>{{ data?.user?.name }}</span>
-  </div>
-  <div>
-    加载中...
-    <img class="h-100px w-100px text-red" src="/svg-icons/SvgSpinners6DotsScaleMiddle.svg">
-  </div>
+  <div scrollbar="~  rounded thumb-color-red300 track-color-[rgba(0,0,0,0.3)]">
+    <button v-if="status === 'unauthenticated'" @click="signIn('github', { redirect: true, callbackUrl: '/article/list' })">
+      登录
+    </button>
+    <div v-else>
+      <img :src="data?.user?.image ?? ''">
+      <span>{{ data?.user?.name }}</span>
+    </div>
 
-  <NuxtLink to="/article/List">
-    文章列表
-  </NuxtLink>
+    <NuxtLink to="/article/List">
+      文章列表
+    </NuxtLink>
 
-  <button
-    v-if="status === 'authenticated'"
-    @click="signOut()"
-  />
+    <NuxtLink to="/manage/article">
+      文章管理
+    </NuxtLink>
+
+    <button
+      v-if="status === 'authenticated'"
+      @click="signOut()"
+    />
+  </div>
 </template>
 
 <style scoped></style>

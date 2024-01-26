@@ -1,4 +1,8 @@
 <script lang='ts' setup>
+defineOptions({
+  name: 'DarkToggle',
+})
+
 const colorMode = useColorMode()
 
 const isDark = computed({
@@ -10,12 +14,8 @@ const isDark = computed({
 </script>
 
 <template>
-  <div class="text-red">
-    <UToggle
-      v-model="isDark"
-      on-icon="i-streamline-emojis-sleeping-face"
-      off-icon="i-streamline-emojis-grimacing-face"
-    />
+  <div>
+    <div :class="!isDark ? 'line-md:moon-alt-to-sunny-outline-loop-transition' : 'line-md:moon-rising-filled-alt-loop'" @click="isDark = !isDark" />
   </div>
 </template>
 

@@ -10,16 +10,10 @@ onNuxtReady(() => {
 </script>
 
 <template>
-  <NuxtPage />
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
 <style>
-#__nuxt, html {
-  height: 100%;
-}
-
-html.dark {
-  background-color: #1a202c;
-  color: #fff;
-}
 </style>

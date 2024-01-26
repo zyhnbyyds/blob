@@ -2,7 +2,7 @@
 import type { ArticleItem } from '~/server/types'
 
 const { query } = useRoute()
-const { data: detail } = useFetch<ArticleItem>('/api/article/detail', { method: 'GET', params: { id: query.id } })
+const { data: detail, pending } = useFetch<ArticleItem>('/api/article/detail', { method: 'GET', params: { id: query.id } })
 
 definePageMeta({
   auth: false,
@@ -11,7 +11,11 @@ definePageMeta({
 
 <template>
   <div>
-    {{ detail?.content }}
+    <div v-if="pending" text-10 absolute-center i-svg-spinners:12-dots-scale-rotate />
+
+    <div v-else>
+      {{ detail?.content }}
+    </div>
   </div>
 </template>
 
