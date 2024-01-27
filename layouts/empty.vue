@@ -1,7 +1,7 @@
 <script lang='ts' setup></script>
 
 <template>
-  <div>😎asdasd❤️❤️❤️</div>
+  <slot />
 </template>
 
 <style scoped></style>

@@ -68,7 +68,7 @@ watch(() => app.isHeaderTextOrIcon, async () => {
 async function handleTabChange(value: string | number, index: number) {
   actTabVal.value = value
   if (props.isRoute)
-    router.push(value as string)
+    router.push({ path: value as string })
   await nextTick()
   if (!tabsRef.value)
     return
@@ -92,9 +92,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="shadow-style relative inline-flex gap-2 rounded-6 px-2 py-2 font-bold shadow-md dark:bg-#333">
+  <div class="shadow-style relative inline-flex gap-2 rounded-6 items-center text-gray-400 bg-white px-2 py-2 shadow-md dark:bg-#333">
     <div v-for="item, i in props.tabs" ref="tabsRef" :key="i" class="relative z-10">
-      <div class="relative z-10 cursor-pointer rounded-3 px-4 py-1" hover="text-#1ad6ff text-opacity-60" :class="{ 'text-#1ad6ff': actTabVal === item.value }" @click="handleTabChange(item[props.valueFiled], i)">
+      <div class="relative z-10 cursor-pointer rounded-3 px-4 py-1" :class="{ 'font-bold text-dark dark:text-white': actTabVal === item.value }" @click="handleTabChange(item[props.valueFiled], i)">
         <slot :data="item">
           {{ item.label }}
         </slot>
