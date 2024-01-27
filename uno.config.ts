@@ -25,6 +25,7 @@ export default defineConfig({
 
     ['hw-full', 'h-full w-full'],
 
+    ['text-over-one', 'overflow-hidden w-full text-nowrap text-ellipsis'],
     ...shortcuts,
   ],
   presets: [

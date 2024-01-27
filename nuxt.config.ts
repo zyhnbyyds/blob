@@ -9,11 +9,14 @@ export default defineNuxtConfig({
     'nuxt-lodash',
     '@sidebase/nuxt-auth',
     '@unocss/nuxt',
+    '@ant-design-vue/nuxt',
   ],
 
   colorMode: {
     classSuffix: '',
   },
+
+  ssr: false,
 
   css: ['@unocss/reset/tailwind-compat.css'],
 
