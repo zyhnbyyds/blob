@@ -20,6 +20,12 @@ export default defineNuxtConfig({
 
   css: ['@unocss/reset/tailwind-compat.css'],
 
+  vite: {
+    optimizeDeps: {
+      include: ['lodash-es'],
+    },
+  },
+
   nitro: {
     devStorage: {
       redis: redisConfig,
@@ -34,9 +40,5 @@ export default defineNuxtConfig({
     timeline: {
       enabled: true,
     },
-  },
-
-  nuxtTypedRouter: {
-    ignoreRoutes: ['/api/**'],
   },
 })
