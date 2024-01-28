@@ -1,23 +1,5 @@
 {
   "prettier.enable": false,
-  "files.associations": {
-    "*.css": "tailwindcss"
-  },
-  "tailwindCSS.experimental.configFile": "tailwind.config.ts",
-  "tailwindCSS.experimental.classRegex": [
-    ["ui:\\s*{([^)]*)\\s*}", "[\"'`]([^\"'`]*).*?[\"'`]"],
-    ["/\\*ui\\*/\\s*{([^;]*)}", ":\\s*[\"'`]([^\"'`]*).*?[\"'`]"]
-  ],
-  "tailwindCSS.classAttributes": [
-    "class",
-    "className",
-    "ngClass",
-    "ui"
-  ],
-  "editor.quickSuggestions": {
-    "strings": true
-  },
-  "testing.automaticallyOpenPeekView": "never",
   "cSpell.words": [
     "aliyuncs",
     "authjs",
@@ -34,6 +16,10 @@
 
   // Disable the default formatter, use eslint instead
   "editor.formatOnSave": false,
+
+  "[vue]": {
+    "editor.formatOnSave": false
+  },
 
   // Auto fix
   "editor.codeActionsOnSave": {

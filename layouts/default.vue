@@ -8,22 +8,34 @@ const tabs = ref([
     label: '案例',
     value: '/demos',
   },
+  {
+    label: '管理',
+    value: '/manage/article',
+  },
 ])
 
 const active = ref(tabs.value[0].value)
+
+const { loggedIn, user } = useUserSession()
 </script>
 
 <template>
   <div scrollbar="~ rounded w-1" class="h-100vh text-common bg-common">
-    <div w-full flex gap-20px items-center p-30px pl-60px>
+    <div w-full flex gap-20px items-center justify-between p-30px pl-60px>
       <Tab v-model:value="active" z-100 :tabs="tabs" :is-route="true">
         <template #extra>
           <DarkToggle />
         </template>
       </Tab>
+
+      <a href="/api/auth/github" hover="bg-light-500" p-2>
+        <div cursor="pointer" logos:github-icon />
+        <div v-if="loggedIn">{{ user }}</div>
+      </a>
     </div>
     <slot />
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>
