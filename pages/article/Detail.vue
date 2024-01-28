@@ -3,10 +3,6 @@ import type { ArticleItem } from '~/server/types'
 
 const { query } = useRoute()
 const { data: detail, pending } = useFetch<ArticleItem>('/api/article/detail', { method: 'GET', params: { id: query.id } })
-
-definePageMeta({
-  auth: false,
-})
 </script>
 
 <template>

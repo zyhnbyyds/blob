@@ -1,22 +1,20 @@
-import omit from 'lodash-es/omit'
-import type { ArticleItem } from '~/server/types'
-import { hasItem } from '~/server/utils/request/request'
+import { omit } from 'lodash-es'
+import { EditSchema } from '~/server/config/zod/article'
+import { ArticleSchema } from '~/server/models/article'
 
 export default defineEventHandler(async (event) => {
-  const body = await readBody<ArticleItem | null>(event)
+  const result = await readValidatedBody(event, query => EditSchema.safeParse(query))
 
-  if (!body || !body.title || !body.content || !body.id)
-    return Err_400(event, 'payload error')
+  if (!result.success)
+    return Err_400(event, result.error.message)
 
-  const isHas = await hasItem<boolean>(`article:${body.id}`)
-
-  if (!isHas)
-    return Err_400(event, 'articleId not found')
-
-  const timeNow = dayjs().format('YYYY-MM-DD HH:mm:ss')
-
-  await getStorage<ArticleItem>(`article:${body.id}`).then((res) => {
-    setStorage<ArticleItem>(`article:${body.id}`, { ...omit(res, ['id']), ...omit(body, ['createTime']), updateTime: timeNow })
+  await ArticleSchema.findOneAndUpdate({
+    id: result.data.id,
+  }, {
+    ...omit(result.data, 'id'),
   })
-  return 'success'
+  return {
+    id: String(result.data.id),
+    msg: 'success',
+  }
 })

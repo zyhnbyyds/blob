@@ -5,10 +5,6 @@ import type { ArticleItem } from '~/server/types/article'
 import type { PageRes } from '~/server/types/common'
 
 definePageMeta({
-  title: '文章管理',
-  description: '文章管理',
-  keywords: '文章管理',
-  auth: false,
   layout: 'manage',
 })
 

@@ -1,18 +1,33 @@
-import { emptyListRes } from '~/server/config/common'
-import type { ArticleItem, Page } from '~/server/types'
-import { hasItem } from '~/server/utils/request/request'
+import { z } from 'zod'
+import { ArticleSchema } from '~/server/models/article'
 
-export default defineEventHandler(async (event) => {
-  const query = getQuery<Partial<Page>>(event)
+const schema = z.object({
+  page: z.string().default('1').transform(val => Number(val)),
+  size: z.string().default('10').transform(val => Number(val)),
+})
 
-  const isHave = await hasItem<boolean>('articles')
+type Page = z.infer<typeof schema>
 
-  if (!isHave)
-    return emptyListRes
+export default defineEventHandler<{ query: Page }>(async (event) => {
+  const query = getQuery(event)
+  const result = schema.safeParse(query)
 
-  const articleIds = (await getStorage<string[]>('articles')) ?? []
+  if (!result.success)
+    return Err_400(event, result.error.message)
 
-  const articles = await getStorages<ArticleItem[]>(articleIds.map(id => `article:${id}`), { ...query, excludeKeys: ['content'] })
+  const { page, size } = result.data
 
-  return articles ?? []
+  const list = await ArticleSchema.find({ isDelete: false }).skip((page - 1) * size).limit(size).sort({ createTime: -1 })
+
+  const total = await ArticleSchema.find({ isDelete: false }).countDocuments()
+
+  const pages = Math.ceil(total / size)
+
+  return {
+    list,
+    total,
+    page,
+    size,
+    pages,
+  }
 })

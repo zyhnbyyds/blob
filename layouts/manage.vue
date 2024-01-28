@@ -1,10 +1,6 @@
 <script lang='ts' setup>
 definePageMeta({
-  title: '管理后台',
-  description: '管理后台',
-  keywords: '管理后台',
   layout: 'manage',
-  auth: false,
 })
 const tabs = ref([
   {

@@ -1,17 +1,20 @@
-import type { ArticleItem } from '~/server/types/article'
+import { z } from 'zod'
+import { ArticleSchema } from '~/server/models/article'
+
+const delValidate = z.object({
+  id: z.string(),
+})
 
 export default defineEventHandler(async (event) => {
-  const query = getQuery<{ id: string }>(event)
+  const result = await getValidatedQuery (event, query => delValidate.safeParse(query))
 
-  if (!query.id)
-    return Err_400(event, 'id is required')
+  if (!result.success)
+    return Err_400(event, result.error.message)
 
-  const articleId = `article:${query.id}`
+  await ArticleSchema.findOneAndUpdate({ id: result.data.id }, { isDelete: true })
 
-  if (!(await hasItem<boolean>(articleId)))
-    return Err_400(event, 'articleId not found')
-
-  removeStorage(articleId)
-
-  return 'del success'
+  return {
+    id: String(result.data.id),
+    msg: 'success',
+  }
 })

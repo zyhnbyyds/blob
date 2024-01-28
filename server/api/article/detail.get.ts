@@ -1,15 +1,22 @@
-import type { ArticleItem } from '~/server/types'
+import { z } from 'zod'
 
 export default defineEventHandler(async (event) => {
-  const query = getQuery<{ id: string }>(event)
+  const result = await getValidatedQuery(event, query => z.object({
+    id: z.string(),
+  }).safeParse(query))
 
-  if (!query.id)
-    return Err_400(event, 'id is required')
+  if (!result.success)
+    return Err_400(event, result.error.message)
 
-  const articleId = `article:${query.id}`
+  const isArticle = await ArticleSchema.exists({ id: result.data.id, isDelete: false })
 
-  if (!(await hasItem<boolean>(articleId)))
-    return Err_400(event, 'articleId not found')
+  if (!isArticle)
+    return Err_400(event, 'Article not found')
 
-  return getStorage<ArticleItem>(articleId)
+  const article = await ArticleSchema
+    .findOne({ isDelete: false })
+    .where('id')
+    .equals(result.data.id)
+
+  return article
 })

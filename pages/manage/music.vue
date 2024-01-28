@@ -1,10 +1,6 @@
 <script lang='ts' setup>
 definePageMeta({
-  title: '音乐管理',
-  description: '音乐管理',
-  keywords: '音乐管理',
   layout: 'manage',
-  auth: false,
 })
 </script>
 

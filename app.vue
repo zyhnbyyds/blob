@@ -1,26 +1,32 @@
 <script setup lang="ts">
 import { theme } from 'ant-design-vue'
 
-const colorMode = useColorMode()
-const isPrefersDark = usePreferredDark()
+const antDTheme = ref(theme.darkAlgorithm)
 
 onNuxtReady(() => {
+  const colorMode = useColorMode()
+  const isPrefersDark = usePreferredDark()
+
   watchEffect(() => {
     colorMode.preference = isPrefersDark.value ? 'dark' : 'light'
+  })
+
+  watchEffect(() => {
+    antDTheme.value = colorMode.preference === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm
   })
 })
 </script>
 
 <template>
-  <AConfigProvider
-    :theme="{
-      algorithm: colorMode.preference === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
-    }"
-  >
-    <NuxtLayout>
+  <NuxtLayout>
+    <AConfigProvider
+      :theme="{
+        algorithm: antDTheme,
+      }"
+    >
       <NuxtPage keepalive />
-    </NuxtLayout>
-  </AConfigProvider>
+    </AConfigProvider>
+  </NuxtLayout>
 </template>
 
 <style>

@@ -4,9 +4,6 @@ import type { ArticleItem, PageRes } from '~/server/types'
 const { data, pending } = useFetch<PageRes<ArticleItem>>('/api/article/list', { method: 'GET', params: { page: 1, size: 1000 } })
 
 definePageMeta({
-  title: '博客文章列表',
-  description: '吃不胖的彭于晏的博客文章列表集合，在这里了解我更多一点吧',
-  keywords: '博客 blob 文章 article 列表 list',
   auth: false,
 })
 

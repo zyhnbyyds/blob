@@ -2,9 +2,12 @@
  * Article content type
  */
 export interface ArticleItem {
-  id: string
   title: string
   content: string
+  id: number
   createTime: string
+  likeCount?: number
   updateTime: string
+  viewCount?: number
+  isDelete: boolean
 }

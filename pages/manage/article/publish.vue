@@ -1,9 +1,5 @@
 <script lang='ts' setup>
 definePageMeta({
-  title: '发布文章',
-  description: '发布文章',
-  keywords: '发布文章',
-  auth: false,
   layout: 'empty',
 })
 </script>
