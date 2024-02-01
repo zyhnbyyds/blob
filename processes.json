@@ -1,0 +1,23 @@
+{
+  "apps": [
+    {
+      "name": "blob-run",
+      "cwd": "./.output",
+      "script": "./.output/server/index.mjs",
+      "log_date_format": "YYYY-MM-DD HH:mm Z",
+      "error_file": "/var/log/node-app/blob.stderr.log",
+      "out_file": "log/blob.stdout.log",
+      "pid_file": "pids/node-geo-api.pid",
+      "instances": 6,
+      "min_uptime": "200s",
+      "max_restarts": 10,
+      "max_memory_restart": "1M",
+      "watch": true,
+      "merge_logs": true,
+      "exec_interpreter": "node",
+      "exec_mode": "cluster_mode",
+      "autorestart": true,
+      "vizion": false
+    }
+  ]
+}

@@ -86,7 +86,7 @@ function handleClickListItem(item: ActiveBgListItem, index: number) {
     <div
       ref="actDiv"
       dark="bg-dark-400"
-      bg-light-200
+      bg-light-400
       class="absolute h-40px w-full rounded-sm opacity-0 transition-all -top-40px"
     />
   </div>

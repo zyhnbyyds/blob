@@ -17,7 +17,13 @@ export default defineEventHandler<{ query: Page }>(async (event) => {
 
   const { page, size } = result.data
 
-  const list = await ArticleSchema.find({ isDelete: false }).skip((page - 1) * size).limit(size).sort({ createTime: -1 })
+  const list = await ArticleSchema.find(
+    { isDelete: false },
+    ['title', 'createTime', 'id', 'isDelete', 'updateTime'],
+  )
+    .skip((page - 1) * size)
+    .limit(size)
+    .sort({ createTime: -1 })
 
   const total = await ArticleSchema.find({ isDelete: false }).countDocuments()
 

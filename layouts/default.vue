@@ -28,8 +28,8 @@ const { loggedIn, user } = useUserSession()
         </template>
       </Tab>
 
-      <a href="/api/auth/github" hover="bg-light-500" p-2>
-        <div cursor="pointer" logos:github-icon />
+      <a href="/api/auth/github" hover="bg-light-500" transition-all p-1>
+        <div text-5 dark:text-white cursor="pointer" bxl:github />
         <div v-if="loggedIn">{{ user }}</div>
       </a>
     </div>

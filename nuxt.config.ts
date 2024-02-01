@@ -18,6 +18,8 @@ export default defineNuxtConfig({
     classSuffix: '',
   },
 
+  ssr: false,
+
   css: ['@unocss/reset/tailwind-compat.css'],
 
   vite: {

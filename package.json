@@ -5,6 +5,7 @@
   "private": true,
   "packageManager": "pnpm@8.14.3",
   "scripts": {
+    "pm2": "pm2 start processes.json",
     "build": "nuxi build",
     "dev": "nuxi dev",
     "dev:pwa": "VITE_PLUGIN_PWA=true nuxi dev",
@@ -29,6 +30,8 @@
     "@unocss/reset": "^0.58.4",
     "@vite-pwa/nuxt": "^0.3.6",
     "@vueuse/nuxt": "^10.7.2",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-vue": "^5.1.12",
     "dayjs": "^1.11.10",
     "eslint": "^8.56.0",
     "happy-dom": "^12.10.3",
