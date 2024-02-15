@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { theme } from 'ant-design-vue'
+import './style/global.css'
 
 const antDTheme = ref(theme.darkAlgorithm)
 
@@ -18,25 +19,20 @@ onNuxtReady(() => {
 </script>
 
 <template>
-  <NuxtLayout>
-    <AConfigProvider
-      :theme="{
-        algorithm: antDTheme,
-      }"
-    >
-      <NuxtPage keepalive />
-    </AConfigProvider>
-  </NuxtLayout>
+  <div hw-full>
+    <NuxtLoadingIndicator :height="8" :duration="5000" />
+    <NuxtLayout>
+      <AConfigProvider
+        :theme="{
+          algorithm: antDTheme,
+        }"
+      >
+        <NuxtPage keepalive :transition="{ name: 'fade', mode: 'out-in', duration: 200 }" />
+      </AConfigProvider>
+    </NuxtLayout>
+  </div>
 </template>
 
 <style>
-html.dark ::selection {
-  color: #e5e5e5;
-  background-color: gray;
-}
 
-html ::selection {
-  color: #555;
-  background-color: #e5e5e5;
-}
 </style>

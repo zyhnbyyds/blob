@@ -1,5 +1,5 @@
 <script lang='ts' setup>
-import type { TableColumnsType } from 'ant-design-vue'
+import type { TableColumnsType, TablePaginationConfig } from 'ant-design-vue'
 import { Modal } from 'ant-design-vue'
 import type { ArticleItem } from '~/server/types/article'
 import type { PageRes } from '~/server/types/common'
@@ -8,7 +8,27 @@ definePageMeta({
   layout: 'manage',
 })
 
-const { data, pending, refresh } = useFetch<PageRes<ArticleItem>>('/api/article/list', { method: 'GET', params: { page: 1, size: 1000 } })
+const page = reactive({
+  size: 10,
+  page: 1,
+})
+
+const { data, pending, refresh } = useFetch<PageRes<ArticleItem>>('/api/article/list', { method: 'GET', params: page })
+
+const pagination = reactive<TablePaginationConfig>(
+  {
+    position: ['bottomRight'],
+    pageSizeOptions: [10, 30, 50, 100],
+    current: 1,
+    pageSize: 10,
+    showTotal: total => `共 ${total} 条`,
+    total: data.value?.total ?? 0,
+    onChange(current, pageSize) {
+      page.page = current
+      page.size = pageSize
+    },
+  },
+)
 
 const columns: TableColumnsType = [
   {
@@ -28,7 +48,7 @@ const columns: TableColumnsType = [
     dataIndex: 'action',
     key: 'action',
     align: 'center',
-    width: '20%',
+    width: '24%',
   },
 ]
 
@@ -40,6 +60,8 @@ function handleDelete(rowData: ArticleItem) {
   Modal.confirm({
     title: '确认删除',
     content: '确认删除该文章吗？',
+    cancelText: '取消',
+    okText: '确认',
     onOk: async () => {
       await useFetch('/api/article/del', { method: 'DELETE', params: { id: rowData.id } })
       refresh()
@@ -59,12 +81,23 @@ function handleAdd() {
       添加
     </a-button>
 
-    <a-table :loading="pending" :data-source="data?.list ?? []" :columns="columns">
+    <a-table
+      :pagination="{
+        ...pagination,
+        total: data?.total ?? 0,
+        pageSize: page.size,
+        current: page.page,
+      }"
+      :loading="pending" :data-source="data?.list ?? []" :columns="columns"
+    >
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
           <div w-full flex justify="around">
             <a-button size="small" type="primary" @click="handleEdit(record as ArticleItem)">
               编辑
+            </a-button>
+            <a-button size="small" type="text" @click="handleEdit(record as ArticleItem)">
+              查看
             </a-button>
             <a-button size="small" type="default" @click="handleDelete(record as ArticleItem)">
               删除

@@ -1,0 +1,20 @@
+@import './reset.css';
+@import './nprogress.css';
+@import './transition.css';
+@import './bytemd.css';
+
+html,
+body,
+#__nuxt {
+  height: 100%;
+}
+
+html.dark ::selection {
+  color: #e5e5e5;
+  background-color: gray;
+}
+
+html ::selection {
+  color: #555;
+  background-color: #e5e5e5;
+}

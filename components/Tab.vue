@@ -93,7 +93,7 @@ onMounted(() => {
 
 <template>
   <div class="shadow-style relative inline-flex gap-2 rounded-6 items-center text-gray-400 bg-white px-2 py-2 shadow-md dark:bg-#333">
-    <div v-for="item, i in props.tabs" ref="tabsRef" :key="i" class="relative z-10">
+    <div v-for="item, i in props.tabs" ref="tabsRef" :key="i" cursor="pointer" class="relative z-10">
       <div class="relative z-10 cursor-pointer rounded-3 px-4 py-1" :class="{ 'font-bold text-dark dark:text-white': actTabVal === item.value }" @click="handleTabChange(item[props.valueFiled], i)">
         <slot :data="item">
           {{ item.label }}

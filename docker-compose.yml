@@ -4,11 +4,9 @@ services:
   nuxt-app:
     image: node:20.3.1
     working_dir: /app
-    command: bash -c "npm i pnpm -g && pnpm install && pnpm build"
+    command: /bin/bash -c "npm i pnpm -g && pnpm install && pnpm build"
     ports:
       - "3000:3000"
-    volumes:
-      - ./nuxt-app:/app
     depends_on:
       - redis
       - mongodb
@@ -23,7 +21,7 @@ services:
   redis:
     image: redis:latest
     ports:
-      - "6379:6379"
+      - "7379:6379"
 
   mongodb:
     image: mongo:latest

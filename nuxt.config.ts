@@ -12,20 +12,24 @@ export default defineNuxtConfig({
     'nuxt-mongoose',
     'nuxt-typed-router',
     'nuxt-auth-utils',
+    '@nuxtjs/i18n',
   ],
 
   colorMode: {
     classSuffix: '',
   },
 
-  ssr: false,
-
-  css: ['@unocss/reset/tailwind-compat.css'],
+  css: ['bytemd/dist/index.css'],
 
   vite: {
     optimizeDeps: {
       include: ['lodash-es'],
     },
+  },
+
+  app: {
+    pageTransition: true,
+    layoutTransition: true,
   },
 
   nitro: {

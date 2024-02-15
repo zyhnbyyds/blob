@@ -17,14 +17,17 @@ const tabs = ref([
 const active = ref(tabs.value[0].value)
 
 const { loggedIn, user } = useUserSession()
+
+// const { pageLoading } = useAppConfig()
 </script>
 
 <template>
-  <div scrollbar="~ rounded w-1" class="h-100vh text-common bg-common">
+  <div scrollbar="~ rounded w-4px" class="h-100vh text-common bg-common">
     <div w-full flex gap-20px items-center justify-between p-30px pl-60px>
       <Tab v-model:value="active" z-100 :tabs="tabs" :is-route="true">
         <template #extra>
           <DarkToggle />
+          <RefreshBtn />
         </template>
       </Tab>
 

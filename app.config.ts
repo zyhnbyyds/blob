@@ -3,6 +3,9 @@ export default defineAppConfig({
     primary: 'blue',
   },
   pageScroolTop: 0,
+
+  pageLoading: false,
+
   contact: {
     github: {
       url: '',
