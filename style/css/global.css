@@ -1,0 +1,27 @@
+@import './reset.css';
+@import './nprogress.css';
+@import './transition.css';
+
+html,
+body,
+#__nuxt {
+  height: 100%;
+}
+
+html.dark ::selection {
+  color: #e5e5e5;
+  background-color: gray;
+}
+
+html ::selection {
+  color: #555;
+  background-color: #e5e5e5;
+}
+
+.markdown-body ol {
+  list-style: decimal;
+}
+
+.markdown-body ul {
+  list-style: disc;
+}
