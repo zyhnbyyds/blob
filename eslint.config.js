@@ -1,3 +1,10 @@
-import antfu from '@antfu/eslint-config'
+import { sxzz } from '@sxzz/eslint-config';
 
-export default await antfu()
+export default sxzz({
+  rules: {
+    'import/no-default-export': 'off',
+    'no-duplicate-imports': 'off',
+    'require-await': 'off',
+    '@typescript-eslint/no-dynamic-delete': 'off',
+  },
+});

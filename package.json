@@ -1,9 +1,9 @@
 {
   "name": "blob",
-  "type": "module",
   "version": "1.0.0",
   "private": true,
   "packageManager": "pnpm@8.14.3",
+  "type": "module",
   "scripts": {
     "pm2": "pm2 start processes.json",
     "build": "nuxi build",
@@ -12,7 +12,7 @@
     "start": "node .output/server/index.mjs",
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint:fix": "prettier . --write && eslint . --fix",
     "postinstall": "nuxi prepare",
     "generate": "nuxi generate",
     "start:generate": "npx serve .output/public",
@@ -20,7 +20,6 @@
   },
   "devDependencies": {
     "@ant-design-vue/nuxt": "^1.4.1",
-    "@antfu/eslint-config": "^2.6.3",
     "@bytemd/plugin-breaks": "^1.21.0",
     "@bytemd/plugin-frontmatter": "^1.21.0",
     "@bytemd/plugin-gemoji": "^1.21.0",
@@ -33,6 +32,7 @@
     "@nuxtjs/color-mode": "^3.3.2",
     "@nuxtjs/i18n": "^8.1.0",
     "@pinia/nuxt": "^0.5.1",
+    "@sxzz/eslint-config": "^3.7.6",
     "@unocss/nuxt": "^0.58.4",
     "@unocss/reset": "^0.58.4",
     "@vite-pwa/nuxt": "^0.3.6",
@@ -48,6 +48,7 @@
     "nuxt-mongoose": "^1.0.4",
     "nuxt-typed-router": "^3.5.1",
     "pinia": "^2.1.7",
+    "sass": "^1.71.0",
     "typescript": "^5.3.3",
     "unocss-preset-scrollbar": "^0.3.0",
     "vitest": "1.0.0-beta.0",
@@ -57,7 +58,7 @@
   "lint-staged": {
     "*.{ts,js,vue}": [
       "vitest related --run",
-      "eslint --fix"
+      "eslint ."
     ]
   }
 }

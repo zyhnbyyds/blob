@@ -1,21 +1,35 @@
 <script setup lang="ts">
-import { theme } from 'ant-design-vue'
-import './style/global.css'
+import { theme } from 'ant-design-vue';
+import './style/css/global.css';
 
-const antDTheme = ref(theme.darkAlgorithm)
+const app = useAppConfig();
+
+const antDTheme = ref(theme.darkAlgorithm);
 
 onNuxtReady(() => {
-  const colorMode = useColorMode()
-  const isPrefersDark = usePreferredDark()
+  const colorMode = useColorMode();
+  const isPrefersDark = usePreferredDark();
 
   watchEffect(() => {
-    colorMode.preference = isPrefersDark.value ? 'dark' : 'light'
-  })
+    colorMode.preference = isPrefersDark.value ? 'dark' : 'light';
+  });
 
   watchEffect(() => {
-    antDTheme.value = colorMode.preference === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm
-  })
-})
+    antDTheme.value =
+      colorMode.preference === 'dark'
+        ? theme.darkAlgorithm
+        : theme.defaultAlgorithm;
+  });
+
+  watch(
+    () => app.pageLoading,
+    (val) => {
+      nextTick(() => {
+        if (val) app.pageLoading = false;
+      });
+    },
+  );
+});
 </script>
 
 <template>
@@ -27,12 +41,16 @@ onNuxtReady(() => {
           algorithm: antDTheme,
         }"
       >
-        <NuxtPage keepalive :transition="{ name: 'fade', mode: 'out-in', duration: 200 }" />
+        <NuxtPage
+          v-if="!app.pageLoading"
+          :transition="{ name: 'fade', mode: 'out-in', duration: 200 }"
+        />
       </AConfigProvider>
     </NuxtLayout>
   </div>
 </template>
 
-<style>
-
+<style lang="scss">
+@import url(./style/scss/global.scss);
+@import url(./style/css/global.css);
 </style>

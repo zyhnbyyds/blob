@@ -1,5 +1,3 @@
-import common from './common'
+import common from './common';
 
-export const shortcuts = [
-  ...common,
-]
+export const shortcuts = [...common];

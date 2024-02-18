@@ -1,7 +1,7 @@
-<script lang='ts' setup>
+<script lang="ts" setup>
 definePageMeta({
   auth: false,
-})
+});
 </script>
 
 <template>

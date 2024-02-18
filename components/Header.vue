@@ -1,27 +1,32 @@
-<script lang='ts' setup>
-import type { TabItem } from './Tab.vue'
+<script lang="ts" setup>
+import type { TabItem } from './Tab.vue';
 
 defineOptions({
   name: 'TopHeader',
-})
+});
 
 const props = withDefaults(defineProps<Props>(), {
   show: true,
-})
+});
 
 interface Props {
-  paths: TabItem[]
-  show: boolean
+  paths: TabItem[];
+  show: boolean;
 }
 
-const app = useAppConfig()
+const app = useAppConfig();
 
-const activeIndex = ref<string>('')
+const activeIndex = ref<string>('');
 </script>
 
 <template>
   <div class="flex justify-center py2 font-600">
-    <Tab v-model:value="activeIndex" :follow-change="true" :is-route="true" :tabs="props.paths">
+    <Tab
+      v-model:value="activeIndex"
+      :follow-change="true"
+      :is-route="true"
+      :tabs="props.paths"
+    >
       <template #extra>
         <DarkToggle class="px-2" />
       </template>
@@ -37,6 +42,4 @@ const activeIndex = ref<string>('')
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,13 +1,13 @@
-<script lang='ts' setup>
+<script lang="ts" setup>
 export interface CardType {
-  title: string
-  border: boolean
-  shadow: boolean
+  title: string;
+  border: boolean;
+  shadow: boolean;
 }
 
 defineOptions({
   name: 'Card',
-})
+});
 </script>
 
 <template>

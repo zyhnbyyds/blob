@@ -1,16 +1,22 @@
-<script lang='ts' setup>
-const status = defineModel<boolean>({ default: false })
+<script lang="ts" setup>
+const app = useAppConfig();
 
 function refresh() {
-  status.value = true
-  setTimeout(() => {
-    status.value = false
-  }, 2000)
+  app.pageLoading = true;
 }
 </script>
 
 <template>
-  <div cursor-pointer text-4 mx-2 mdi:refresh animate-spin animate-duration-1000 :class="status ? 'animate-spin' : 'animate-none'" @click="refresh" />
+  <div
+    mdi:refresh
+    mx-2
+    animate-spin
+    animate-duration-1000
+    cursor-pointer
+    text-4
+    :class="app.pageLoading ? 'animate-spin' : 'animate-none'"
+    @click="refresh"
+  />
 </template>
 
 <style scoped></style>

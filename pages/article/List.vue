@@ -1,11 +1,15 @@
-<script lang='ts' setup>
-import type { ArticleItem, PageRes } from '~/server/types'
+<script lang="ts" setup>
+import type { ArticleItem, PageRes } from '~/server/types';
 
-const { data, pending } = useFetch<PageRes<ArticleItem>>('/api/article/list', { method: 'GET', params: { page: 1, size: 1000 } })
+const { data, pending } = useFetch<PageRes<ArticleItem>>('/api/article/list', {
+  method: 'GET',
+  params: { page: 1, size: 1000 },
+});
 
 definePageMeta({
   auth: false,
-})
+  keepalive: false,
+});
 
 function handleClickArticle(item: ArticleItem) {
   useRouter().push({
@@ -13,14 +17,20 @@ function handleClickArticle(item: ArticleItem) {
     query: {
       id: item.id,
     },
-  })
+  });
 }
 </script>
 
 <template>
   <div flex-row-center>
-    <div px-30px py-2 max-w-2xl>
-      <div v-if="pending" text-10 ab-c text-gray-400 i-svg-spinners:12-dots-scale-rotate />
+    <div w-4xl px-30px py-2>
+      <div
+        v-if="pending"
+        i-svg-spinners:12-dots-scale-rotate
+        text-8
+        text-gray-400
+        ab-c
+      />
 
       <div v-else>
         <ActiveBgList

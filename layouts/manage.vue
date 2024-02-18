@@ -1,7 +1,7 @@
-<script lang='ts' setup>
+<script lang="ts" setup>
 definePageMeta({
   layout: 'manage',
-})
+});
 const tabs = ref([
   {
     label: '首页',
@@ -19,15 +19,15 @@ const tabs = ref([
     label: '分类',
     value: '/manage/cate',
   },
-])
+]);
 
-const active = ref(tabs.value[0].value)
+const active = ref(tabs.value[0].value);
 </script>
 
 <template>
   <a-watermark content="manager">
-    <div scrollbar="~ rounded w-1" class="h-100vh text-common bg-common">
-      <div w-full flex gap-20px items-center p-30px pl-60px>
+    <div scrollbar="~ rounded w-1" class="h-100vh bg-common text-common">
+      <div w-full flex items-center gap-20px p-30px pl-60px>
         <Tab v-model:value="active" z-100 :tabs="tabs" :is-route="true">
           <template #extra>
             <DarkToggle />

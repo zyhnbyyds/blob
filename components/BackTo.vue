@@ -1,21 +1,21 @@
-<script lang='ts' setup>
+<script lang="ts" setup>
 interface Props {
-  parentPath: string
-  icon?: string
+  parentPath: string;
+  icon?: string;
 }
 
 defineOptions({
   name: 'BackTo',
-})
+});
 
-const props = defineProps<Props>()
-const flag = ref(false)
+const props = defineProps<Props>();
+const flag = ref(false);
 
 const backPath = computed(() => {
-  const arr = props.parentPath.split('/')
-  arr.pop()
-  return arr.join('/')
-})
+  const arr = props.parentPath.split('/');
+  arr.pop();
+  return arr.join('/');
+});
 </script>
 
 <template>

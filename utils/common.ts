@@ -1,6 +1,6 @@
 export function handlePathGetFirst(path: string) {
-  const arr = path.split('/')
-  return arr.length >= 2 ? `/${arr[1]}` : ''
+  const arr = path.split('/');
+  return arr.length >= 2 ? `/${arr[1]}` : '';
 }
 
 /**
@@ -10,10 +10,14 @@ export function handlePathGetFirst(path: string) {
  * @param target
  * @returns 对应的index值
  */
-export function handleGetIdxByObjAttr<T>(array: T[], key: keyof T, target: any) {
+export function handleGetIdxByObjAttr<T>(
+  array: T[],
+  key: keyof T,
+  target: any,
+) {
   return array.findIndex((item) => {
-    return item[key] === target
-  })
+    return item[key] === target;
+  });
 }
 
 /**
@@ -24,12 +28,12 @@ export function handleGetIdxByObjAttr<T>(array: T[], key: keyof T, target: any) 
  */
 export function arrFindNum(array: number[], isBigFlg = false) {
   // 数组去重
-  const setArr = Array.from(new Set(array))
+  const setArr = Array.from(new Set(array));
   const sortedArr = setArr.sort((a, b) => {
-    return !isBigFlg ? b - a : a - b
-  })
+    return !isBigFlg ? b - a : a - b;
+  });
 
-  return array.findIndex(item => item === sortedArr[sortedArr.length - 1])
+  return array.indexOf(sortedArr.at(-1));
 }
 
 /**
@@ -38,7 +42,9 @@ export function arrFindNum(array: number[], isBigFlg = false) {
  * @returns 返回对应的数据
  */
 export function styleTypeReduce(judgeAttributeVal: string | number) {
-  return typeof judgeAttributeVal === 'number' ? `${judgeAttributeVal}px` : judgeAttributeVal
+  return typeof judgeAttributeVal === 'number'
+    ? `${judgeAttributeVal}px`
+    : judgeAttributeVal;
 }
 
 /**
@@ -49,26 +55,28 @@ export function styleTypeReduce(judgeAttributeVal: string | number) {
  * @param extraFn 额外的执行操作
  * @param duration 持续时间
  */
-export async function loadingKeep(fn: () => Promise<void>, status: Ref<boolean>, extraFn?: () => any, duration = 1000) {
-  status.value = true
+export async function loadingKeep(
+  fn: () => Promise<void>,
+  status: Ref<boolean>,
+  extraFn?: () => any,
+  duration = 1000,
+) {
+  status.value = true;
 
-  const beforeDate = Date.now()
-  await fn()
-  const afterDate = Date.now()
+  const beforeDate = Date.now();
+  await fn();
+  const afterDate = Date.now();
 
-  const spend = afterDate - beforeDate
+  const spend = afterDate - beforeDate;
 
   if (spend > duration) {
-    if (extraFn)
-      extraFn()
+    if (extraFn) extraFn();
 
-    status.value = false
-  }
-  else {
+    status.value = false;
+  } else {
     setTimeout(() => {
-      if (extraFn)
-        extraFn()
-      status.value = false
-    }, duration - spend)
+      if (extraFn) extraFn();
+      status.value = false;
+    }, duration - spend);
   }
 }

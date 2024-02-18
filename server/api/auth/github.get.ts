@@ -6,12 +6,12 @@ export default oauth.githubEventHandler({
   async onSuccess(event, { user }) {
     await setUserSession(event, {
       user,
-    })
+    });
 
-    return sendRedirect(event, '/article/list')
+    return sendRedirect(event, '/article/list');
   },
   onError(event, error) {
-    console.error('GitHub OAuth error:', error)
-    return sendRedirect(event, '/')
+    console.error('GitHub OAuth error:', error);
+    return sendRedirect(event, '/');
   },
-})
+});

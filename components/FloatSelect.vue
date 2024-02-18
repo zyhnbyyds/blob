@@ -1,47 +1,72 @@
-<script lang='ts' setup>
+<script lang="ts" setup>
 export interface SelectItem {
-  label: string
-  value: string | number
-  [key: string]: any
+  label: string;
+  value: string | number;
+  [key: string]: any;
 }
 
 interface Props {
-  options: SelectItem[]
+  options: SelectItem[];
 }
 
 defineOptions({
   name: 'FloatSelect',
-})
+});
 
-const props = defineProps<Props>()
-const emits = defineEmits<{ change: [value: SelectItem], isFocusFn: [value: boolean] }>()
+const props = defineProps<Props>();
+const emits = defineEmits<{
+  change: [value: SelectItem];
+  isFocusFn: [value: boolean];
+}>();
 
-const [isShowList, toggle] = useToggle()
+const [isShowList, toggle] = useToggle();
 
-const active = defineModel<string | number>('value', { default: '0' })
+const active = defineModel<string | number>('value', { default: '0' });
 
-watch(() => isShowList.value, (val) => {
-  emits('isFocusFn', val)
-})
+watch(
+  () => isShowList.value,
+  (val) => {
+    emits('isFocusFn', val);
+  },
+);
 
 function handleSelect(item: SelectItem) {
-  active.value = item.value
-  isShowList.value = false
-  emits('change', item)
+  active.value = item.value;
+  isShowList.value = false;
+  emits('change', item);
 }
 </script>
 
 <template>
-  <FloatInput v-model:value="active" autocomplete="off" @focus="isShowList = true" @blur="isShowList = false">
+  <FloatInput
+    v-model:value="active"
+    autocomplete="off"
+    @focus="isShowList = true"
+    @blur="isShowList = false"
+  >
     <template #suffix>
-      <div :style="{ transform: isShowList ? 'scaleY(1)' : 'scaleY(-1)' }" class="i-carbon:chevron-up absolute right-20px top-15px h-25px w-25px cursor-pointer font-bold transition-all duration-300" @click="toggle()" />
+      <div
+        :style="{ transform: isShowList ? 'scaleY(1)' : 'scaleY(-1)' }"
+        class="i-carbon:chevron-up absolute right-20px top-15px h-25px w-25px cursor-pointer font-bold transition-all duration-300"
+        @click="toggle()"
+      />
     </template>
     <template #default>
       <Transition name="fade">
-        <div v-show="isShowList" class="select-con absolute left-0 top-60px z-10 max-h-376px w-full w-full overflow-y-scroll rounded-12px bg-#fff p-4px">
-          <div v-for="(item, i) in props.options" :key="`${item.value}-${i}-${item.phonePrefix}`" class="mx-4px my-2px h-32px cursor-pointer items-center rounded-6px p-4px text-14px" active="scale-97" hover="bg-[rgba(0,0,0,0.06666666666666667)]" @click="handleSelect(item)">
+        <div
+          v-show="isShowList"
+          class="select-con absolute left-0 top-60px z-10 max-h-376px w-full w-full overflow-y-scroll rounded-12px bg-#fff p-4px"
+        >
+          <div
+            v-for="(item, i) in props.options"
+            :key="`${item.value}-${i}-${item.phonePrefix}`"
+            class="mx-4px my-2px h-32px cursor-pointer items-center rounded-6px p-4px text-14px"
+            active="scale-97"
+            hover="bg-[rgba(0,0,0,0.06666666666666667)]"
+            @click="handleSelect(item)"
+          >
             <slot name="perfix" :data="item" />
-            <div class="float-left h-24px font-500 leading-24px text-black">
+            <div class="float-left h-24px text-black font-500 leading-24px">
               {{ item.label }}
             </div>
             <slot name="suffix" :data="item" />
@@ -66,7 +91,7 @@ function handleSelect(item: SelectItem) {
 }
 
 .select-con::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0, 0, 0, 0.1);
   border-radius: 3px;
 }
 
@@ -77,17 +102,17 @@ function handleSelect(item: SelectItem) {
 .fade-enter-active,
 .fade-leave-active {
   transition-duration: 0.15s;
-  transition-timing-function: cubic-bezier(0.2, 0, 0.2, 1), cubic-bezier(0.2, 0, 0.2, 1);
+  transition-timing-function: cubic-bezier(0.2, 0, 0.2, 1),
+    cubic-bezier(0.2, 0, 0.2, 1);
   transition-property: opacity, transform;
-  transform-origin: center
+  transform-origin: center;
 }
 
-.fade-enter-from
-{
+.fade-enter-from {
   opacity: 0.3;
   transform: scale(0.97);
 }
-.fade-leave-to  {
+.fade-leave-to {
   transform: scale(0.97);
   opacity: 0;
 }

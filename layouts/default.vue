@@ -1,4 +1,4 @@
-<script lang='ts' setup>
+<script lang="ts" setup>
 const tabs = ref([
   {
     label: '文章',
@@ -12,18 +12,18 @@ const tabs = ref([
     label: '管理',
     value: '/manage/article',
   },
-])
+]);
 
-const active = ref(tabs.value[0].value)
+const active = ref(tabs.value[0].value);
 
-const { loggedIn, user } = useUserSession()
+const { loggedIn, user } = useUserSession();
 
 // const { pageLoading } = useAppConfig()
 </script>
 
 <template>
-  <div scrollbar="~ rounded w-4px" class="h-100vh text-common bg-common">
-    <div w-full flex gap-20px items-center justify-between p-30px pl-60px>
+  <div scrollbar="~ rounded w-4px" class="h-100vh bg-common text-common">
+    <div w-full flex items-center justify-between gap-20px p-30px pl-60px>
       <Tab v-model:value="active" z-100 :tabs="tabs" :is-route="true">
         <template #extra>
           <DarkToggle />
@@ -31,8 +31,8 @@ const { loggedIn, user } = useUserSession()
         </template>
       </Tab>
 
-      <a href="/api/auth/github" hover="bg-light-500" transition-all p-1>
-        <div text-5 dark:text-white cursor="pointer" bxl:github />
+      <a href="/api/auth/github" hover="bg-light-500" p-1 transition-all>
+        <div cursor="pointer" bxl:github text-5 dark:text-white />
         <div v-if="loggedIn">{{ user }}</div>
       </a>
     </div>
@@ -40,5 +40,4 @@ const { loggedIn, user } = useUserSession()
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
