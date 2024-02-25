@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import { theme } from 'ant-design-vue';
 import './style/css/global.css';
 
 const app = useAppConfig();
-
-const antDTheme = ref(theme.darkAlgorithm);
 
 onNuxtReady(() => {
   const colorMode = useColorMode();
@@ -12,13 +9,6 @@ onNuxtReady(() => {
 
   watchEffect(() => {
     colorMode.preference = isPrefersDark.value ? 'dark' : 'light';
-  });
-
-  watchEffect(() => {
-    antDTheme.value =
-      colorMode.preference === 'dark'
-        ? theme.darkAlgorithm
-        : theme.defaultAlgorithm;
   });
 
   watch(
@@ -33,21 +23,10 @@ onNuxtReady(() => {
 </script>
 
 <template>
-  <div hw-full>
-    <NuxtLoadingIndicator :height="8" :duration="5000" />
-    <NuxtLayout>
-      <AConfigProvider
-        :theme="{
-          algorithm: antDTheme,
-        }"
-      >
-        <NuxtPage
-          v-if="!app.pageLoading"
-          :transition="{ name: 'fade', mode: 'out-in', duration: 200 }"
-        />
-      </AConfigProvider>
-    </NuxtLayout>
-  </div>
+  <NuxtLayout>
+    <NuxtLoadingIndicator />
+    <NuxtPage v-if="!app.pageLoading" />
+  </NuxtLayout>
 </template>
 
 <style lang="scss">

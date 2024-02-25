@@ -55,17 +55,17 @@ function handleSelect(item: SelectItem) {
       <Transition name="fade">
         <div
           v-show="isShowList"
-          class="select-con absolute left-0 top-60px z-10 max-h-376px w-full w-full overflow-y-scroll rounded-12px bg-#fff p-4px"
+          class="select-con absolute left-0 top-60px z-10 overflow-auto max-h-376px w-full w-full rounded-12px bg-#fff p-4px"
         >
           <div
             v-for="(item, i) in props.options"
             :key="`${item.value}-${i}-${item.phonePrefix}`"
-            class="mx-4px my-2px h-32px cursor-pointer items-center rounded-6px p-4px text-14px"
+            class="mx-4px my-2px transition-all h-32px cursor-pointer items-center rounded-6px p-4px text-14px"
             active="scale-97"
-            hover="bg-[rgba(0,0,0,0.06666666666666667)]"
+            hover="bg-light-500 dark:bg-#333"
             @click="handleSelect(item)"
           >
-            <slot name="perfix" :data="item" />
+            <slot name="prefix" :data="item" />
             <div class="float-left h-24px text-black font-500 leading-24px">
               {{ item.label }}
             </div>
@@ -97,23 +97,5 @@ function handleSelect(item: SelectItem) {
 
 .select-con::-webkit-scrollbar-track {
   background-color: none;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition-duration: 0.15s;
-  transition-timing-function: cubic-bezier(0.2, 0, 0.2, 1),
-    cubic-bezier(0.2, 0, 0.2, 1);
-  transition-property: opacity, transform;
-  transform-origin: center;
-}
-
-.fade-enter-from {
-  opacity: 0.3;
-  transform: scale(0.97);
-}
-.fade-leave-to {
-  transform: scale(0.97);
-  opacity: 0;
 }
 </style>

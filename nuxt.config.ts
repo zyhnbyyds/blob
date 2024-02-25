@@ -8,11 +8,12 @@ export default defineNuxtConfig({
     '@nuxt/devtools',
     'nuxt-lodash',
     '@unocss/nuxt',
-    '@ant-design-vue/nuxt',
     'nuxt-mongoose',
     'nuxt-typed-router',
     'nuxt-auth-utils',
     '@nuxtjs/i18n',
+    '@nuxt/content',
+    '@nuxt/image',
   ],
 
   colorMode: {
@@ -27,11 +28,6 @@ export default defineNuxtConfig({
     },
   },
 
-  app: {
-    pageTransition: true,
-    layoutTransition: true,
-  },
-
   nitro: {
     devStorage: {
       redis: redisConfig,
@@ -42,7 +38,7 @@ export default defineNuxtConfig({
   },
 
   devtools: {
-    enabled: true,
+    enabled: false,
     timeline: {
       enabled: true,
     },

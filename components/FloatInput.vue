@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 interface Props {
-  placeholder: string;
-  id: string;
-  status: 'success' | 'error';
-  autocomplete: string;
-  type: string;
+  placeholder?: string;
+  id?: string;
+  status?: 'success' | 'error';
+  autocomplete?: string;
+  type?: string;
 }
 
 defineOptions({
@@ -64,7 +64,6 @@ function handleFocus() {
       :autocomplete="autocomplete"
       :type="type"
       class="h-52px w-full border rounded-12px px-14px py-11px text-#333 caret-blue-400"
-      focus="bg-dark-200"
       @focus="handleFocus"
       @blur="handleBlur"
     />

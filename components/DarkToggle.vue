@@ -14,16 +14,15 @@ const isDark = computed({
 </script>
 
 <template>
-  <div>
-    <div
-      :class="
-        !isDark
-          ? 'line-md:moon-alt-to-sunny-outline-loop-transition'
-          : 'line-md:moon-rising-filled-alt-loop'
-      "
-      @click="isDark = !isDark"
-    />
-  </div>
+  <div
+    cursor-pointer
+    :class="
+      !isDark
+        ? 'material-symbols:wb-sunny-outline'
+        : 'material-symbols:nightlight-outline-rounded'
+    "
+    @click="isDark = !isDark"
+  />
 </template>
 
 <style scoped></style>

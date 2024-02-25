@@ -18,6 +18,10 @@ html ::selection {
   background-color: #e5e5e5;
 }
 
+.nuxt-loading-indicator {
+  height: 3px;
+}
+
 .markdown-body ol {
   list-style: decimal;
 }

@@ -116,13 +116,13 @@ onMounted(() => {
     <div
       ref="bgRef"
       :class="{ 'transition-all duration-250': isLoaded }"
-      class="shadow-style absolute top-2 z-1 h-8 w-16 rounded-4 bg-#e5e5e5 bg-opacity-40 transition-all duration-250 dark:bg-#444"
+      class="shadow-style absolute top-2 z-1 h-8 w-16 rounded-4 bg-#e5e5e5 bg-opacity-40 transition-all duration-150 dark:bg-#444"
     />
   </div>
 </template>
 
 <style scoped>
 .shadow-style {
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.16);
 }
 </style>

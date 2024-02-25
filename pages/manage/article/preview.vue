@@ -16,9 +16,9 @@ const { data } = await useFetch<ArticleItem>('/api/article/detail', {
 </script>
 
 <template>
-  <div>
+  <ClientOnly>
     <ArticleViewer :content="data ? data.content : ''" />
-  </div>
+  </ClientOnly>
 </template>
 
 <style scoped></style>
