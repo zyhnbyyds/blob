@@ -6,4 +6,4 @@ export const emptyListRes = {
   list: [],
   page: 1,
   size: 10,
-};
+}

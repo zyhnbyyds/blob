@@ -6,9 +6,9 @@ import {
   presetWebFonts,
   transformerDirectives,
   transformerVariantGroup,
-} from 'unocss';
-import { presetScrollbar } from 'unocss-preset-scrollbar';
-import { shortcuts } from './config/unocss';
+} from 'unocss'
+import { presetScrollbar } from 'unocss-preset-scrollbar'
+import { shortcuts } from './config/unocss'
 
 export default defineConfig({
   shortcuts: [
@@ -45,4 +45,4 @@ export default defineConfig({
     presetScrollbar(),
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
-});
+})

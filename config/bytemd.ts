@@ -1,3 +1,3 @@
-export const themes = ['hydrogen', 'fancy'] as const;
+export const themes = ['hydrogen', 'fancy'] as const
 
-export type MdTheme = (typeof themes)[number];
+export type MdTheme = (typeof themes)[number]

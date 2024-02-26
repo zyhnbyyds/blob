@@ -1,4 +1,4 @@
-import { defineMongooseModel } from '#nuxt/mongoose';
+import { defineMongooseModel } from '#nuxt/mongoose'
 
 export const ArticleSchema = defineMongooseModel('Article', {
   title: {
@@ -34,4 +34,4 @@ export const ArticleSchema = defineMongooseModel('Article', {
     type: Boolean,
     required: true,
   },
-});
+})

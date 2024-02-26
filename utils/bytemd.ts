@@ -1,4 +1,4 @@
-import type { MdTheme } from '~/config/bytemd';
+import type { MdTheme } from '~/config/bytemd'
 
 /**
  * Toggle the theme of the editor
@@ -10,16 +10,17 @@ export function byteToggleTheme(
   url: string,
 ) {
   // Remove theme link tag
-  const linkTags = document.querySelectorAll('link');
+  const linkTags = document.querySelectorAll('link')
   for (const link of linkTags) {
-    if (link.href.includes('md-themes')) link?.remove();
+    if (link.href.includes('md-themes'))
+      link?.remove()
   }
 
   // add timestamp to the link to avoid cache
-  const now = useTimestamp();
-  const linkHref = `../../style/scss/md-themes/${theme}.scss?timeNow=${now.value}`;
+  const now = useTimestamp()
+  const linkHref = `../../style/scss/md-themes/${theme}.scss?timeNow=${now.value}`
 
-  const href = new URL(linkHref, url).href;
+  const href = new URL(linkHref, url).href
 
   // Add theme link tag
   useHead({
@@ -29,5 +30,5 @@ export function byteToggleTheme(
         href,
       },
     ],
-  });
+  })
 }

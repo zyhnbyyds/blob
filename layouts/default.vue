@@ -8,11 +8,11 @@ const tabs = ref([
     label: '案例',
     value: '/demos',
   },
-]);
+])
 
-const active = ref(tabs.value[0].value);
+const active = ref(tabs.value[0].value)
 
-const { loggedIn, user } = useUserSession();
+const { loggedIn, user } = useUserSession()
 
 const articleTitles = ref([
   {
@@ -136,14 +136,17 @@ const articleTitles = ref([
     label: '示例26',
     value: '/example26',
   },
-]);
+])
 
-const activeArticle = ref(0);
+const activeArticle = ref(0)
 </script>
 
 <template>
   <div>
-    <div scrollbar="~ rounded w-4px" class="h-100vh bg-common text-common">
+    <div
+      scrollbar="~ rounded w-8px dark:thumb-color-[#444] dark:track-color-[bg-#1a1a1a]"
+      class="h-100vh bg-common text-common"
+    >
       <header w-full flex items-center justify-between gap-20px p-30px pl-60px>
         <Tab v-model:value="active" z-100 :tabs="tabs" :is-route="true">
           <template #extra>

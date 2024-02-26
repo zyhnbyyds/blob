@@ -1,25 +1,26 @@
 <script setup lang="ts">
-import './style/css/global.css';
+import './style/css/global.css'
 
-const app = useAppConfig();
+const app = useAppConfig()
 
 onNuxtReady(() => {
-  const colorMode = useColorMode();
-  const isPrefersDark = usePreferredDark();
+  const colorMode = useColorMode()
+  const isPrefersDark = usePreferredDark()
 
   watchEffect(() => {
-    colorMode.preference = isPrefersDark.value ? 'dark' : 'light';
-  });
+    colorMode.preference = isPrefersDark.value ? 'dark' : 'light'
+  })
 
   watch(
     () => app.pageLoading,
     (val) => {
       nextTick(() => {
-        if (val) app.pageLoading = false;
-      });
+        if (val)
+          app.pageLoading = false
+      })
     },
-  );
-});
+  )
+})
 </script>
 
 <template>

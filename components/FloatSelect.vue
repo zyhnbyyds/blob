@@ -1,39 +1,39 @@
 <script lang="ts" setup>
 export interface SelectItem {
-  label: string;
-  value: string | number;
-  [key: string]: any;
+  label: string
+  value: string | number
+  [key: string]: any
 }
 
 interface Props {
-  options: SelectItem[];
+  options: SelectItem[]
 }
 
 defineOptions({
   name: 'FloatSelect',
-});
+})
 
-const props = defineProps<Props>();
+const props = defineProps<Props>()
 const emits = defineEmits<{
-  change: [value: SelectItem];
-  isFocusFn: [value: boolean];
-}>();
+  change: [value: SelectItem]
+  isFocusFn: [value: boolean]
+}>()
 
-const [isShowList, toggle] = useToggle();
+const [isShowList, toggle] = useToggle()
 
-const active = defineModel<string | number>('value', { default: '0' });
+const active = defineModel<string | number>('value', { default: '0' })
 
 watch(
   () => isShowList.value,
   (val) => {
-    emits('isFocusFn', val);
+    emits('isFocusFn', val)
   },
-);
+)
 
 function handleSelect(item: SelectItem) {
-  active.value = item.value;
-  isShowList.value = false;
-  emits('change', item);
+  active.value = item.value
+  isShowList.value = false
+  emits('change', item)
 }
 </script>
 
@@ -55,12 +55,12 @@ function handleSelect(item: SelectItem) {
       <Transition name="fade">
         <div
           v-show="isShowList"
-          class="select-con absolute left-0 top-60px z-10 overflow-auto max-h-376px w-full w-full rounded-12px bg-#fff p-4px"
+          class="select-con absolute left-0 top-60px z-10 max-h-376px w-full w-full overflow-auto rounded-12px bg-#fff p-4px"
         >
           <div
             v-for="(item, i) in props.options"
             :key="`${item.value}-${i}-${item.phonePrefix}`"
-            class="mx-4px my-2px transition-all h-32px cursor-pointer items-center rounded-6px p-4px text-14px"
+            class="mx-4px my-2px h-32px cursor-pointer items-center rounded-6px p-4px text-14px transition-all"
             active="scale-97"
             hover="bg-light-500 dark:bg-#333"
             @click="handleSelect(item)"

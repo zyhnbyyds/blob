@@ -1,15 +1,15 @@
 <script lang="ts" setup>
 defineOptions({
   name: 'Modal',
-});
+})
 
 const props = withDefaults(
   defineProps<{
-    width?: string | number;
-    top?: string | number;
-    bgTransparent?: boolean;
-    title?: string;
-    header?: boolean;
+    width?: string | number
+    top?: string | number
+    bgTransparent?: boolean
+    title?: string
+    header?: boolean
   }>(),
   {
     width: 600,
@@ -17,14 +17,14 @@ const props = withDefaults(
     bgTransparent: false,
     header: true,
   },
-);
+)
 
-const { width, top, bgTransparent, header, title } = toRefs(props);
+const { width, top, bgTransparent, header, title } = toRefs(props)
 
 const modelVisible = defineModel<boolean>('modelVisible', {
   required: true,
   default: false,
-});
+})
 </script>
 
 <template>

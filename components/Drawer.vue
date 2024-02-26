@@ -1,19 +1,19 @@
 <script lang="ts" setup>
 defineOptions({
   name: 'Drawer',
-});
+})
 
 const props = withDefaults(
   defineProps<{
-    width?: string | number;
-    title?: string;
+    width?: string | number
+    title?: string
   }>(),
   { width: '30%' },
-);
+)
 
-const { width, title } = toRefs(props);
+const { width, title } = toRefs(props)
 
-const drawerVisible = defineModel<boolean>('visible', { default: false });
+const drawerVisible = defineModel<boolean>('visible', { default: false })
 </script>
 
 <template>

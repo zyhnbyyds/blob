@@ -21,4 +21,4 @@
 //   })
 // })
 
-export default defineNitroPlugin(() => {});
+export default defineNitroPlugin(() => {})

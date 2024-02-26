@@ -1,6 +1,6 @@
 export function handlePathGetFirst(path: string) {
-  const arr = path.split('/');
-  return arr.length >= 2 ? `/${arr[1]}` : '';
+  const arr = path.split('/')
+  return arr.length >= 2 ? `/${arr[1]}` : ''
 }
 
 /**
@@ -16,8 +16,8 @@ export function handleGetIdxByObjAttr<T>(
   target: any,
 ) {
   return array.findIndex((item) => {
-    return item[key] === target;
-  });
+    return item[key] === target
+  })
 }
 
 /**
@@ -28,23 +28,23 @@ export function handleGetIdxByObjAttr<T>(
  */
 export function arrFindNum(array: number[], isBigFlg = false) {
   // 数组去重
-  const setArr = Array.from(new Set(array));
+  const setArr = Array.from(new Set(array))
   const sortedArr = setArr.sort((a, b) => {
-    return !isBigFlg ? b - a : a - b;
-  });
+    return !isBigFlg ? b - a : a - b
+  })
 
-  return array.indexOf(sortedArr.at(-1));
+  return array.indexOf(sortedArr.at(-1) ?? -1)
 }
 
 /**
  * 样式类型收窄
- * @param judgeAttribute 要收窄的属性
+ * @param judgeAttributeVal 要收窄的属性
  * @returns 返回对应的数据
  */
 export function styleTypeReduce(judgeAttributeVal: string | number) {
   return typeof judgeAttributeVal === 'number'
     ? `${judgeAttributeVal}px`
-    : judgeAttributeVal;
+    : judgeAttributeVal
 }
 
 /**
@@ -61,22 +61,25 @@ export async function loadingKeep(
   extraFn?: () => any,
   duration = 1000,
 ) {
-  status.value = true;
+  status.value = true
 
-  const beforeDate = Date.now();
-  await fn();
-  const afterDate = Date.now();
+  const beforeDate = Date.now()
+  await fn()
+  const afterDate = Date.now()
 
-  const spend = afterDate - beforeDate;
+  const spend = afterDate - beforeDate
 
   if (spend > duration) {
-    if (extraFn) extraFn();
+    if (extraFn)
+      extraFn()
 
-    status.value = false;
-  } else {
+    status.value = false
+  }
+  else {
     setTimeout(() => {
-      if (extraFn) extraFn();
-      status.value = false;
-    }, duration - spend);
+      if (extraFn)
+        extraFn()
+      status.value = false
+    }, duration - spend)
   }
 }

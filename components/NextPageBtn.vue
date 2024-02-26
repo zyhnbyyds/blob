@@ -1,33 +1,34 @@
 <script lang="ts" setup>
 export interface NextItem {
-  title: string;
-  _path: string;
-  [key: string]: any;
+  title: string
+  _path: string
+  [key: string]: any
 }
 
 interface Emits {
-  (event: 'change', path: string): void;
+  (event: 'change', path: string): void
 }
 
 const props = withDefaults(
   defineProps<{
-    pre: null | NextItem;
-    next: null | NextItem;
-    preText?: string;
-    nextText?: string;
+    pre: null | NextItem
+    next: null | NextItem
+    preText?: string
+    nextText?: string
   }>(),
   {
     preText: '上一篇',
     nextText: '下一篇',
   },
-);
+)
 
-const emits = defineEmits<Emits>();
+const emits = defineEmits<Emits>()
 
-const { pre, next, preText, nextText } = props;
+const { pre, next, preText, nextText } = props
 
 function handleChange(btnObj: NextItem | null) {
-  if (btnObj) emits('change', btnObj._path);
+  if (btnObj)
+    emits('change', btnObj._path)
 }
 </script>
 

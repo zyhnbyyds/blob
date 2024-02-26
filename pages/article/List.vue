@@ -1,15 +1,15 @@
 <script lang="ts" setup>
-import type { ArticleItem, PageRes } from '~/server/types';
+import type { ArticleItem, PageRes } from '~/server/types'
 
 const { data, pending } = useFetch<PageRes<ArticleItem>>('/api/article/list', {
   method: 'GET',
   params: { page: 1, size: 1000 },
-});
+})
 
 definePageMeta({
   auth: false,
   keepalive: false,
-});
+})
 
 function handleClickArticle(item: ArticleItem) {
   useRouter().push({
@@ -17,7 +17,7 @@ function handleClickArticle(item: ArticleItem) {
     query: {
       id: item.id,
     },
-  });
+  })
 }
 </script>
 

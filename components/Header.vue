@@ -1,22 +1,22 @@
 <script lang="ts" setup>
-import type { TabItem } from './Tab.vue';
+import type { TabItem } from './Tab.vue'
 
 defineOptions({
   name: 'TopHeader',
-});
+})
 
 const props = withDefaults(defineProps<Props>(), {
   show: true,
-});
+})
 
 interface Props {
-  paths: TabItem[];
-  show: boolean;
+  paths: TabItem[]
+  show: boolean
 }
 
-const app = useAppConfig();
+const app = useAppConfig()
 
-const activeIndex = ref<string>('');
+const activeIndex = ref<string>('')
 </script>
 
 <template>

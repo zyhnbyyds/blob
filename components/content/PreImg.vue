@@ -1,33 +1,36 @@
 <script lang="ts" setup>
 interface Props {
-  src: string;
-  height?: number | string;
-  width?: number | string;
+  src: string
+  height?: number | string
+  width?: number | string
 }
 
-const props = defineProps<Props>();
+const props = defineProps<Props>()
 
-const { src } = toRefs(props);
+const { src } = toRefs(props)
 // 弹出框flag
-const modalVisible = ref(false);
+const modalVisible = ref(false)
 // 旋转
-const rotateDeg = ref(0);
+const rotateDeg = ref(0)
 // 缩放
-const scaleLevel = ref(1);
-const cursorStyle = ref<'grab' | 'grabbing'>('grab');
+const scaleLevel = ref(1)
+const cursorStyle = ref<'grab' | 'grabbing'>('grab')
 
 const imgStyle = computed(() => {
   return {
     transform: `rotate(${rotateDeg.value}deg) scale(${toValue(scaleLevel)})`,
     cursor: toValue(cursorStyle),
-  };
-});
+  }
+})
 
 /** 点击进行缩放 */
 function handleScale(flag: '-' | '+' | 'reset') {
-  if (flag === '+' && toValue(scaleLevel) <= 3) scaleLevel.value += 0.5;
-  else if (flag === '-' && toValue(scaleLevel) >= 0.4) scaleLevel.value -= 0.3;
-  else if (flag === 'reset') scaleLevel.value = 1;
+  if (flag === '+' && toValue(scaleLevel) <= 3)
+    scaleLevel.value += 0.5
+  else if (flag === '-' && toValue(scaleLevel) >= 0.4)
+    scaleLevel.value -= 0.3
+  else if (flag === 'reset')
+    scaleLevel.value = 1
 }
 </script>
 

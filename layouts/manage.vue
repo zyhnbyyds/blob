@@ -16,9 +16,9 @@ const tabs = ref([
     label: '分类',
     value: '/manage/cate',
   },
-]);
+])
 
-const active = ref(tabs.value[0].value);
+const active = ref(tabs.value[0].value)
 </script>
 
 <template>

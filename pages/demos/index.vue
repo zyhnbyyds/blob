@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 definePageMeta({
   auth: false,
-});
+})
 
 const renderVal = `# 啊实打实的
 
@@ -14,7 +14,7 @@ const renderVal = `# 啊实打实的
 1. 123123
 2. 123123123
 3. 43245325
-`;
+`
 </script>
 
 <template>

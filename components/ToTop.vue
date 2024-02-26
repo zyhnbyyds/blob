@@ -2,13 +2,13 @@
 <script lang="ts" setup>
 defineOptions({
   name: 'ToTop',
-});
+})
 
-defineProps<{ top: number }>();
+defineProps<{ top: number }>()
 
-const emits = defineEmits<{ (event: 'goTop'): void }>();
+const emits = defineEmits<{ (event: 'goTop'): void }>()
 
-const { pageScroolTop } = useAppConfig();
+const { pageScroolTop } = useAppConfig()
 </script>
 
 <template>

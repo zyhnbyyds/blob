@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 defineOptions({
   name: 'ContactMe',
-});
+})
 
-const { contact } = useAppConfig();
+const { contact } = useAppConfig()
 </script>
 
 <template>

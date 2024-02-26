@@ -1,4 +1,4 @@
-import type { H3Event } from 'h3';
+import type { H3Event } from 'h3'
 
 /**
  * 404 Err
@@ -7,7 +7,7 @@ import type { H3Event } from 'h3';
  * @returns error message
  */
 export function Err_404(event: H3Event, errMsg: string): string {
-  return Err_Common(event, errMsg, 404);
+  return Err_Common(event, errMsg, 404)
 }
 
 /**
@@ -17,7 +17,7 @@ export function Err_404(event: H3Event, errMsg: string): string {
  * @returns error message
  */
 export function Err_500(event: H3Event, errMsg: string): string {
-  return Err_Common(event, errMsg, 500);
+  return Err_Common(event, errMsg, 500)
 }
 
 /**
@@ -32,15 +32,15 @@ export function Err_Common(
   errMsg: string,
   code: number,
 ): string {
-  setResponseStatus(event, code);
-  return errMsg;
+  setResponseStatus(event, code)
+  return errMsg
 }
 
 /**
  * handle payload err & return error message
  * @param event h3 event type
- * @param code response status code
+ * @param errMsg response status code
  */
 export function Err_400(event: H3Event, errMsg: string): string {
-  return Err_Common(event, errMsg, 400);
+  return Err_Common(event, errMsg, 400)
 }

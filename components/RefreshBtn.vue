@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-const app = useAppConfig();
+const app = useAppConfig()
 
 function refresh() {
-  app.pageLoading = true;
+  app.pageLoading = true
 }
 </script>
 
