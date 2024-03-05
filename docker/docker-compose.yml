@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  redis:
+    image: redis:latest
+    volumes:
+      - ${REDIS_DATA_PATH}:/data
+      - ${REDIS_CONF_PATH}:/usr/local/etc/redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    restart: always
+    env_file: .env
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_DATA_PATH: ${REDIS_DATA_PATH}
+      REDIS_LOG_PATH: ${REDIS_LOG_PATH}
+      REDIS_CONF_PATH: ${REDIS_CONF_PATH}
+
+  # mongodb:
+  #   image: mongo:latest
+  #   volumes:
+  #     - ${MONGO_DATA_PATH}:/data/db
+  #     - ${MONGO_CONF_PATH}:/etc/mongo
+  #   command: mongod --config /etc/mongo
+  #   restart: always
+  #   env_file: .env
+  #   environment:
+  #     MONGO_USERNAME: ${MONGO_USERNAME}
+  #     MONGO_PASSWORD: ${MONGO_PASSWORD}
+  #     MONGO_DATA_PATH: ${MONGO_DATA_PATH}
+  #     MONGO_LOG_PATH: ${MONGO_LOG_PATH}
+  #     MONGO_CONF_PATH: ${MONGO_CONF_PATH}

@@ -7,3 +7,4 @@ dist
 .idea/
 .env.prod
 pnpm-lock.yaml
+docker/data

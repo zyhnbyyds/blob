@@ -8,7 +8,7 @@
       "error_file": "/var/log/node-app/blob.stderr.log",
       "out_file": "log/blob.stdout.log",
       "pid_file": "pids/node-geo-api.pid",
-      "instances": 6,
+      "instances": 2,
       "min_uptime": "200s",
       "max_restarts": 10,
       "max_memory_restart": "1M",
