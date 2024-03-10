@@ -1,8 +1,12 @@
 import { Snowflake } from '~/lib/snow-flake'
 import { AddSchema } from '~/server/config/zod/article'
 import { ArticleSchema } from '~/server/models/article'
+import githubApp from '~/server/utils/github-app'
 
 export default defineEventHandler(async (event) => {
+  // githubApp.eachRepository((repo) => {
+  //   repo.repository.
+  // })
   const result = await readValidatedBody(event, body =>
     AddSchema.safeParse(body))
 

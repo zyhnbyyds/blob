@@ -9,7 +9,6 @@ export default defineNuxtConfig({
     'nuxt-lodash',
     '@unocss/nuxt',
     'nuxt-mongoose',
-    'nuxt-typed-router',
     'nuxt-auth-utils',
     '@nuxtjs/i18n',
     '@nuxt/content',

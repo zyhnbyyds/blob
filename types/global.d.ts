@@ -11,5 +11,11 @@ interface ImportMeta {
     REDIS_AUTH_PASS: string
     AUTH_SECRET: string
     AUTH_ORIGIN: string
+    GITHUB_APP_ID: string
+    GITHUB_APP_WEBHOOK_SECRET: string
+    GITHUB_APP_PRIVATE_KEY: string
+    GITHUB_APP_WEBHOOK_PATH: string
+    GITHUB_APP_PRIVATE_KEY_PATH: string
+    GITHUB_APP_WEBHOOK_API_PATH: string
   }
 }

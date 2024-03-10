@@ -144,7 +144,7 @@ const activeArticle = ref(0)
 <template>
   <div>
     <div
-      scrollbar="~ rounded w-8px dark:thumb-color-[#444] dark:track-color-[bg-#1a1a1a]"
+      scrollbar="~ rounded w-8px dark:thumb-color-gray-600 dark:track-color-gray-800"
       class="h-100vh bg-common text-common"
     >
       <header w-full flex items-center justify-between gap-20px p-30px pl-60px>
