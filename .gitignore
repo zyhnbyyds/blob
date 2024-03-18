@@ -8,3 +8,4 @@ dist
 .env.prod
 pnpm-lock.yaml
 docker/data
+docs/.vitepress/cache
