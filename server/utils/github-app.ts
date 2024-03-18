@@ -1,4 +1,4 @@
-import { App } from 'octokit'
+import { App, Octokit } from 'octokit'
 import logger from './logger'
 
 class GithubApp {
@@ -13,6 +13,7 @@ class GithubApp {
       webhooks: {
         secret,
       },
+      Octokit: Octokit.defaults({}),
     })
 
     app.webhooks.onError((error) => {
@@ -26,7 +27,6 @@ class GithubApp {
   }
 }
 
-const githubApp = new GithubApp()
-const app = githubApp.initApp()
+const githubApp = (new GithubApp()).initApp()
 
-export default app
+export default githubApp

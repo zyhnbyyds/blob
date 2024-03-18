@@ -29,6 +29,7 @@ export function clearStorage() {
 export function setStorages<V extends StorageValue>(key: string, val: V) {
   return redis.setItem(key, val)
 }
+
 export function getStorages<R = object, E = object>(
   keys: ItemKeys,
   params?: ListOptions<E>,

@@ -17,5 +17,6 @@ interface ImportMeta {
     GITHUB_APP_WEBHOOK_PATH: string
     GITHUB_APP_PRIVATE_KEY_PATH: string
     GITHUB_APP_WEBHOOK_API_PATH: string
+    GITHUB_APP_INSTALLATION_ID: string
   }
 }

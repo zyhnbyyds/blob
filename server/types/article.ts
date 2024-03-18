@@ -11,3 +11,8 @@ export interface ArticleItem {
   viewCount?: number
   isDelete: boolean
 }
+
+export interface YearArticleItem {
+  _id: number
+  articles: ArticleItem[]
+}

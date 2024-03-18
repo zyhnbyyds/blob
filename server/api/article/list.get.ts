@@ -23,16 +23,45 @@ export default defineEventHandler<{ query: Page }>(async (event) => {
 
   const { page, size } = result.data
 
-  const list = await ArticleSchema.find({ isDelete: false }, [
-    'title',
-    'createTime',
-    'id',
-    'isDelete',
-    'updateTime',
+  const aggregation = ArticleSchema.aggregate([
+    {
+      $match: { isDelete: false },
+    },
+    {
+      $sort: { createTime: -1 },
+    },
+    {
+      $skip: (page - 1) * size,
+    },
+    {
+      $limit: size,
+    },
+    {
+      $project: {
+        year: { $year: {
+          $dateFromString: {
+            dateString: '$createTime',
+          },
+        } },
+        title: 1,
+        createTime: 1,
+        id: 1,
+        isDelete: 1,
+        updateTime: 1,
+      },
+    },
+    {
+      $group: {
+        _id: '$year',
+        articles: { $push: '$$ROOT' },
+      },
+    },
+    {
+      $sort: { _id: 1 },
+    },
   ])
-    .skip((page - 1) * size)
-    .limit(size)
-    .sort({ createTime: -1 })
+
+  const list = await aggregation.exec()
 
   const total = await ArticleSchema.find({ isDelete: false }).countDocuments()
 
@@ -41,8 +70,6 @@ export default defineEventHandler<{ query: Page }>(async (event) => {
   return {
     list,
     total,
-    page,
-    size,
     pages,
   }
 })

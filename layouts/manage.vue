@@ -22,7 +22,7 @@ const active = ref(tabs.value[0].value)
 </script>
 
 <template>
-  <div scrollbar="~ rounded w-1" class="h-100vh bg-common text-common">
+  <div scrollbar="~ w-1" class="h-100vh bg-common text-common">
     <div w-full flex items-center gap-20px p-30px pl-60px>
       <Tab v-model:value="active" z-100 :tabs="tabs" :is-route="true">
         <template #extra>

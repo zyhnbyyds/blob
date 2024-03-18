@@ -16,8 +16,6 @@ const props = defineProps<{
 }>()
 
 const plugins = [frontmatter(), gfm(), gemoji(), breaks(), highlight()]
-
-byteToggleTheme('hydrogen', import.meta.url)
 </script>
 
 <template>
