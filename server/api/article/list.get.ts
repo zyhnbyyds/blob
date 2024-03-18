@@ -57,7 +57,7 @@ export default defineEventHandler<{ query: Page }>(async (event) => {
       },
     },
     {
-      $sort: { _id: 1 },
+      $sort: { _id: -1 },
     },
   ])
 

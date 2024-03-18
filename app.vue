@@ -26,7 +26,7 @@ onNuxtReady(() => {
 <template>
   <NuxtLayout>
     <NuxtLoadingIndicator />
-    <NuxtPage v-if="!app.pageLoading" :page-key="route => route.fullPath" />
+    <NuxtPage v-if="!app.pageLoading" keepalive :page-key="route => route.fullPath" />
   </NuxtLayout>
 </template>
 

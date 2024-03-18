@@ -9,7 +9,34 @@ const { data, pending } = useFetch<PageRes<YearArticleItem>>('/api/article/list'
 
 definePageMeta({
   auth: false,
-  keepalive: true,
+})
+
+// 当一个 IntersectionObserver 对象被创建时，其被配置为监听根中一段给定比例的可见区域。
+// 一旦 IntersectionObserver 被创建，则无法更改其配置，所以一个给定的观察者对象只能用
+// 来监听可见区域的特定变化值；然而，你可以在同一个观察者对象中配置监听多个目标元素。
+// link: https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver
+const anchors = reactive<{ [key: string]: Element }>({})
+const currentAnchor = ref<string | null>(null)
+const observer = ref<IntersectionObserver | null>(null)
+
+onMounted(() => {
+  observer.value = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting)
+          currentAnchor.value = entry.target.id
+      })
+    },
+    { threshold: 0.7 },
+  )
+
+  Object.values(anchors).forEach((anchor) => {
+    observer.value?.observe(anchor)
+  })
+})
+
+onUnmounted(() => {
+  observer.value?.disconnect()
 })
 
 function handleClickArticle(item: ArticleItem) {
@@ -20,11 +47,18 @@ function handleClickArticle(item: ArticleItem) {
     },
   })
 }
+
+function handleLinkClick(id: string) {
+  currentAnchor.value = id
+  const el = anchors[id]
+  if (el)
+    el.scrollIntoView({ behavior: 'smooth' })
+}
 </script>
 
 <template>
   <div flex-row-center>
-    <div w-4xl px-30px py-2>
+    <div w-full px-30px py-2 lg="w-4xl">
       <div
         v-if="pending"
         i-svg-spinners:12-dots-scale-rotate
@@ -32,12 +66,16 @@ function handleClickArticle(item: ArticleItem) {
         text-gray-400
         ab-c
       />
-
       <div v-else>
+        <!-- articles list -->
         <div v-for="item in data?.list" :key="item._id" relative mb-10>
-          <section :id="`${item._id}-year`" hover="animate-pulse" flex-center py-10 text-5 text-gray-500 cursor="wait">
-            --- 😒{{ item._id }} ---
-          </section>
+          <!-- year -->
+          <h2 :id="`${item._id}`" :ref="el => { if (el) anchors[item._id] = el as Element }" hover="animate-pulse" py-10 text-5 text-gray-500>
+            <NuxtLink :href="`#${item._id}`" external>
+              --- {{ item._id }} ---
+            </NuxtLink>
+          </h2>
+
           <ActiveBgList
             z-2
             :list="item.articles"
@@ -52,7 +90,8 @@ function handleClickArticle(item: ArticleItem) {
                   {{ listItem.title }}
                 </span>
 
-                <div absolute class="-left-25" w-24>
+                <!-- article createTime -->
+                <div absolute class="-left-25 <md:hidden" w-24>
                   <span
                     group-hover="bg-light-600 dark:bg-#333 text-gray-600 dark:text-gray-300 font-600"
                     class="transition-all"
@@ -66,15 +105,24 @@ function handleClickArticle(item: ArticleItem) {
           </ActiveBgList>
         </div>
       </div>
+
+      <div h-200 />
     </div>
 
-    <div fixed right-10 class="h-[calc(100vh-104px)] pt-20">
+    <!-- right years nav -->
+    <div fixed right-10 lg="block" class="h-[calc(100vh-104px)] pt-20 hidden">
       <div>
         <div v-for="item in (data?.list ?? [])" :key="item._id" class="group" flex-col-center justify="end" gap-2 py-3>
-          <div class="h2 w2 rounded bg-gray-200 transition-all hidden" group-hover="block underline-dotted" />
-          <a :href="`#${item._id}-year`" class="cursor-pointer px-2 py-1 text-4 text-gray-500 transition-all" group-hover="bg-gray-200">
+          <div :class="[currentAnchor === String(item._id) ? 'block' : 'hidden']" class="h2 w2 rounded bg-gray-200 transition-all" />
+          <NuxtLink
+            :class="[currentAnchor === String(item._id) ? 'text-gray-100' : 'text-gray-500']"
+            external :to="`#${item._id}`"
+            class="cursor-pointer px-2 py-1 text-4 transition-all"
+            group-hover="bg-gray-400 dark:bg-#333"
+            @click.prevent="handleLinkClick(String(item._id))"
+          >
             {{ item._id }}
-          </a>
+          </NuxtLink>
         </div>
       </div>
     </div>

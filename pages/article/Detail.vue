@@ -1,10 +1,6 @@
 <script lang="ts" setup>
 import type { ArticleItem } from '~/server/types'
 
-definePageMeta({
-  keepalive: false,
-})
-
 const { query } = useRoute()
 const { data: detail, pending } = useFetch<ArticleItem>('/api/article/detail', {
   method: 'GET',
