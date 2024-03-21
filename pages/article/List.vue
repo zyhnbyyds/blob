@@ -66,12 +66,13 @@ function handleLinkClick(id: string) {
         text-gray-400
         ab-c
       />
+
       <div v-else>
         <!-- articles list -->
         <div v-for="item in data?.list" :key="item._id" relative mb-10>
           <!-- year -->
           <h2 :id="`${item._id}`" :ref="el => { if (el) anchors[item._id] = el as Element }" hover="animate-pulse" py-10 text-5 text-gray-500>
-            <NuxtLink :href="`#${item._id}`" external>
+            <NuxtLink :href="`#${item._id}`" external @click.prevent="handleLinkClick(String(item._id))">
               --- {{ item._id }} ---
             </NuxtLink>
           </h2>
@@ -105,20 +106,18 @@ function handleLinkClick(id: string) {
           </ActiveBgList>
         </div>
       </div>
-
-      <div h-200 />
     </div>
 
     <!-- right years nav -->
     <div fixed right-10 lg="block" class="h-[calc(100vh-104px)] pt-20 hidden">
       <div>
         <div v-for="item in (data?.list ?? [])" :key="item._id" class="group" flex-col-center justify="end" gap-2 py-3>
-          <div :class="[currentAnchor === String(item._id) ? 'block' : 'hidden']" class="h2 w2 rounded bg-gray-200 transition-all" />
+          <div :class="[currentAnchor === String(item._id) ? 'block dark:bg-gray-200 bg-gray-300' : 'hidden']" class="h2 w2 rounded transition-all" />
           <NuxtLink
-            :class="[currentAnchor === String(item._id) ? 'text-gray-100' : 'text-gray-500']"
+            :class="[currentAnchor === String(item._id) ? 'dark:text-gray-100 text-dark' : 'text-gray-400']"
             external :to="`#${item._id}`"
             class="cursor-pointer px-2 py-1 text-4 transition-all"
-            group-hover="bg-gray-400 dark:bg-#333"
+            group-hover="bg-light-600 dark:bg-#333"
             @click.prevent="handleLinkClick(String(item._id))"
           >
             {{ item._id }}

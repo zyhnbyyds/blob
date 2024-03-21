@@ -6,7 +6,7 @@ import gfm from '@bytemd/plugin-gfm'
 import frontmatter from '@bytemd/plugin-frontmatter'
 import gemoji from '@bytemd/plugin-gemoji'
 import breaks from '@bytemd/plugin-breaks'
-import highlight from '@bytemd/plugin-highlight'
+import { shikiPlugin } from '~/utils/bytemd'
 
 defineOptions({
   name: 'ArticleEditor',
@@ -22,7 +22,7 @@ const emits = defineEmits<{
 
 const { loading } = toRefs(props)
 
-const plugins = [frontmatter(), gfm(), gemoji(), breaks(), highlight()]
+const plugins = [frontmatter(), gfm(), gemoji(), breaks(), shikiPlugin()]
 
 definePageMeta({
   layout: 'empty',
@@ -57,7 +57,7 @@ const article = reactive({
       </div>
     </header>
 
-    <div class="h-[calc(100%-120px)]">
+    <div class="bytemd-editor h-[calc(100%-60px)] w-full">
       <!-- @vue-expect-error -->
       <Editor
         :plugins="plugins"
@@ -69,4 +69,12 @@ const article = reactive({
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+:deep(.bytemd-editor > div) {
+  height: 100%;
+  width: 100%;
+}
+:deep(.bytemd) {
+  height: 100%;
+}
+</style>

@@ -10,7 +10,7 @@ const { data: detail, pending } = useFetch<ArticleItem>('/api/article/detail', {
 
 <template>
   <div flex-row-center>
-    <div w-4xl border="1px solid light-500">
+    <div mb-5 w-4xl rounded-1 bg-light-400 p-4 dark:bg-dark:400>
       <div
         v-if="pending"
         i-svg-spinners:12-dots-scale-rotate

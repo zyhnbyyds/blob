@@ -1,3 +1,6 @@
+import type { BytemdPlugin } from 'bytemd'
+import { codeToHtml } from 'shiki'
+import type { CodeToHastOptions } from 'shiki'
 import type { MdTheme } from '~/config/bytemd'
 
 /**
@@ -31,4 +34,34 @@ export function byteToggleTheme(
       },
     ],
   })
+}
+
+/**
+ * ByteMD plugin to show the code block with shiki
+ * @param options The options for shiki
+ */
+export function shikiPlugin(options?: CodeToHastOptions): BytemdPlugin {
+  return {
+    viewerEffect({ markdownBody }) {
+      const els = markdownBody.querySelectorAll<HTMLElement>('pre>code')
+      if (els.length === 0)
+        return
+      els.forEach(async (el) => {
+        const lang = el.className.replace('language-', '')
+        el.className = `${el.className} shiki-code`
+        const codeGet = el.textContent || ''
+        const code = await codeToHtml(codeGet, useAssign(options, {
+          lang,
+          themes: {
+            light: 'github-light',
+            dark: 'github-dark',
+          },
+        }))
+
+        if (el.parentElement)
+          el.parentElement.innerHTML = code
+      },
+      )
+    },
+  }
 }

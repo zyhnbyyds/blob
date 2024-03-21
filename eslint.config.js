@@ -4,7 +4,7 @@ import format from 'eslint-plugin-format'
 export default antfu(
   {
     formatters: {
-      css: true,
+      css: false,
       html: true,
     },
     unocss: true,

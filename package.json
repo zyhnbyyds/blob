@@ -57,6 +57,7 @@
     "octokit": "^3.1.2",
     "pinia": "^2.1.7",
     "sass": "^1.71.1",
+    "shiki": "^1.2.0",
     "typescript": "^5.4.2",
     "unocss-preset-scrollbar": "^0.3.1",
     "vitepress": "1.0.0-rc.45",
