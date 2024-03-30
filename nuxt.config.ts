@@ -11,7 +11,6 @@ export default defineNuxtConfig({
     'nuxt-mongoose',
     'nuxt-auth-utils',
     '@nuxtjs/i18n',
-    '@nuxt/content',
     '@nuxt/image',
   ],
 

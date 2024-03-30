@@ -8,7 +8,7 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 import { presetScrollbar } from 'unocss-preset-scrollbar'
-import { shortcuts } from './config/unocss'
+import presetTagify from '@unocss/preset-tagify'
 
 export default defineConfig({
   shortcuts: [
@@ -26,9 +26,11 @@ export default defineConfig({
     ['hw-full', 'h-full w-full'],
 
     ['text-over-one', 'overflow-hidden w-full text-nowrap text-ellipsis'],
-    ...shortcuts,
+    ['text-common', 'text-#333 text-sm dark:text-#e5e5e5 text-14px transition-colors'],
+    ['bg-common', 'bg-#fff dark:bg-#1a1a1a transition-colors'],
   ],
   presets: [
+    presetTagify(),
     presetUno(),
     presetAttributify(),
     presetIcons({
@@ -42,7 +44,13 @@ export default defineConfig({
         mono: 'DM Mono',
       },
     }),
-    presetScrollbar(),
+    // pkg problem
+    presetScrollbar() as any,
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
+  content: {
+    pipeline: {
+      include: ['**/**/*.{ts}', /\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html)($|\?)/],
+    },
+  },
 })
