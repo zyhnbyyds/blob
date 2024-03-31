@@ -2,8 +2,8 @@
   "apps": [
     {
       "name": "blob-run",
-      "cwd": "/usr/blob/.output",
-      "script": "/usr/blob/.output/server/index.mjs",
+      "cwd": "/usr/app/blob/.output",
+      "script": "/usr/app/blob/.output/server/index.mjs",
       "log_date_format": "YYYY-MM-DD HH:mm Z",
       "error_file": "/var/log/node-app/blob.stderr.log",
       "out_file": "log/blob.stdout.log",
