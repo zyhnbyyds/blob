@@ -36,28 +36,27 @@ const article = reactive({
 
 <template>
   <div class="hw-full">
-    <header h-60px flex items-center px-30px justify="between">
+    <header h-60px class="dark:bg-[#333]" flex items-center px-30px justify="between">
       <input
         v-model="article.title"
-        text-24px
+        text-20px
         outline-none
-        class="w-60%"
+        class="w-60% px-3 py-2 dark:bg-[#333]"
         placeholder="输入文章标题..."
       >
       <div flex-col-center gap-4>
-        <a-button> 草稿箱 </a-button>
-        <a-button
+        <p> 草稿箱 </p>
+        <p
           :loading="loading"
-          type="primary"
           @click="emits('publish', article)"
         >
           发布
-        </a-button>
+        </p>
         <DarkToggle />
       </div>
     </header>
 
-    <div class="bytemd-editor h-[calc(100%-60px)] w-full">
+    <div class="bytemd-editor h-[calc(100%-60px)] w-full bg-common">
       <!-- @vue-expect-error -->
       <Editor
         :plugins="plugins"

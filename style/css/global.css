@@ -9,13 +9,13 @@ body,
 }
 
 html.dark ::selection {
-  color: #e5e5e5;
-  background-color: gray;
+  color: #e5e5e5 !important;
+  background-color: #555 !important;
 }
 
 html ::selection {
-  color: #555;
-  background-color: #e5e5e5;
+  color: #555 !important;
+  background-color: #e5e5e5 !important;
 }
 
 .nuxt-loading-indicator {

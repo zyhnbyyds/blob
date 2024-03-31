@@ -1,10 +1,6 @@
 <script lang="ts" setup>
 const tabs = ref([
   {
-    label: '首页',
-    value: '/',
-  },
-  {
     label: '文章',
     value: '/manage/article',
   },

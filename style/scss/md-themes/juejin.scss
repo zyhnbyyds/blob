@@ -1,6 +1,10 @@
 $monospace-font: Menlo, Monaco, Consolas, 'Courier New', monospace;
 $line-space: 22px;
 
+$bg-dark-common: #333;
+$text-dark-common: #e5e5e5;
+$border-dark-common: 1px solid #444;
+
 .markdown-body {
   word-break: break-word;
   line-height: 1.75;
@@ -214,7 +218,7 @@ html.dark {
       color: gray;
     }
 
-    pre > code {
+    pre>code {
       background: #333;
       background-color: var(--shiki-dark-bg);
     }
@@ -238,5 +242,42 @@ html.dark {
       background-color: #333;
       color: #999;
     }
+  }
+
+  .bytemd {
+    background-color: $bg-dark-common;
+    border: $border-dark-common;
+    caret-color: $text-dark-common;
+  }
+
+  .bytemd-toolbar {
+    background-color: $bg-dark-common;
+    border-bottom: $border-dark-common;
+  }
+
+  .bytemd-toolbar-icon svg,
+  .bytemd-toolbar-icon img {
+    color: $text-dark-common;
+    border-color: $bg-dark-common;
+  }
+
+  .bytemd-editor {
+    color: $text-dark-common;
+
+    .CodeMirror {
+      background-color: $bg-dark-common;
+      color: $text-dark-common;
+    }
+  }
+
+  .bytemd-split .bytemd-preview {
+    border-left: $border-dark-common;
+    background-color: #333;
+    color: $text-dark-common;
+  }
+
+  .bytemd-status {
+    color: $text-dark-common;
+    border-top: $border-dark-common;
   }
 }

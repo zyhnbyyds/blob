@@ -2,6 +2,7 @@
 <script lang="ts" setup>
 import type { ArticleItem } from '~/server/types/article'
 import type { PageRes } from '~/server/types/common'
+import type { TableColumns } from '~/components/blob/table/type'
 
 definePageMeta({
   layout: 'manage',
@@ -30,27 +31,27 @@ const { data, pending, refresh } = useFetch<PageRes<ArticleItem>>(
 //   },
 // });
 
-// const columns: TableColumnsType = [
-//   {
-//     title: '标题',
-//     dataIndex: 'title',
-//     width: '60%',
-//     key: 'title',
-//     ellipsis: true,
-//   },
-//   {
-//     title: '发布时间',
-//     dataIndex: 'createTime',
-//     key: 'createTime',
-//   },
-//   {
-//     title: '操作',
-//     dataIndex: 'action',
-//     key: 'action',
-//     align: 'center',
-//     width: '16%',
-//   },
-// ];
+const columns: TableColumns[] = [
+  {
+    title: '标题',
+    dataIndex: 'title',
+    width: '60%',
+    key: 'title',
+    ellipsis: true,
+  },
+  {
+    title: '发布时间',
+    dataIndex: 'createTime',
+    key: 'createTime',
+  },
+  {
+    title: '操作',
+    dataIndex: 'action',
+    key: 'action',
+    align: 'center',
+    width: '16%',
+  },
+]
 
 function handleEdit(rowData: ArticleItem) {
   window.open(`/manage/article/publish?id=${rowData.id}&type=edit`, '_blank')
@@ -73,17 +74,23 @@ function handleAdd() {
   <div p-30px>
     <span
       border="1px solid #ee5e5e5"
-      class="flex-col-center!"
-      inline
+      class="flex-col-center inline-flex text-3"
       gap-2
       px-5
-      py-2
-      @click="handleAdd"
+      py-1.5
+      @click="refresh()"
     >
       添加
-      <div carbon:add-alt />
+      <div carbon:add-alt text-3 />
     </span>
+
+    <BlobTable
+      v-if="data"
+      :columns="columns"
+      :data="data.list"
+      :loading="pending"
+    />
   </div>
 </template>
 
-<style scoped></style>
+<style scoped></style>~/components/blob/table/type
