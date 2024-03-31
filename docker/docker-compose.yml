@@ -4,28 +4,23 @@ services:
   redis:
     image: redis:latest
     volumes:
-      - ${REDIS_DATA_PATH}:/data
-      - ${REDIS_CONF_PATH}:/usr/local/etc/redis
-    command: redis-server /usr/local/etc/redis/redis.conf
-    restart: always
-    env_file: .env
-    environment:
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
-      REDIS_DATA_PATH: ${REDIS_DATA_PATH}
-      REDIS_LOG_PATH: ${REDIS_LOG_PATH}
-      REDIS_CONF_PATH: ${REDIS_CONF_PATH}
+      - ${pwd}/data/redis:/data
+      - ${pwd}/logs/redis:/usr/local/etc/redis
+      - ${pwd}/conf/redis.conf:/etc/redis/redis.conf
+    command: redis-server --requirepass testpassWord --appendonly yes
+    ports:
+      - 6378:6379
 
   mongodb:
     image: mongo:latest
+    container_name: mongodb
     volumes:
-      - ${MONGO_DATA_PATH}:/data/db
-      - ${MONGO_CONF_PATH}:/etc/mongo
-    command: mongod --config /etc/mongo
-    restart: always
+      - ${pwd}/data/mongo/data:/data/db
+      - ${pwd}/conf/mongo.conf:/etc/mongo/mongo.conf
+    command: mongod --config /etc/mongo/mongo.conf
     env_file: .env
+    ports:
+      - 27018:27017
     environment:
-      MONGO_USERNAME: ${MONGO_USERNAME}
-      MONGO_PASSWORD: ${MONGO_PASSWORD}
-      MONGO_DATA_PATH: ${MONGO_DATA_PATH}
-      MONGO_LOG_PATH: ${MONGO_LOG_PATH}
-      MONGO_CONF_PATH: ${MONGO_CONF_PATH}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
