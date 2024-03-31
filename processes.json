@@ -17,7 +17,15 @@
       "exec_interpreter": "node",
       "exec_mode": "cluster_mode",
       "autorestart": true,
-      "vizion": false
+      "vizion": false,
+      "env": {
+        "PORT": 3003,
+        "NODE_ENV": "development"
+      },
+      "env_production": {
+        "PORT": 3004,
+        "NODE_ENV": "production"
+      }
     }
   ]
 }
