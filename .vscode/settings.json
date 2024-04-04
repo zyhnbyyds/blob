@@ -3,13 +3,16 @@
     "aliyuncs",
     "authjs",
     "datacenter",
+    "Jian",
+    "ljmc",
     "Millis",
     "Muti",
     "octocat",
     "Scrool",
     "Tagify",
     "tailwindcss",
-    "yujiezhang"
+    "yujiezhang",
+    "Zheng"
   ],
   // Enable the ESlint flat config support
   "eslint.experimental.useFlatConfig": true,
@@ -19,6 +22,9 @@
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never"
   },
+
+  "editor.defaultFormatter": null,
+
   // Silent the stylistic rules in you IDE, but still auto fix them
   "eslint.rules.customizations": [
     {
@@ -76,5 +82,8 @@
     "yaml",
     "toml"
   ],
-  "prettier.enable": false
+  "prettier.enable": false,
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar"
+  }
 }

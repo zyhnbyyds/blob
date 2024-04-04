@@ -42,6 +42,9 @@ export default defineConfig({
         sans: 'DM Sans',
         serif: 'DM Serif Display',
         mono: 'DM Mono',
+        maShan: 'Ma Shan Zheng',
+        mali: 'Mali',
+        ljmc: 'Liu Jian Mao Cao',
       },
     }),
     // pkg problem

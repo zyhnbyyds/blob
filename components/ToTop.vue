@@ -18,7 +18,7 @@ const { pageScroolTop } = useAppConfig()
     <div
       v-if="top > pageScroolTop"
       class="i-solar:round-arrow-up-broken fixed bottom-3 right-10 z-10 h-7 w-7 flex-center cursor-pointer rounded-5 bg-#666 dark:bg-#bbb"
-      @click="emits('goTop')"
+      @click.capture="emits('goTop')"
     />
   </Transition>
 </template>

@@ -26,15 +26,15 @@ defineOptions({
 const props = withDefaults(defineProps<Props>(), {
   labelFiled: 'label',
   valueFiled: 'value',
+  value: 0,
   isRoute: false,
   followChange: false,
 })
 
 const emits = defineEmits<Emits>()
 
-const { followChange } = toRefs(props)
 const isLoaded = ref(false)
-const app = useAppConfig()
+const { width } = useWindowSize()
 
 const activeIdx = computed(() => {
   return handleGetIdxByObjAttr(props.tabs, props.valueFiled, props.value)
@@ -49,37 +49,23 @@ const actTabVal = computed({
   },
 })
 
-const tabsRef = ref<HTMLElement[]>()
+const tabItemsRef = ref<HTMLElement[]>()
 const bgRef = ref<HTMLElement>()
+const tabRef = ref<HTMLElement>()
 const router = useRouter()
-
-watch(
-  () => app.isHeaderTextOrIcon,
-  async () => {
-    await nextTick()
-    if (!tabsRef.value)
-      return
-
-    if (followChange.value) {
-      setTimeout(() => {
-        moveBgPoi(tabsRef.value![activeIdx.value])
-      }, 100)
-    }
-  },
-)
 
 async function handleTabChange(value: string | number, index: number) {
   actTabVal.value = value
   if (props.isRoute)
     router.push({ path: value as string })
   await nextTick()
-  if (!tabsRef.value)
+  if (!tabItemsRef.value)
     return
-  moveBgPoi(tabsRef.value[index])
+  moveBgPoi(tabItemsRef.value[index])
 }
 
 function moveBgPoi(ele: HTMLElement) {
-  if (!bgRef.value)
+  if (!bgRef.value || !ele)
     return
   bgRef.value.style.height = `${ele.offsetHeight}px`
   bgRef.value.style.width = `${ele.offsetWidth}px`
@@ -87,20 +73,23 @@ function moveBgPoi(ele: HTMLElement) {
 }
 
 onMounted(() => {
-  if (!tabsRef.value)
+  if (width.value < 768)
     return
-  moveBgPoi(tabsRef.value[actTabVal.value === -1 ? 0 : activeIdx.value])
+
+  if (tabItemsRef.value)
+    moveBgPoi(tabItemsRef.value[actTabVal.value === -1 ? 0 : activeIdx.value])
   isLoaded.value = true
 })
 </script>
 
 <template>
   <div
-    class="shadow-style relative inline-flex items-center gap-2 rounded-6 bg-white px-2 py-2 text-gray-400 shadow-md dark:bg-#333"
+    ref="tabRef"
+    class="shadow-style relative inline-flex items-center gap-2 rounded-6 bg-white px-2 py-2 text-gray-400 shadow-md dark:bg-#333 <md:hidden"
   >
     <div
       v-for="(item, i) in props.tabs"
-      ref="tabsRef"
+      ref="tabItemsRef"
       :key="i"
       cursor="pointer"
       class="relative z-10"
@@ -123,6 +112,9 @@ onMounted(() => {
       :class="{ 'transition-all duration-250': isLoaded }"
       class="shadow-style absolute top-2 z-1 h-8 w-16 rounded-4 bg-#e5e5e5 bg-opacity-40 transition-all duration-150 dark:bg-#444"
     />
+  </div>
+  <div class="md:hidden">
+    111
   </div>
 </template>
 

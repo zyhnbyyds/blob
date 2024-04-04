@@ -71,9 +71,9 @@ function handleLinkClick(id: string) {
         <!-- articles list -->
         <div v-for="item in data?.list" :key="item._id" relative mb-10>
           <!-- year -->
-          <h2 :id="`${item._id}`" :ref="el => { if (el) anchors[item._id] = el as Element }" hover="animate-pulse" py-10 text-5 text-gray-500>
-            <NuxtLink :href="`#${item._id}`" external @click.prevent="handleLinkClick(String(item._id))">
-              --- {{ item._id }} ---
+          <h2 :id="`${item._id}`" :ref="el => { if (el) anchors[item._id] = el as Element }" hover="animate-pulse" py-5 text-7 text-gray-500>
+            <NuxtLink :href="`#${item._id}`" class="font-maShan" external @click.prevent="handleLinkClick(String(item._id))">
+              {{ item._id }}
             </NuxtLink>
           </h2>
 

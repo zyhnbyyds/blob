@@ -1,45 +1,39 @@
 <script lang="ts" setup>
 import type { TabItem } from './Tab.vue'
 
-defineOptions({
-  name: 'TopHeader',
-})
-
-const props = withDefaults(defineProps<Props>(), {
-  show: true,
-})
-
 interface Props {
-  paths: TabItem[]
-  show: boolean
+  tabs: TabItem[]
 }
 
-const app = useAppConfig()
+defineProps<Props>()
 
-const activeIndex = ref<string>('')
+const active = ref<string>('')
 </script>
 
 <template>
-  <div class="flex justify-center py2 font-600">
-    <Tab
-      v-model:value="activeIndex"
-      :follow-change="true"
-      :is-route="true"
-      :tabs="props.paths"
-    >
+  <header h-70px w-full flex items-center justify-between p-3 pl-10 class="dark:bg-dark-300">
+    <Tab v-model:value="active" :tabs="tabs" :is-route="true">
       <template #extra>
-        <DarkToggle class="px-2" />
-      </template>
-      <template #default="{ data }">
-        <div v-if="app.isHeaderTextOrIcon === 'text'">
-          {{ data.label }}
-        </div>
-        <div v-else-if="app.isHeaderTextOrIcon === 'icon'">
-          <Icon :name="data.icon ?? 'emojione:broken-heart'" />
-        </div>
+        <RefreshBtn />
       </template>
     </Tab>
-  </div>
+
+    <div flex-center gap-2 text-4.5>
+      <MeSign />
+
+      <DarkToggle />
+
+      <a
+        href="https://github.com/zyhnbyyds"
+        target="_blank"
+        hover="bg-light-500 dark:bg-#333"
+        p-1
+        transition-colors
+      >
+        <div cursor="pointer" bxl:github dark:text-white />
+      </a>
+    </div>
+  </header>
 </template>
 
 <style scoped></style>

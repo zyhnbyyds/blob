@@ -10,8 +10,6 @@ const tabs = ref([
   },
 ])
 
-const active = ref(tabs.value[0].value)
-
 const defaultLayoutRef = ref<HTMLDivElement>()
 
 const { y } = useScroll(defaultLayoutRef)
@@ -36,32 +34,17 @@ function goTop() {
   <div
     ref="defaultLayoutRef"
     scrollbar="~ w-12px dark:thumb-color-dark-100 dark:track-color-#1a1a1a"
-    class="h-100vh overflow-scroll bg-common text-common"
+    class="h-100vh <sm:scrollbar-none bg-common text-common"
   >
-    <header w-full flex items-center justify-between gap-20px p-30px pl-60px>
-      <Tab v-model:value="active" z-100 :tabs="tabs" :is-route="true">
-        <template #extra>
-          <RefreshBtn />
-        </template>
-      </Tab>
+    <Header :tabs="tabs" />
 
-      <div flex-center gap-2 text-4.5>
-        <DarkToggle />
-
-        <a
-          href="https://github.com/zyhnbyyds"
-          target="_blank"
-          hover="bg-light-500 dark:bg-#333"
-          p-1
-          transition-colors
-        >
-          <div cursor="pointer" bxl:github dark:text-white />
-        </a>
-      </div>
-    </header>
-    <slot />
+    <div class="min-h-[calc(100%-135px)]">
+      <slot />
+    </div>
 
     <ToTop :top="Math.abs(y)" @go-top="goTop()" />
+
+    <Footer />
   </div>
 </template>
 

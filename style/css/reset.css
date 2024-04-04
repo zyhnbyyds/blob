@@ -376,3 +376,8 @@ video {
 [hidden] {
   display: none;
 }
+
+/* h5 element bg clear */
+div {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
