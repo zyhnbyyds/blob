@@ -6,7 +6,7 @@
   "packageManager": "pnpm@8.15.5",
   "scripts": {
     "pm2": "pm2 start processes.json",
-    "build": "nuxi build",
+    "build": "nuxi build && vitepress build docs",
     "dev": "nuxi dev -p 3000 -o",
     "dev:pwa": "VITE_PLUGIN_PWA=true nuxi dev",
     "start": "node .output/server/index.mjs",

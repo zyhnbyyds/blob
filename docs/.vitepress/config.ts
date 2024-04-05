@@ -3,26 +3,39 @@ import { defineConfig } from 'vitepress'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'blob-docs',
-  description: 'blob-docs',
+  description: 'Nuxt fullstack boilerplate with Vite, Redis, MongoDB, and more!',
+  head: [
+    ['link', {
+      href: '/logo.ico',
+      rel: 'shortcut icon',
+    }],
+  ],
+
+  cleanUrls: true,
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' },
     ],
 
     sidebar: [
       {
-        text: 'Examples',
+        text: 'frontend',
         items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' },
+          { text: 'index', link: '/front_end' },
+        ],
+      },
+      {
+        text: 'apis',
+        items: [
+          { text: 'index', link: '/api' },
         ],
       },
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
+      { icon: 'github', link: 'https://github.com/zyhnbyyds' },
     ],
+
+    logo: '/logo.ico',
   },
 })
