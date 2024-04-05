@@ -9,3 +9,4 @@ dist
 pnpm-lock.yaml
 docker/data
 docs/.vitepress/cache
+processes-local.json

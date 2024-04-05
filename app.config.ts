@@ -12,6 +12,13 @@ export default defineAppConfig({
     },
   },
 
-  /** 工信部备案号 */
+  /**
+   * ipc(工信部备案号)
+   * china only
+   */
   icp: '豫ICP备2024049030号-1',
+
+  me: {
+    name: '张宇行',
+  },
 })

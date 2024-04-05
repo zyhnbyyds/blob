@@ -41,4 +41,15 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
+
+  app: {
+    head: {
+      link: [
+        {
+          href: '/logo.ico',
+          rel: 'shortcut icon',
+        },
+      ],
+    },
+  },
 })
