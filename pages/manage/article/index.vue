@@ -5,7 +5,7 @@ import type { PageRes } from '~/server/types/common'
 import type { TableColumns } from '~/components/blob/table/type'
 
 definePageMeta({
-  layout: 'manage',
+  layout: 'master',
 })
 
 const page = reactive({

@@ -1,11 +1,11 @@
-<script lang="ts" setup>
+<script lang='ts' setup>
 definePageMeta({
-  layout: 'manage',
+  layout: 'master',
 })
 </script>
 
 <template>
-  <div>分类页</div>
+  <div>setting</div>
 </template>
 
 <style scoped></style>
