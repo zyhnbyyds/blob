@@ -28,6 +28,8 @@ export default defineEventHandler(async (event) => {
     headers: {
       accept: 'application/vnd.github+json',
     },
+  }).catch((e) => {
+    logger.error(e)
   })
 
   await new ArticleSchema({

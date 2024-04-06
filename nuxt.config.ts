@@ -9,13 +9,19 @@ export default defineNuxtConfig({
     'nuxt-lodash',
     '@unocss/nuxt',
     'nuxt-mongoose',
-    'nuxt-auth-utils',
     '@nuxtjs/i18n',
     '@nuxt/image',
   ],
 
   colorMode: {
     classSuffix: '',
+  },
+
+  mongoose: {
+    devtools: true,
+    options: {
+      dbName: 'blob',
+    },
   },
 
   css: ['bytemd/dist/index.css'],
@@ -36,7 +42,7 @@ export default defineNuxtConfig({
   },
 
   devtools: {
-    enabled: false,
+    enabled: true,
     timeline: {
       enabled: true,
     },

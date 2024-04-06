@@ -7,10 +7,6 @@ const { data, pending } = useFetch<PageRes<YearArticleItem>>('/api/article/list'
   params: { page: 1, size: 1000 },
 })
 
-definePageMeta({
-  auth: false,
-})
-
 // 当一个 IntersectionObserver 对象被创建时，其被配置为监听根中一段给定比例的可见区域。
 // 一旦 IntersectionObserver 被创建，则无法更改其配置，所以一个给定的观察者对象只能用
 // 来监听可见区域的特定变化值；然而，你可以在同一个观察者对象中配置监听多个目标元素。
@@ -59,53 +55,55 @@ function handleLinkClick(id: string) {
 <template>
   <div flex-row-center>
     <div w-full px-30px py-2 lg="w-4xl">
-      <div
-        v-if="pending"
-        i-svg-spinners:12-dots-scale-rotate
-        text-9
-        text-gray-400
-        ab-c
-      />
-
-      <div v-else>
-        <!-- articles list -->
-        <div v-for="item in data?.list" :key="item._id" relative mb-10>
-          <!-- year -->
-          <h2 :id="`${item._id}`" :ref="el => { if (el) anchors[item._id] = el as Element }" hover="animate-pulse" py-5 text-7 text-gray-500>
-            <NuxtLink :href="`#${item._id}`" class="font-maShan" external @click.prevent="handleLinkClick(String(item._id))">
-              {{ item._id }}
-            </NuxtLink>
-          </h2>
-
-          <ActiveBgList
-            z-2
-            :list="item.articles"
-            label-field="title"
-            value-field="id"
-            :is-route="true"
-            @change="handleClickArticle"
-          >
-            <template #list-item="{ listItem }">
-              <div class="group" relative flex items-center px-3 py-3 text-4 leading-none>
-                <span text-nowrap overflow="hidden" text="ellipsis">
-                  {{ listItem.title }}
-                </span>
-
-                <!-- article createTime -->
-                <div absolute class="-left-25 <md:hidden" w-24>
-                  <span
-                    group-hover="bg-light-600 dark:bg-#333 text-gray-600 dark:text-gray-300 font-600"
-                    class="transition-all"
-                    flex-center rounded-sm px-2 py-1 text-3 text-gray
-                  >
-                    {{ dayjs(listItem.createTime).format('MM-DD hh:mm') }}
-                  </span>
-                </div>
-              </div>
-            </template>
-          </ActiveBgList>
+      <Transition name="fade" mode="out-in">
+        <div v-if="pending" ab-c>
+          <div i-svg-spinners:180-ring text-10 text-light-900 dark:text-gray-500 />
         </div>
-      </div>
+
+        <div v-else>
+          <div v-if="data?.list.length !== 0">
+            <div v-for="item in data?.list" :key="item._id" relative mb-10>
+              <!-- year -->
+              <h2 :id="`${item._id}`" :ref="el => { if (el) anchors[item._id] = el as Element }" hover="animate-pulse" py-5 text-7 text-gray-500>
+                <NuxtLink :href="`#${item._id}`" class="font-maShan" external @click.prevent="handleLinkClick(String(item._id))">
+                  {{ item._id }}
+                </NuxtLink>
+              </h2>
+
+              <ActiveBgList
+                z-2
+                :list="item.articles"
+                label-field="title"
+                value-field="id"
+                :is-route="true"
+                @change="handleClickArticle"
+              >
+                <template #list-item="{ listItem }">
+                  <div class="group" relative flex items-center px-3 py-3 text-3.7 leading-none>
+                    <span text-nowrap overflow="hidden" text="ellipsis">
+                      {{ listItem.title }}
+                    </span>
+
+                    <!-- article createTime -->
+                    <div absolute class="-left-25 <md:hidden" w-24>
+                      <span
+                        group-hover="bg-light-600 dark:bg-#333 text-gray-600 dark:text-gray-300 font-600"
+                        class="transition-all"
+                        flex-center rounded-sm px-2 py-1 text-3 text-gray
+                      >
+                        {{ dayjs(listItem.createTime).format('MM-DD hh:mm') }}
+                      </span>
+                    </div>
+                  </div>
+                </template>
+              </ActiveBgList>
+            </div>
+          </div>
+          <div v-else>
+            <EmptyList />
+          </div>
+        </div>
+      </Transition>
     </div>
 
     <!-- right years nav -->

@@ -25,8 +25,7 @@ onNuxtReady(() => {
 
 <template>
   <NuxtLayout>
-    <NuxtLoadingIndicator />
-    <NuxtPage v-if="!app.pageLoading" keepalive :page-key="route => route.fullPath" />
+    <NuxtPage v-if="!app.pageLoading" :transition="{ name: 'fade-slide', duration: 400, mode: 'out-in' }" :page-key="route => route.fullPath" />
   </NuxtLayout>
 </template>
 

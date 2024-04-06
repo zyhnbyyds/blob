@@ -11,7 +11,7 @@ const active = ref<string>('')
 </script>
 
 <template>
-  <header h-70px w-full flex items-center justify-between p-3 pl-10 class="dark:bg-dark-300">
+  <header h-70px border-b="1px solid gray-400 op30" w-100vw flex items-center justify-between p-3 pl-10>
     <Tab v-model:value="active" :tabs="tabs" :is-route="true">
       <template #extra>
         <RefreshBtn />
