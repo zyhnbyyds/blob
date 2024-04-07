@@ -2,6 +2,7 @@
 
 <template>
   <div>
+    <ManageMainHeader />
     <slot />
   </div>
 </template>

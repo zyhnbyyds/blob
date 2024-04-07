@@ -6,7 +6,10 @@
     <ManageLeftSideBar />
 
     <div flex-1 overflow-hidden>
-      <slot />
+      <ManageMain>
+        <slot />
+      </ManageMain>
+
       <DarkToggle />
     </div>
   </div>
