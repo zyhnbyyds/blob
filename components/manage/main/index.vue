@@ -1,9 +1,11 @@
 <script lang='ts' setup></script>
 
 <template>
-  <div>
+  <div class="h-full flex flex-col">
     <ManageMainHeader />
-    <slot />
+    <div flex-1>
+      <slot />
+    </div>
   </div>
 </template>
 

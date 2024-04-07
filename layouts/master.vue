@@ -5,7 +5,7 @@
   <div scrollbar="~ w-1" class="h-100vh w-full flex overflow-hidden bg-common text-common">
     <ManageLeftSideBar />
 
-    <div flex-1 overflow-hidden>
+    <div h-full min-w-3xl flex-1 overflow-hidden>
       <ManageMain>
         <slot />
       </ManageMain>

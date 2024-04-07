@@ -39,7 +39,7 @@ defineExpose({
 
     <div
       :class="!isFold ? '' : 'rotate-y-180deg'"
-      hover="bg-light-600" absolute bottom-6 right-4 h-10 w-10 flex-center rounded-full transition-all
+      hover="bg-light-600" absolute bottom-6 right-6 h-10 w-10 flex-center rounded-full transition-all
       @click="isFold = !isFold"
     >
       <div class="line-md:arrow-close-left" transition-all duration-300 />

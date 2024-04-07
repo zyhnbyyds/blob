@@ -14,15 +14,7 @@ const isDark = computed({
 </script>
 
 <template>
-  <div
-    cursor-pointer
-    :class="
-      !isDark
-        ? 'material-symbols:wb-sunny-outline'
-        : 'material-symbols:nightlight-outline-rounded'
-    "
-    @click="isDark = !isDark"
-  />
+  <Switch v-model="isDark" />
 </template>
 
 <style scoped></style>
