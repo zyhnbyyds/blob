@@ -7,15 +7,15 @@
     </h1>
 
     <div flex-col-center gap-7>
-      <Button size="sm" icon="carbon:add-filled">
+      <DarkToggle />
+
+      <Button size="md" icon="carbon:add-filled">
         Write An Article
       </Button>
 
       <div class="carbon:notification-filled text-lg text-#9096A2" />
 
       <div flex gap-3>
-        <DarkToggle />
-
         <img src="/public/logo.ico" h-10 w-10 rounded-full>
 
         <section flex flex-col justify-between>
