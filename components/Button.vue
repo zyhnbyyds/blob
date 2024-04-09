@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 })
 
 const configPresets = {
-  common: 'rounded-full bg-[#3981F7] text-white flex-col-center cursor-pointer active:scale-99 hover:bg-op70 transition-colors duration-200 ease-in-out',
+  common: 'rounded-full bg-[#3981F7] text-white  dark:bg-dark-200 dark:text-gray-400 flex-col-center cursor-pointer active:scale-99 hover:bg-op70 transition-colors duration-200 ease-in-out',
   size: {
     sm: 'text-3 px-5 py-2 h-8',
     md: 'text-4 px-6 py-3 h-10',

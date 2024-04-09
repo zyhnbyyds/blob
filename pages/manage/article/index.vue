@@ -23,10 +23,12 @@ const columns = [
   {
     title: '标题',
     key: 'title',
+    widthClass: '500px',
   },
   {
     title: '发布时间',
     key: 'createTime',
+    widthClass: '300px',
   },
   {
     title: '操作',
@@ -52,7 +54,6 @@ function handleAdd() {
 
 function handlePageChange(pageGet: number) {
   page.page = pageGet
-  refresh()
 }
 </script>
 
@@ -62,7 +63,7 @@ function handlePageChange(pageGet: number) {
       <Button icon="solar:add-square-broken text-2.7" size="sm" @click="handleAdd">
         新增
       </Button>
-      <Button icon="solar:refresh-circle-outline text-2.7" size="sm" bg-green-6 @click="refresh">
+      <Button icon="solar:refresh-circle-outline text-2.7" size="sm" bg-green-6 dark="bg-gray-700" @click="refresh">
         刷新
       </Button>
     </div>

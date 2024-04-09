@@ -4,7 +4,7 @@ const value = defineModel<boolean>()
 
 <template>
   <div
-    class="relative h-8 w-15 flex-col-center rounded-full p-1 transition-all"
+    class="relative h-7 w-15 flex-col-center rounded-full p-1 transition-all"
     border="light-900 1 solid dark:gray-6"
     :class="!value ? 'bg-blue-400' : 'blur-0.4 shadow-md bg-dark-300'"
     @click="value = !value"

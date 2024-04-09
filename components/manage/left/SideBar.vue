@@ -33,13 +33,13 @@ defineExpose({
 </script>
 
 <template>
-  <div :class="!isFold ? 'w-58' : 'w-[calc(28px+4rem)]'" border-r="1px solid #E4E4E7" relative h-full px-4 transition-width duration-300>
+  <div :class="!isFold ? 'w-58' : 'w-[calc(28px+4rem)]'" border-r="1px solid #E4E4E7 dark:gray-700 dark:op60" relative h-full px-4 transition-all duration-300>
     <ManageLeftHeader :is-fold="isFold" />
     <Menu v-model="activeMenu" :menus="menuList" :is-fold="isFold" />
 
     <div
       :class="!isFold ? '' : 'rotate-y-180deg'"
-      hover="bg-light-600" absolute bottom-6 right-6 h-10 w-10 flex-center rounded-full transition-all
+      hover="bg-light-600 dark:bg-dark-300" absolute bottom-6 right-6 h-10 w-10 flex-center rounded-full transition-all
       @click="isFold = !isFold"
     >
       <div class="line-md:arrow-close-left" transition-all duration-300 />

@@ -13,7 +13,7 @@ defineProps<{
         leave: 50,
       }"
     >
-      <h1 v-if="!isFold" text-6 class="text-#0a112f" font-bold>
+      <h1 v-if="!isFold" text-6 class="text-#0a112f transition-colors dark:text-gray-200" font-bold>
         Manage
       </h1>
     </Transition>

@@ -21,7 +21,7 @@ const props = withDefaults(defineProps<
 }
 >(), {
   menuConfig: () => ({
-    active: 'border-1px border-solid rounded-3 border-#E4E4E7 text-#3981F7 bg-#FAFAFA',
+    active: 'border-1px border-solid rounded-3 border-#E4E4E7 text-#3981F7 bg-#FAFAFA dark:bg-dark-400 dark:border-dark-300 dark:text-gray-200',
     normal: 'border-transparent text-#9096A2',
     common: 'block px-4 h-50px leading-50px mb-16px border-1 border-solid cursor-pointer transition-all',
     icon: 'text-20px inline-block align-mid',

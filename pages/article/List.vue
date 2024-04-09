@@ -4,7 +4,7 @@ import type { ArticleItem, PageRes, YearArticleItem } from '~/server/types'
 
 const { data, pending } = useFetch<PageRes<YearArticleItem>>('/api/article/list', {
   method: 'GET',
-  params: { page: 1, size: 1000 },
+  params: { page: 1, size: 1000, type: 'year' },
 })
 
 // 当一个 IntersectionObserver 对象被创建时，其被配置为监听根中一段给定比例的可见区域。

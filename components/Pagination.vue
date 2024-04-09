@@ -33,7 +33,7 @@ const common = {
 
 <template>
   <div class="h-30px w-full flex-center gap-5">
-    <div :hover="common.hover" class="" :class="[common.sideBtn]" @click="$emit('change', p - 1 > 0 ? p - 1 : 1)">
+    <div :hover="common.hover" class="" :class="[common.sideBtn]" @click="$emit('change', props.page - 1 > 0 ? props.page - 1 : 1)">
       Prev
     </div>
     <div flex border-x="1px solid light-700" gap-2 px-5>
@@ -47,7 +47,7 @@ const common = {
         </div>
       </div>
     </div>
-    <div :hover="common.hover" class="" :class="[common.sideBtn]" @click="$emit('change', p + 1)">
+    <div :hover="common.hover" class="" :class="[common.sideBtn]" @click="$emit('change', (props.page + 1) > props.total ? props.page : props.page + 1)">
       Next
     </div>
   </div>
