@@ -1,4 +1,4 @@
-import { redisConfig } from './config/redis'
+import { oauth, redisConfig } from './config/env'
 
 export default defineNuxtConfig({
   modules: [
@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     'nuxt-mongoose',
     '@nuxtjs/i18n',
     '@nuxt/image',
+    'nuxt-auth-utils',
   ],
 
   colorMode: {
@@ -41,8 +42,12 @@ export default defineNuxtConfig({
     },
   },
 
+  runtimeConfig: {
+    oauth,
+  },
+
   devtools: {
-    enabled: true,
+    enabled: false,
     timeline: {
       enabled: true,
     },

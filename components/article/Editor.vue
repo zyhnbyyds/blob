@@ -24,10 +24,6 @@ const { loading } = toRefs(props)
 
 const plugins = [frontmatter(), gfm(), gemoji(), breaks(), shikiPlugin()]
 
-definePageMeta({
-  layout: 'empty',
-})
-
 const article = reactive({
   title: '',
   content: '',

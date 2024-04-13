@@ -7,18 +7,12 @@ const [loading, load] = useToggle(false)
 
 async function handlePublish(article: { title: string, content: string }) {
   load(true)
-  const { data } = await useFetch<{ id: string }>('/api/article/add', {
+  await useFetch<{ id: string }>('/api/article/add', {
     method: 'POST',
     body: article,
   })
   load(false)
-
-  if (data.value && data.value?.id) {
-    useRouter().push({
-      path: '/manage/article/preview',
-      query: { id: data.value.id },
-    })
-  }
+  useRouter().push('/manage/article')
 }
 </script>
 
@@ -27,6 +21,7 @@ async function handlePublish(article: { title: string, content: string }) {
     <ClientOnly>
       <ArticleEditor :loading="loading" @publish="handlePublish" />
     </ClientOnly>
+    <div v-if="loading" i-svg-spinners:180-ring z-3 text-10 text-light-900 ab-c dark:text-gray-500 />
   </div>
 </template>
 
