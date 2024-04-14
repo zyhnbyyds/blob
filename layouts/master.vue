@@ -9,8 +9,6 @@
       <ManageMain>
         <slot />
       </ManageMain>
-
-      <DarkToggle />
     </div>
   </div>
 </template>

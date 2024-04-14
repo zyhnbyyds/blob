@@ -7,7 +7,7 @@ export default oauth.githubEventHandler({
       user,
     })
 
-    logger.info(tokens)
+    logger.info(JSON.stringify(tokens))
 
     return sendRedirect(event, '/manage')
   },

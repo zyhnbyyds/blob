@@ -1,8 +1,4 @@
 <script lang="ts" setup>
-defineOptions({
-  name: 'DarkToggle',
-})
-
 const colorMode = useColorMode()
 
 const isDark = computed({
@@ -14,7 +10,9 @@ const isDark = computed({
 </script>
 
 <template>
-  <Switch v-model="isDark" />
+  <ClientOnly>
+    <Switch v-model="isDark" reverse />
+  </ClientOnly>
 </template>
 
 <style scoped></style>
