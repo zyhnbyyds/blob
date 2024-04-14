@@ -7,9 +7,12 @@ onNuxtReady(() => {
   const colorMode = useColorMode()
   const isPrefersDark = usePreferredDark()
 
-  watchEffect(() => {
-    colorMode.preference = isPrefersDark.value ? 'dark' : 'light'
-  })
+  watch(
+    () => isPrefersDark.value,
+    (val) => {
+      colorMode.preference = val ? 'dark' : 'light'
+    },
+  )
 
   watch(
     () => app.pageLoading,
@@ -24,9 +27,15 @@ onNuxtReady(() => {
 </script>
 
 <template>
-  <NuxtLayout>
-    <NuxtPage v-if="!app.pageLoading" :transition="{ name: 'fade-slide', duration: 400, mode: 'out-in' }" :page-key="route => route.fullPath" />
-  </NuxtLayout>
+  <div class="relative hw-full">
+    <NuxtLayout>
+      <NuxtPage v-if="!app.pageLoading" :transition="{ name: 'fade-slide', duration: 400, mode: 'out-in' }" :page-key="route => route.fullPath" />
+    </NuxtLayout>
+
+    <ClientOnly>
+      <MessageBox />
+    </ClientOnly>
+  </div>
 </template>
 
 <style lang="scss">
