@@ -1,12 +1,12 @@
 import { Schema } from 'mongoose'
 import { defineMongooseModel } from '#nuxt/mongoose'
 
-export const ArticleSchema = defineMongooseModel('Article', {
-  title: {
+export const UserSchema = defineMongooseModel('User', {
+  username: {
     type: String,
     required: true,
   },
-  content: {
+  password: {
     type: String,
     required: true,
   },
@@ -14,29 +14,24 @@ export const ArticleSchema = defineMongooseModel('Article', {
     type: Number,
     required: true,
   },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-  },
   createTime: {
     type: String,
     required: true,
-  },
-  likeCount: {
-    type: Number,
-    required: false,
   },
   updateTime: {
     type: String,
     required: true,
   },
-  viewCount: {
-    type: Number,
-    required: false,
-  },
-
   isDelete: {
     type: Boolean,
     required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  roles: {
+    type: Schema.Types.ObjectId,
+    ref: 'Role',
   },
 })

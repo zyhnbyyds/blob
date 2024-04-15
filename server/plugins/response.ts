@@ -1,5 +1,3 @@
-import logger from '../utils/logger'
-
 export default defineNitroPlugin((nitroApp) => {
   nitroApp.hooks.hook('error', async (event) => {
     if (event)

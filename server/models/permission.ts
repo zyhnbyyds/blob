@@ -1,12 +1,15 @@
-import { Schema } from 'mongoose'
 import { defineMongooseModel } from '#nuxt/mongoose'
 
-export const ArticleSchema = defineMongooseModel('Article', {
-  title: {
+export const PermissionSchema = defineMongooseModel('Permission', {
+  permissionName: {
     type: String,
     required: true,
   },
-  content: {
+  permissionKey: {
+    type: String,
+    required: true,
+  },
+  permissionDesc: {
     type: String,
     required: true,
   },
@@ -14,27 +17,14 @@ export const ArticleSchema = defineMongooseModel('Article', {
     type: Number,
     required: true,
   },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-  },
   createTime: {
     type: String,
     required: true,
-  },
-  likeCount: {
-    type: Number,
-    required: false,
   },
   updateTime: {
     type: String,
     required: true,
   },
-  viewCount: {
-    type: Number,
-    required: false,
-  },
-
   isDelete: {
     type: Boolean,
     required: true,
