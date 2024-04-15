@@ -10,9 +10,10 @@ definePageMeta({
 const page = reactive({
   size: 10,
   page: 1,
-  total: 1000,
   type: 'normal',
 })
+
+const total = ref(0)
 
 const { data, pending, refresh } = useFetch<PageRes<ArticleItem>>(
   '/api/article/list',
@@ -72,7 +73,7 @@ function handlePageChange(pageGet: number) {
         :columns="columns"
         :data="data?.list ?? []"
         :loading="pending"
-        :page="page"
+        :page="{ ...page, total }"
         @change="handlePageChange"
       />
     </div>
