@@ -25,8 +25,10 @@ const switchVal = computed(() => {
       class="absolute left-1 h-6 w-6 flex-center rounded-full transition-all duration-400"
     >
       <slot>
-        <div v-if="switchVal" material-symbols:wb-sunny-outline />
-        <div v-else material-symbols:nightlight-outline-rounded />
+        <div text-3 text-shadow-md>
+          <div v-if="switchVal" material-symbols:wb-sunny-outline />
+          <div v-else material-symbols:nightlight-outline-rounded />
+        </div>
       </slot>
     </div>
   </div>

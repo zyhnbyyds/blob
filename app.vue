@@ -32,9 +32,7 @@ onNuxtReady(() => {
       <NuxtPage v-if="!app.pageLoading" :transition="{ name: 'fade-slide', duration: 400, mode: 'out-in' }" :page-key="route => route.fullPath" />
     </NuxtLayout>
 
-    <ClientOnly>
-      <MessageBox />
-    </ClientOnly>
+    <MessageBox />
   </div>
 </template>
 

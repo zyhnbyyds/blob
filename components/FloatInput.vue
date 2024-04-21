@@ -1,19 +1,13 @@
 <script lang="ts" setup>
 interface Props {
   placeholder?: string
-  id?: string
   status?: 'success' | 'error'
   autocomplete?: string
   type?: string
 }
 
-defineOptions({
-  name: 'FloatInput',
-})
-
 const props = withDefaults(defineProps<Props>(), {
   placeholder: '请输入',
-  id: '',
   status: 'success',
   autocomplete: 'on',
   type: 'text',
@@ -21,18 +15,14 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emits = defineEmits(['focus', 'blur'])
 
-const ipt = defineModel<string | number>('value', { default: '' })
+const ipt = defineModel<string | number>({ default: '' })
+const iptId = useId()
 
 const isFocus = ref(false)
 
 const isShow = computed(() => {
   return ipt.value !== ''
 })
-
-const outlineColors = {
-  success: 'outline-blue-400 hover="border-blue-400"',
-  error: 'outline-red-400 border-2px border-red',
-}
 
 function handleBlur() {
   setTimeout(() => {
@@ -51,31 +41,28 @@ function handleFocus() {
 
 <template>
   <div
-    :class="
-      props.status === 'error'
-        ? 'text-red'
-        : 'text-[rgb(112,117,121)] hover:text-blue-400  focus-within:text-blue-600'
-    "
-    class="relative text-16px"
+    class="relative bg-inherit text-16px text-gray-3 focus-within:text-blue-3"
   >
     <input
-      :id="props.id"
+      :id="iptId"
       v-model="ipt"
-      :class="outlineColors[props.status]"
+      dark="bg-dark-400 border-dark-300 ring-dark-2 hover:border-dark-200 focus:border-dark-100 focus:bg-dark-300 text-dark-100 focus:ring-1"
+      border="~ gray-200"
+      hover="border-blue-200"
+      class="w-full rounded-2 px-14px pb-3 pt-6 caret-blue-400 outline-none ring-blue-2 ring-op-70 transition-all focus:border-blue-4 focus:bg-light-3 text-common dark:text-light-500 focus:ring-1"
       :autocomplete="autocomplete"
       :type="type"
-      class="h-52px w-full border rounded-12px px-14px py-11px text-#333 caret-blue-400"
       @focus="handleFocus"
       @blur="handleBlur"
     >
     <label
-      :for="props.id"
+      :for="iptId"
       :class="
         isShow || isFocus
-          ? 'left-10px scale-75 -top-12px'
+          ? 'left-10px scale-80 top-2px'
           : 'left-14px top-1/2 -translate-y-1/2'
       "
-      class="absolute inline-block origin-top-left bg-#fff px-4px duration-150 ease"
+      class="absolute inline-block origin-top-left cursor-text px-1 text-3.3 transition-all"
     >{{ props.placeholder }}</label>
     <slot name="suffix" />
     <slot name="default" />

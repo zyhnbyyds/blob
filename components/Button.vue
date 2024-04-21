@@ -3,6 +3,8 @@ export interface ButtonProps {
   size?: 'sm' | 'md' | 'lg'
   config?: Config
   icon?: string
+  disabled?: boolean
+  loading?: boolean
 }
 
 export interface Config {
@@ -16,15 +18,17 @@ export interface Config {
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   size: 'md',
+  disabled: false,
 })
 
 const configPresets = {
-  common: 'rounded-full inline-flex text-nowrap bg-[#3981F7] text-white  dark:bg-dark-200 dark:text-gray-400 flex-col-center cursor-pointer active:scale-99 hover:bg-op70 transition-colors duration-200 ease-in-out',
+  common: 'rounded-full inline-flex flex-center text-nowrap shadow-sm dark:shadow-gray-700 bg-[#3981F7] text-white cursor-pointer active:scale-99 hover:bg-op70 transition-colors duration-200 ease-in-out',
   size: {
-    sm: 'text-3 px-5 py-2 h-8',
-    md: 'text-3.5 px-6 py-2.5 h-9',
+    sm: 'text-3 px-5 py-2',
+    md: 'text-3.5 px-6 py-2.5',
     lg: 'text-lg px-7 py-5',
   },
+  disabled: 'cursor-not-allowed! bg-blue-300  text-gray-500',
 }
 
 const classes = computed(() => {
@@ -33,11 +37,16 @@ const classes = computed(() => {
 </script>
 
 <template>
-  <div :class="[classes.common, classes.size[props.size]]">
+  <button
+    :disabled="props.disabled"
+    :class="[classes.common, classes.size[props.size], [props.disabled ? classes.disabled : '']]"
+  >
     <slot />
-
-    <div v-if="props.icon" ml-3 scale-120 :class="props.icon" />
-  </div>
+    <Transition>
+      <div v-if="$props.loading" i-svg-spinners:180-ring ml-3 />
+      <div v-else-if="props.icon" ml-3 scale-120 :class="props.icon" />
+    </Transition>
+  </button>
 </template>
 
 <style scoped></style>
