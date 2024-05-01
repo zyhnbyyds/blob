@@ -15,9 +15,9 @@ const page = reactive({
 
 const total = ref(0)
 
-const { data, pending, refresh } = useFetch<PageRes<ArticleItem>>(
+const { data, pending, refresh } = apiGet<PageRes<ArticleItem>>(
   '/api/article/list',
-  { method: 'GET', params: page },
+  page,
 )
 
 const columns = [

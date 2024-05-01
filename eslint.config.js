@@ -21,4 +21,7 @@ export default antfu(
       'format/prettier': ['error', { parser: 'css', tabWidth: 2 }],
     },
   },
+  {
+    ignores: ['docker'],
+  },
 )

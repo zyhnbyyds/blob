@@ -2,17 +2,13 @@ import { Schema } from 'mongoose'
 import { defineMongooseModel } from '#nuxt/mongoose'
 
 export const UserSchema = defineMongooseModel('User', {
-  username: {
+  nick: {
     type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
   },
   id: {
     type: Number,
     required: true,
+    unique: true,
   },
   createTime: {
     type: String,
@@ -29,9 +25,11 @@ export const UserSchema = defineMongooseModel('User', {
   email: {
     type: String,
     required: true,
+    unique: true,
   },
   roles: {
     type: Schema.Types.ObjectId,
     ref: 'Role',
+    required: true,
   },
 })

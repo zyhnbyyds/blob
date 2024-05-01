@@ -2,10 +2,8 @@
 import type { ArticleItem } from '~/server/types'
 
 const { query } = useRoute()
-const { data: detail, pending } = useFetch<ArticleItem>('/api/article/detail', {
-  method: 'GET',
-  params: { id: query.id },
-})
+const { data: detail, pending } = apiGet<ArticleItem>('/api/article/detail', { id: query.id },
+)
 </script>
 
 <template>
@@ -22,7 +20,7 @@ const { data: detail, pending } = useFetch<ArticleItem>('/api/article/detail', {
 
       <div v-else>
         <ClientOnly>
-          <ArticleViewer :content="detail ? detail.content : ''" />
+          <ArticleViewer :content="detail?.content ?? ''" />
         </ClientOnly>
       </div>
     </div>

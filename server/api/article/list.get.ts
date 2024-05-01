@@ -23,7 +23,7 @@ export default defineEventHandler<{ query: Page }>(async (event) => {
   const result = schema.safeParse(query)
 
   if (!result.success)
-    return Err_400(event, result.error.message)
+    return Err_400(result.error.message)
 
   const { page, size, type } = result.data
 
@@ -40,9 +40,12 @@ export default defineEventHandler<{ query: Page }>(async (event) => {
     const pages = Math.ceil(total / size)
 
     return {
-      list,
-      total,
-      pages,
+      success: true,
+      data: {
+        list,
+        total,
+        pages,
+      },
     }
   }
   else {
@@ -91,9 +94,12 @@ export default defineEventHandler<{ query: Page }>(async (event) => {
     const pages = Math.ceil(total / size)
 
     return {
-      list,
-      total,
-      pages,
+      success: true,
+      data: {
+        list,
+        total,
+        pages,
+      },
     }
   }
 })

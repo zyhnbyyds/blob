@@ -1,46 +1,33 @@
-import type { H3Event } from 'h3'
-
 /**
  * 404 Err
- * @param event h3 event type
  * @param errMsg error text
  * @returns error message
  */
-export function Err_404(event: H3Event, errMsg: string): string {
-  return Err_Common(event, errMsg, 404)
-}
-
-/**
- * 500 Err
- * @param event h3 event type
- * @param errMsg error text
- * @returns error message
- */
-export function Err_500(event: H3Event, errMsg: string): string {
-  return Err_Common(event, errMsg, 500)
+export function Err_404(errMsg: any) {
+  return Err_Common(errMsg, 404)
 }
 
 /**
  * set response status & return error message
- * @param event  h3 event type
- * @param errMsg  error text
- * @param code  response status code
+ * @param errMsg error text
+ * @param code response status code
  * @returns error message
  */
 export function Err_Common(
-  event: H3Event,
-  errMsg: string,
+  errMsg: any,
   code: number,
-): string {
-  setResponseStatus(event, code)
-  return errMsg
+) {
+  return {
+    code,
+    success: false,
+    message: errMsg,
+  }
 }
 
 /**
  * handle payload err & return error message
- * @param event h3 event type
  * @param errMsg response status code
  */
-export function Err_400(event: H3Event, errMsg: string): string {
-  return Err_Common(event, errMsg, 400)
+export function Err_400(errMsg: any) {
+  return Err_Common(errMsg, 400)
 }

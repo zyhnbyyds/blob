@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { ApiResult } from '~/server/types'
+
 definePageMeta({
   layout: 'empty',
 })
@@ -7,7 +9,7 @@ const [loading, load] = useToggle(false)
 
 async function handlePublish(article: { title: string, content: string }) {
   load(true)
-  await useFetch<{ id: string }>('/api/article/add', {
+  await useFetch<ApiResult<{ id: string }>>('/api/article/add', {
     method: 'POST',
     body: article,
   })

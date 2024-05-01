@@ -2,10 +2,7 @@
 import dayjs from 'dayjs'
 import type { ArticleItem, PageRes, YearArticleItem } from '~/server/types'
 
-const { data, pending } = useFetch<PageRes<YearArticleItem>>('/api/article/list', {
-  method: 'GET',
-  params: { page: 1, size: 1000, type: 'year' },
-})
+const { data, pending } = apiGet<PageRes<YearArticleItem>>('/api/article/list', { page: 1, size: 1000, type: 'year' })
 
 // 当一个 IntersectionObserver 对象被创建时，其被配置为监听根中一段给定比例的可见区域。
 // 一旦 IntersectionObserver 被创建，则无法更改其配置，所以一个给定的观察者对象只能用

@@ -9,15 +9,12 @@ const route = useRoute()
 
 const { id } = route.query
 
-const { data } = await useFetch<ArticleItem>('/api/article/detail', {
-  method: 'GET',
-  query: { id },
-})
+const { data } = await apiGet<ArticleItem>('/api/article/detail', { id })
 </script>
 
 <template>
   <ClientOnly>
-    <ArticleViewer :content="data ? data.content : ''" />
+    <ArticleViewer :content="data?.content ?? ''" />
   </ClientOnly>
 </template>
 

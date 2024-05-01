@@ -1,3 +1,5 @@
+import type { UnwrapRef } from 'vue'
+
 /**
  * @description pagination common type
  * @example { size: 10, page: 1 }
@@ -25,3 +27,11 @@ export type ListOptions<E = object> = {
   excludeKeys?: string[]
 } & Partial<Page> &
 E
+
+export interface ApiResult<R = object> {
+  success: boolean
+  data?: R
+  message?: string
+  code?: number
+  requestId?: string
+}

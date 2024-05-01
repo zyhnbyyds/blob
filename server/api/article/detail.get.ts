@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
       .safeParse(query))
 
   if (!result.success)
-    return Err_400(event, result.error.message)
+    return Err_400(result.error.message)
 
   const isArticle = await ArticleSchema.exists({
     id: result.data.id,
@@ -17,11 +17,14 @@ export default defineEventHandler(async (event) => {
   })
 
   if (!isArticle)
-    return Err_400(event, 'Article not found')
+    return Err_400('Article not found')
 
   const article = await ArticleSchema.findOne({ isDelete: false })
     .where('id')
     .equals(result.data.id)
 
-  return article
+  return {
+    success: true,
+    data: article,
+  }
 })

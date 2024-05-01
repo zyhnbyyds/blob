@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
     EditSchema.safeParse(query))
 
   if (!result.success)
-    return Err_400(event, result.error.message)
+    return Err_400(result.error.message)
 
   await ArticleSchema.findOneAndUpdate(
     {
@@ -18,7 +18,10 @@ export default defineEventHandler(async (event) => {
     },
   )
   return {
-    id: String(result.data.id),
-    msg: 'success',
+    success: true,
+    message: 'edit article success',
+    data: {
+      id: String(result.data.id),
+    },
   }
 })

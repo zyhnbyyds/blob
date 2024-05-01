@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
   const installationId = Number.parseInt(import.meta.env.GITHUB_APP_INSTALLATION_ID)
 
   if (!result.success)
-    return Err_400(event, result.error.message)
+    return Err_400(result.error.message)
 
   const snowFlakeId = new Snowflake(1, 1).generateId()
 
@@ -41,7 +41,10 @@ export default defineEventHandler(async (event) => {
   }).save()
 
   return {
-    id: String(snowFlakeId),
-    msg: 'success',
+    success: true,
+    message: 'add article success',
+    data: {
+      id: String(snowFlakeId),
+    },
   }
 })
