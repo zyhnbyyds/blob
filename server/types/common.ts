@@ -1,5 +1,3 @@
-import type { UnwrapRef } from 'vue'
-
 /**
  * @description pagination common type
  * @example { size: 10, page: 1 }

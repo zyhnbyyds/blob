@@ -13,6 +13,11 @@ const form = reactive({
 const isEmailValid = computed(() => {
   return zod.string().email().safeParse(form.email).success
 })
+const colorMode = useColorMode()
+
+const loginBg = computed(() => {
+  return colorMode.value === 'dark' ? '/svgs/wave-bg-dark.svg' : '/svgs/wave-bg-light.svg'
+})
 
 async function handleSendEmailCode() {
   if (!isEmailValid.value) {
@@ -35,6 +40,10 @@ async function handleSendEmailCode() {
 }
 
 function handleLogin() {
+  showMessage({
+    type: 'loading',
+    message: 'Logging in...',
+  })
   $fetch<{ data: any, success: boolean }>('/api/auth/login', {
     method: 'POST',
     body: form,
@@ -54,15 +63,29 @@ function handleLogin() {
     }
   })
 }
+
+function handleShowLoading() {
+  showMessage({
+    type: 'loading',
+    message: 'Loading...',
+  })
+}
 </script>
 
 <template>
-  <div class="hw-full bg-#0089ED">
+  <div class="hw-full">
+    <NuxtImg
+      fit="fill"
+      hw-full
+      format="svg"
+      :src="loginBg"
+    />
+
     <div absolute left-10 top-10>
       <DarkToggle />
     </div>
 
-    <div class="right-10 w-100 rounded-6 p-8 shadow-sm ab-y-c bg-common">
+    <div class="right-20 w-100 rounded-6 p-8 shadow-sm <md:ab-c ab-y-c bg-common">
       <section flex justify-between>
         <div>Welcome to <span class="text-blue-4 font-bold">BLOB</span></div>
         <span cursor-pointer text="12px blue-4 hover:blue-5">Sign up</span>
@@ -99,7 +122,7 @@ function handleLogin() {
             or
           </div>
           <div class="mt-5 flex-center text-5">
-            <div rounded-2 p-3 class="bg-#f6f6f6 dark:bg-dark-300">
+            <div rounded-2 p-3 class="bg-#f6f6f6 dark:bg-dark-300" @click="handleShowLoading">
               <div cursor="pointer" bxl:github dark:text-white />
             </div>
           </div>

@@ -15,9 +15,8 @@ const switchVal = computed(() => {
 
 <template>
   <div
-    class="relative h-7 w-15 flex-col-center cursor-pointer rounded-full p-1 transition-all duration-400"
-    border="light-900 1 solid dark:gray-6"
-    :class="switchVal ? 'bg-blue-400' : 'blur-0.4 shadow-md bg-dark-300'"
+    class="relative h-7 w-15 flex-col-center cursor-pointer rounded-full p-1 shadow-md transition-all duration-400"
+    :class="switchVal ? 'bg-blue-400' : 'blur-0.4 bg-dark-300'"
     @click="value = !value"
   >
     <div
