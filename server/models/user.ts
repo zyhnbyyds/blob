@@ -4,6 +4,7 @@ import { defineMongooseModel } from '#nuxt/mongoose'
 export const UserSchema = defineMongooseModel('User', {
   nick: {
     type: String,
+    default: null,
   },
   id: {
     type: Number,

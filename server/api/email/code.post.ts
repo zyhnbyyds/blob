@@ -1,12 +1,17 @@
 import nodemailerInstance from '../../utils/nodemailer'
+import type { EmailCode } from '~/server/utils/email-code'
 import { useRandom } from '~/server/utils/random'
 
+/**
+ * login with email and code
+ * @param {string} email
+ */
 export default defineEventHandler(async (event) => {
   const { email } = await readBody(event)
   const code = useRandom(6)
 
   // code default expire in 2 minutes
-  setStorage(`email:${email}:code`, { code, expire: Date.now() + 2 * 60 * 1000 })
+  setStorage<EmailCode>(`email:${email}:code`, { code, expire: Date.now() + 2 * 60 * 1000, status: 'unused' })
 
   logger.info(`Generated code: ${code}`)
 

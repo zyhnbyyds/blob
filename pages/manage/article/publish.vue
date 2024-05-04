@@ -3,6 +3,7 @@ import type { ApiResult } from '~/server/types'
 
 definePageMeta({
   layout: 'empty',
+  middleware: 'auth',
 })
 
 const [loading, load] = useToggle(false)

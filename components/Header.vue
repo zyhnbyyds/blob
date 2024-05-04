@@ -32,6 +32,12 @@ const active = ref<string>('')
       >
         <div cursor="pointer" bxl:github dark:text-white />
       </a>
+
+      <NuxtLink to="/manage" class="text-4.5">
+        <Button size="sm">
+          登录
+        </Button>
+      </NuxtLink>
     </div>
   </header>
 </template>

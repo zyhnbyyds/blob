@@ -11,3 +11,12 @@ export const oauth = {
     clientSecret: import.meta.env.GITHUB_CLIENT_SECRET,
   },
 }
+
+export const auth = {
+  jwtSecret: import.meta.env.JWT_PRIVATE_VAL,
+}
+
+export const mongo = {
+  uri: import.meta.env.MONGODB_URI,
+  dbName: import.meta.env.MONGODB_NAME,
+}

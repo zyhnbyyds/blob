@@ -1,6 +1,6 @@
 declare module '#auth-utils' {
   /** github user info */
-  interface User {
+  interface GitHubUser {
     login: string
     id: number
     node_id: string
@@ -35,8 +35,14 @@ declare module '#auth-utils' {
     updated_at: Date
   }
 
+  interface SelfUser {
+    userId: number
+    email: string
+    roles: number[] | number
+  }
+
   interface UserSession {
-    user?: User
+    user?: GitHubUser | SelfUser
   }
 }
 

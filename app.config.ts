@@ -1,3 +1,5 @@
+import type { MessageBoxOptions } from '~/components/MessageBox.vue'
+
 export default defineAppConfig({
   ui: {
     primary: 'blue',
@@ -21,4 +23,13 @@ export default defineAppConfig({
   me: {
     name: '张宇行',
   },
+
+  messageBox: ({
+    type: 'info',
+    message: '',
+    duration: 2000,
+    visible: false,
+    position: 'top',
+    mask: false,
+  } as MessageBoxOptions & { timer?: NodeJS.Timeout }),
 })

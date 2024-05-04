@@ -13,9 +13,11 @@ const { data } = await apiGet<ArticleItem>('/api/article/detail', { id })
 </script>
 
 <template>
-  <ClientOnly>
-    <ArticleViewer :content="data?.content ?? ''" />
-  </ClientOnly>
+  <div>
+    <ClientOnly>
+      <ArticleViewer :content="data?.content ?? ''" />
+    </ClientOnly>
+  </div>
 </template>
 
 <style scoped></style>

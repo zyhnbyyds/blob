@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 definePageMeta({
   layout: 'master',
+  middleware: 'auth',
 })
 
 const commonBorder = 'border-1px border-#E4E4E7 rounded-4 border-solid'

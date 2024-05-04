@@ -1,33 +1,46 @@
-/* eslint-disable import/no-mutable-exports */
 import type { MessageBoxOptions } from '~/components/MessageBox.vue'
-import { useAppStore } from '~/store/app'
 
-let showMessage: (options: Partial<MessageBoxOptions>) => void
-let closeMessage: () => void
+function showMessage(options: Partial<MessageBoxOptions> = { type: 'info', message: 'Message box', duration: 3000 }) {
+  const app = useAppConfig()
+  return new Promise<void>((resolve) => {
+    app.messageBox = useAssign({
+      type: 'info',
+      message: '',
+      duration: 2000,
+      visible: false,
+      position: 'top',
+      mask: false,
+    }, options)
 
-onNuxtReady(() => {
-  const { messageBox } = storeToRefs(useAppStore())
-
-  showMessage = (options: Partial<MessageBoxOptions> = { type: 'info', message: 'Message box', duration: 3000 }) => {
-    if (messageBox.value.timer)
-      clearTimeout(messageBox.value.timer)
-
-    messageBox.value = useAssign(messageBox.value, options)
-    messageBox.value.visible = true
-    if (messageBox.value.type === 'loading')
+    if (import.meta.server)
       return
 
-    messageBox.value.timer = setTimeout(() => {
-      messageBox.value.visible = false
-    }, messageBox.value.duration)
-  }
+    if (app.messageBox.timer)
+      clearTimeout(app.messageBox.timer)
 
-  closeMessage = () => {
-    if (messageBox.value.timer)
-      clearTimeout(messageBox.value.timer)
-    messageBox.value.visible = false
-  }
-})
+    app.messageBox = useAssign(app.messageBox, options)
+    app.messageBox.visible = true
+    if (app.messageBox.type === 'loading' && !app.messageBox.duration) {
+      resolve()
+      return
+    }
+    else {
+      app.messageBox.timer = setTimeout(() => {
+        app.messageBox.visible = false
+        resolve()
+      }, app.messageBox.duration)
+    }
+  })
+}
+
+function closeMessage() {
+  const app = useAppConfig()
+
+  app.messageBox.visible = false
+
+  if (app.messageBox.timer)
+    clearTimeout(app.messageBox.timer)
+}
 
 export {
   showMessage,

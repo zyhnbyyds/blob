@@ -4,6 +4,9 @@ import zod from 'zod'
 definePageMeta({
   layout: 'empty',
 })
+
+const router = useRouter()
+
 const isEmailCodeSend = ref(false)
 const form = reactive({
   email: '',
@@ -13,6 +16,11 @@ const form = reactive({
 const isEmailValid = computed(() => {
   return zod.string().email().safeParse(form.email).success
 })
+
+const isCodeValid = computed(() => {
+  return zod.string().regex(/^[A-Za-z0-9]{6}$/).safeParse(form.code).success
+})
+
 const colorMode = useColorMode()
 
 const loginBg = computed(() => {
@@ -39,36 +47,42 @@ async function handleSendEmailCode() {
   })
 }
 
-function handleLogin() {
+function handleEmailCodeResend() {
+  handleSendEmailCode()
+}
+
+async function handleLogin() {
+  if (!isCodeValid.value) {
+    showMessage({
+      type: 'error',
+      message: 'Invalid code',
+    })
+    return
+  }
+
   showMessage({
     type: 'loading',
     message: 'Logging in...',
   })
-  $fetch<{ data: any, success: boolean }>('/api/auth/login', {
+
+  const { success } = await $fetch<{ data: any, success: boolean }>('/api/auth/login', {
     method: 'POST',
     body: form,
-  }).then((data) => {
-    if (data.success) {
-      showMessage({
-        type: 'success',
-        message: 'Login successfully',
-      })
-      useRouter().push('/manage')
-    }
-    else {
-      showMessage({
-        type: 'error',
-        message: 'Login failed',
-      })
-    }
   })
-}
 
-function handleShowLoading() {
-  showMessage({
-    type: 'loading',
-    message: 'Loading...',
-  })
+  if (success) {
+    showMessage({
+      type: 'success',
+      message: 'Login successfully',
+    })
+    router.push({ path: '/manage' })
+  }
+  else {
+    showMessage({
+      type: 'error',
+      message: 'Login failed',
+    })
+  }
 }
 </script>
 
@@ -106,6 +120,10 @@ function handleShowLoading() {
             Input the code you received
           </h3>
           <FloatInput v-model="form.code" placeholder="Code" />
+          <span mt-2 flex justify-between px-2>
+            <span text="12px gray-4">Didn't receive the code?</span>
+            <span text="12px blue-4" cursor-pointer @click="handleEmailCodeResend">Resend</span>
+          </span>
         </div>
 
         <div class="mt-10">
@@ -122,9 +140,9 @@ function handleShowLoading() {
             or
           </div>
           <div class="mt-5 flex-center text-5">
-            <div rounded-2 p-3 class="bg-#f6f6f6 dark:bg-dark-300" @click="handleShowLoading">
+            <NuxtLink external to="/api/auth/github" rounded-2 p-3 class="bg-#f6f6f6 dark:bg-dark-300">
               <div cursor="pointer" bxl:github dark:text-white />
-            </div>
+            </NuxtLink>
           </div>
         </section>
       </div>

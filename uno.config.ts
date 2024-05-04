@@ -18,10 +18,16 @@ export default defineConfig({
     ['flex-row-center', 'flex justify-center'],
 
     // position
-    ['ab-x-c', 'absolute left-1/2 -translate-x-1/2'],
+    ['fixed-x-c', 'absolute left-1/2 -translate-x-1/2'],
     ['ab-y-c', 'absolute top-1/2 -translate-y-1/2'],
     ['ab-c', 'absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2'],
     ['ab-0', 'absolute left-0 top-0'],
+
+    // fixed
+    ['fixed-x-c', 'fixed left-1/2 -translate-x-1/2'],
+    ['fixed-y-c', 'fixed top-1/2 -translate-y-1/2'],
+    ['fixed-c', 'fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2'],
+    ['fixed-0', 'fixed left-0 top-0'],
 
     ['hw-full', 'h-full w-full'],
 

@@ -18,5 +18,17 @@ interface ImportMeta {
     GITHUB_APP_PRIVATE_KEY_PATH: string
     GITHUB_APP_WEBHOOK_API_PATH: string
     GITHUB_APP_INSTALLATION_ID: string
+    GITHUB_CLIENT_ID: string
+    GITHUB_CLIENT_SECRET: string
+
+    /** jwt认证私钥 */
+    JWT_PRIVATE_VAL: string
+
+    /** mongodb uri */
+    MONGODB_URI: string
+    /**
+     * mongodb database name
+     */
+    MONGODB_NAME: string
   }
 }

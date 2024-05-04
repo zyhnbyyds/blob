@@ -23,5 +23,8 @@ export default antfu(
   },
   {
     ignores: ['docker'],
+    rules: {
+      'no-useless-return': ['off'],
+    },
   },
 )

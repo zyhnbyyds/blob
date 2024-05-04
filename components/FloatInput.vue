@@ -64,8 +64,9 @@ function handleFocus() {
       "
       class="absolute inline-block origin-top-left cursor-text px-1 text-3.3 transition-all"
     >{{ props.placeholder }}</label>
-    <slot name="suffix" />
-    <slot name="default" />
+    <!-- <span right-3 text-sm text-blue-3 ab-y-c>
+      <slot name="suffix" />
+    </span> -->
   </div>
 </template>
 

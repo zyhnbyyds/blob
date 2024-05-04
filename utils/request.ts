@@ -21,14 +21,23 @@ export function apiDelete<T>(url: string, body: Payload) {
   return request<T>(url, { method: 'DELETE', body })
 }
 
+/**
+ * Makes an asynchronous request to the specified URL.
+ * @template T - The type of the response data.
+ * @param {string} url - The URL to make the request to.
+ * @param {UseFetchOptions<ApiResult<T>>} [options] - The options for the request.
+ * @returns {AsyncData<T, string>} An object containing the response data, as well as any error that occurred.
+ */
 export function request<T>(url: string, options?: UseFetchOptions<ApiResult<T>>): AsyncData<T, string> {
   const res = useFetch<ApiResult<T>, string>(url, { ...options, timeout: 10000 })
   const data = ref<T>()
   const error = ref<string>()
-  watch(res.data, (val) => {
-    data.value = val?.data
-    if (val?.success === false && val?.message)
-      error.value = val.message
+  watchEffect(() => {
+    const response = res.data.value
+    data.value = response?.success ? response.data : undefined
+
+    if (response?.success === false && response?.message)
+      error.value = response.message
   })
 
   return {
