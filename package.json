@@ -63,7 +63,7 @@
     "unocss-preset-scrollbar": "^0.3.1",
     "uuid": "^9.0.1",
     "vitepress": "1.1.4",
-    "vitest": "1.5.3",
+    "vitest": "1.6.0",
     "vue-tsc": "^2.0.15",
     "winston": "^3.13.0",
     "zod": "^3.23.5"
