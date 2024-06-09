@@ -62,7 +62,7 @@
     "shiki": "^1.4.0",
     "typescript": "^5.4.5",
     "unocss-preset-scrollbar": "^0.3.1",
-    "uuid": "^9.0.1",
+    "uuid": "^10.0.0",
     "vitepress": "1.1.4",
     "vitest": "1.6.0",
     "vue-tsc": "^2.0.16",
