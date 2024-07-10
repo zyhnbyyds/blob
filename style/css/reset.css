@@ -198,13 +198,12 @@ button,
 [type='button'],
 [type='reset'],
 [type='submit'] {
-  -webkit-appearance: button; /* 1 */
   /* background-color: transparent;  */
   background-image: none; /* 2 */
 }
 
 /*
-Use the modern Firefox focus style for all focusable elements.
+Use the modern Firefox focus style for all elements.
 */
 
 :-moz-focusring {
@@ -242,7 +241,6 @@ Correct the cursor style of increment and decrement buttons in Safari.
 */
 
 [type='search'] {
-  -webkit-appearance: textfield; /* 1 */
   outline-offset: -2px; /* 2 */
 }
 
@@ -310,7 +308,7 @@ menu {
 }
 
 /*
-Prevent resizing textareas horizontally by default.
+Prevent resizing horizontally by default.
 */
 
 textarea {
@@ -359,7 +357,6 @@ iframe,
 embed,
 object {
   display: block; /* 1 */
-  vertical-align: middle; /* 2 */
 }
 
 /*
@@ -381,3 +378,30 @@ video {
 div {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
+/* 定义滚动条的宽度 */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* 定义滚动条的滑块颜色 */
+::-webkit-scrollbar-thumb {
+  background-color: #e5e7eb;
+}
+
+/* 定义滚动条的轨道颜色 */
+::-webkit-scrollbar-track {
+  background-color: #f1f7f6;
+}
+
+/* 适用于深色模式 */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-thumb {
+     background-color: #1a1a1a;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #1a1a1a;
+  }
+}
+

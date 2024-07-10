@@ -1,6 +1,6 @@
 declare module '#auth-utils' {
-  /** github user info */
-  interface GitHubUser {
+
+  interface GithubUser {
     login: string
     id: number
     node_id: string
@@ -34,6 +34,11 @@ declare module '#auth-utils' {
     created_at: Date
     updated_at: Date
   }
+  /** github user info */
+  interface User extends Partial<GithubUser> {
+    [key: string]: any
+
+  }
 
   interface SelfUser {
     userId: number
@@ -42,7 +47,8 @@ declare module '#auth-utils' {
   }
 
   interface UserSession {
-    user?: GitHubUser | SelfUser
+    user?: User
+    [key: string]: any
   }
 }
 

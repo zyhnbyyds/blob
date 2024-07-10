@@ -3,10 +3,9 @@ const app = useAppConfig()
 </script>
 
 <template>
-  <div text="xl gray4" border-t="1px solid gray-400 op30" mx-5 h-65px flex justify-center p-5>
-    <div v-if="app.icp" flex="~ gap1 col-center" transition-all hover="op40">
-      <img h-3 w-3 src="https://mydailylife.oss-cn-shanghai.aliyuncs.com/ipc-logo.png" alt="工信部" srcset="">
-      <NuxtLink external text-common class="text-3.1" target="_blank" to="https://beian.miit.gov.cn/">
+  <div text="sm gray4" mx-5 flex justify-center p-5 pt-2>
+    <div v-if="app.icp" flex="~ gap1 col-center" transition-all hover="op70">
+      <NuxtLink external text-common class="text-3" target="_blank" to="https://beian.miit.gov.cn/">
         {{ app.icp }}
       </NuxtLink>
     </div>

@@ -23,16 +23,14 @@ $table-border: 1px solid #e5e5e5;
   h5,
   h6 {
     line-height: 1.5;
-    margin-top: 35px;
-    margin-bottom: 10px;
-    padding-bottom: 5px;
+    padding-top: 20px;
+    padding-bottom: 15px;
     font-weight: bold;
     transition: font-size $font-size-duration;
   }
 
   h1 {
     font-size: 24px;
-    margin-bottom: 5px;
   }
 
   h2,
@@ -84,6 +82,7 @@ $table-border: 1px solid #e5e5e5;
     color: lightslategrey;
     font-size: 0.87em;
     padding: 0.065em 0.4em;
+    border: 1px solid #eaeef0;
   }
 
   pre {
@@ -91,7 +90,7 @@ $table-border: 1px solid #e5e5e5;
     overflow: auto;
     position: relative;
     line-height: 1.75;
-    border-radius: 8px;
+    border-radius: 3px;
     transition: box-shadow 0.3s;
 
     >code {
@@ -106,7 +105,7 @@ $table-border: 1px solid #e5e5e5;
   }
 
   pre:hover {
-    box-shadow:  0 0 10px 2px rgba(0,0,0,0.1);
+    box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.02);
   }
 
   a {
@@ -164,11 +163,12 @@ $table-border: 1px solid #e5e5e5;
     border-bottom: $table-border;
   }
 
-  tr:last-child > td {
+  tr:last-child>td {
     border-bottom: 0;
   }
 
-  tr>th:last-child, td:last-child {
+  tr>th:last-child,
+  td:last-child {
     border-right: 0;
   }
 
@@ -261,6 +261,7 @@ html.dark {
       background-color: #333;
       background-color: var(--shiki-dark-bg);
       color: gray;
+      border: 1px solid #444;
     }
 
     pre>code {
@@ -325,4 +326,68 @@ html.dark {
     color: $text-dark-common;
     border-top: $border-dark-common;
   }
+}
+
+.md-side-title {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  width: 200px;
+  background: rgb(246 246 246);
+  transition: all 0.3s;
+
+  >h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: gray;
+    font-weight: 600;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 0.8rem;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #f8e9e9;
+      color: #000;
+    }
+  }
+
+  @media screen and (max-width: 1300px) {
+    display: none;
+  }
+}
+
+html.dark {
+  .md-side-title {
+    background: #333;
+    color: #fff;
+
+    >h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: gray;
+
+      &:hover {
+        background-color: #444;
+        color: #fff;
+      }
+    }
+  }
+}
+
+.link {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
 }

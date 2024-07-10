@@ -1,6 +1,12 @@
 import { oauth, redisConfig } from './config/env'
 
 export default defineNuxtConfig({
+  features: {
+    devLogs: true,
+    inlineStyles: false,
+    noScripts: true,
+  },
+
   modules: [
     '@vueuse/nuxt',
     '@pinia/nuxt',
@@ -17,6 +23,8 @@ export default defineNuxtConfig({
   colorMode: {
     classSuffix: '',
   },
+
+  ssr: false,
 
   mongoose: {
     devtools: true,
@@ -67,4 +75,19 @@ export default defineNuxtConfig({
   pinia: {
     storesDirs: ['~/store'],
   },
+
+  future: {
+    compatibilityVersion: 4,
+  },
+
+  experimental: {
+    clientFallback: true,
+  },
+
+  router: {
+    options: {
+      scrollBehaviorType: 'smooth',
+    },
+  },
+
 })

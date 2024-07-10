@@ -33,7 +33,7 @@ export default defineConfig({
 
     ['text-over-one', 'overflow-hidden w-full text-nowrap text-ellipsis'],
     ['text-common', 'text-#333 text-sm dark:text-#e5e5e5 text-14px transition-colors'],
-    ['bg-common', 'bg-#fff dark:bg-#1a1a1a transition-colors'],
+    ['bg-common', 'bg-light-300 dark:bg-#1a1a1a transition-colors'],
   ],
   presets: [
     presetTagify(),
@@ -53,13 +53,7 @@ export default defineConfig({
         ljmc: 'Liu Jian Mao Cao',
       },
     }),
-    // pkg problem
-    presetScrollbar() as any,
+    presetScrollbar(),
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
-  content: {
-    pipeline: {
-      include: ['**/**/*.{ts}', /\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html)($|\?)/],
-    },
-  },
 })

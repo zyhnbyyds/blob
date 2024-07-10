@@ -26,6 +26,15 @@ const activeMenu = ref<string>(menuList[0].path)
 
 const isFold = ref<boolean>(false)
 
+const { width } = useWindowSize()
+
+watchEffect(() => {
+  if (width.value < 768)
+    isFold.value = true
+
+  else isFold.value = false
+})
+
 defineExpose({
   activeMenu,
   isFold,
@@ -33,7 +42,7 @@ defineExpose({
 </script>
 
 <template>
-  <div :class="!isFold ? 'w-58' : 'w-[calc(28px+4rem)]'" border-r="1px solid #E4E4E7 dark:gray-700 dark:op60" relative h-full px-4 transition-all duration-300>
+  <div :class="!isFold ? 'w-200px' : 'w-[calc(28px+4rem)]'" border-r="1px solid #E4E4E7 dark:gray-700 dark:op60" relative h-full px-4 transition-all duration-300>
     <ManageLeftHeader :is-fold="isFold" />
     <Menu v-model="activeMenu" :menus="menuList" :is-fold="isFold" />
 

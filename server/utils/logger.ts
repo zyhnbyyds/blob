@@ -22,7 +22,7 @@ export default createLogger({
     splat(),
     prettyPrint(),
     printf(({ level, message, timestamp, label }) => {
-      return `[${label}] ${dayjs(timestamp).format('YYYY-MM-DD HH:mm:ss')}: ${level}: ${message}`
+      return `[${label}] ${dayjs(timestamp).format('YYYY-MM-DD HH:mm:ss')}: ${level}: ${typeof message === 'object' ? JSON.stringify(message) : message}`
     }),
   ),
   transports: [

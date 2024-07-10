@@ -11,7 +11,7 @@ export class Snowflake {
   private workerIdShift: number = this.sequenceBits
   private datacenterIdShift: number = this.sequenceBits + this.workerIdBits
   private timestampLeftShift: number
-    = this.sequenceBits + this.workerIdBits + this.datacenterIdBits
+  = this.sequenceBits + this.workerIdBits + this.datacenterIdBits
 
   private sequenceMask: number = -1 ^ (-1 << this.sequenceBits)
 

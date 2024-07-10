@@ -16,11 +16,11 @@ const { loggedIn, user } = useUserSession()
       </Button>
 
       <NuxtLink v-if="loggedIn" to="/manage/profile" flex gap-3 rounded-full px-4 py-2 transition-colors hover:bg-light-600 hover:dark:bg-dark-300>
-        <img :src="user?.avatar_url" h-8 w-8 rounded-full>
+        <img :src="user?.avatar_url ?? 'https://mydailylife.oss-cn-shanghai.aliyuncs.com/blob/d79aefe530934d0834c4db3e7261befc.png'" h-8 w-8 rounded-full>
 
         <div flex flex-col justify-between>
           <h4 text-sm font-500 class="text-#0A112F transition-colors dark:text-gray-400">
-            {{ user?.login }}
+            {{ user?.login ?? 'ZYH' }}
           </h4>
           <h5 text-3 class="text-#70707A">
             Developer
@@ -29,11 +29,21 @@ const { loggedIn, user } = useUserSession()
       </NuxtLink>
 
       <div v-else>
-        <NuxtLink external to="/api/auth/github">
-          <Button size="sm" bg-gray-500>
-            Sign In
-          </Button>
-        </NuxtLink>
+        <HoverBox position="bottom">
+          <NuxtLink external to="/api/auth/github">
+            <Button size="sm" bg-gray-500>
+              Sign In
+            </Button>
+          </NuxtLink>
+
+          <template #box>
+            <div class="absolute rounded-lg p-2 text-white shadow-sm -bottom-100% bg-common">
+              <p text-sm>
+                Sign in with GitHub
+              </p>
+            </div>
+          </template>
+        </HoverBox>
       </div>
     </div>
   </div>

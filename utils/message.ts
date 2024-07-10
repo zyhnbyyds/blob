@@ -20,7 +20,7 @@ function showMessage(options: Partial<MessageBoxOptions> = { type: 'info', messa
 
     app.messageBox = useAssign(app.messageBox, options)
     app.messageBox.visible = true
-    if (app.messageBox.type === 'loading' && !app.messageBox.duration) {
+    if (app.messageBox.type === 'loading' && !options.duration) {
       resolve()
       return
     }

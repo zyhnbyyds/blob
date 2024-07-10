@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import './style/css/global.css'
-
-const app = useAppConfig()
-
 onNuxtReady(() => {
   const colorMode = useColorMode()
   const isPrefersDark = usePreferredDark()
@@ -12,30 +8,26 @@ onNuxtReady(() => {
     (val) => {
       colorMode.preference = val ? 'dark' : 'light'
     },
-  )
-
-  watch(
-    () => app.pageLoading,
-    (val) => {
-      nextTick(() => {
-        if (val)
-          app.pageLoading = false
-      })
+    {
+      immediate: true,
     },
   )
 })
+
+const { y } = useWindowScroll({ behavior: 'smooth' })
+
+function goTop() {
+  y.value = 0
+}
 </script>
 
 <template>
-  <div class="relative hw-full">
+  <div class="relative bg-common text-common" scrollbar="~ w-12px dark:thumb-color-dark-100 dark:track-color-#1a1a1a">
     <NuxtLayout>
-      <NuxtPage v-if="!app.pageLoading" :transition="{ name: 'fade-slide', duration: 400, mode: 'out-in' }" :page-key="route => route.fullPath" />
-      <div v-else ab-c>
-        <div i-svg-spinners:180-ring text-10 text-light-900 dark:text-gray-500 />
-      </div>
+      <NuxtPage keepalive :page-key="route => route.fullPath" />
     </NuxtLayout>
-
     <MessageBox />
+    <ToTop :top="Math.abs(y)" @go-top="goTop()" />
   </div>
 </template>
 

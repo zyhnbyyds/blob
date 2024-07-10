@@ -40,16 +40,17 @@ export default defineEventHandler(async (event) => {
   }
 
   logger.info(`${email} login success`)
-
-  await setUserSession(event, { user: { email, userId: userInfo.id } })
-
+  const response = {
+    token: createToken({ email, userId: userInfo.id }, 60 * 60 * 24),
+    loggedInAt: new Date(),
+    refreshToken: createToken({ email, userId: userInfo.id }, 60 * 60 * 48),
+    user: userInfo,
+  }
+  await setUserSession(event, response as any)
+  await getUserSession(event)
   return {
     success: true,
-    data: {
-      token: createToken({ email, userId: userInfo.id }, 60 * 60 * 24),
-      refreshToken: createToken({ email, userId: userInfo.id }, 60 * 60 * 48),
-      userInfo: { ...userInfo, id: String(userInfo.id) },
-    },
+    data: response,
     message: 'login success',
   }
 })

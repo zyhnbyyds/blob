@@ -18,7 +18,7 @@ const isEmailValid = computed(() => {
 })
 
 const isCodeValid = computed(() => {
-  return zod.string().regex(/^[A-Za-z0-9]{6}$/).safeParse(form.code).success
+  return zod.string().regex(/^[A-Z0-9]{6}$/i).safeParse(form.code).success
 })
 
 const colorMode = useColorMode()
@@ -62,6 +62,7 @@ async function handleLogin() {
 
   showMessage({
     type: 'loading',
+    mask: true,
     message: 'Logging in...',
   })
 
@@ -71,11 +72,12 @@ async function handleLogin() {
   })
 
   if (success) {
+    await useUserSession().fetch()
+    router.replace({ path: '/manage' })
     showMessage({
       type: 'success',
       message: 'Login successfully',
     })
-    router.push({ path: '/manage' })
   }
   else {
     showMessage({

@@ -31,7 +31,7 @@ const messageBoxConfig = {
       <div v-if="messageBox.visible && messageBox.mask" class="fixed left-0 top-0 z-9998 h-100vh w-100vw bg-black bg-opacity-20 backdrop-blur-4" />
     </Transition>
 
-    <div class="fixed-x-c z-9999" :class="messageBoxConfig[messageBox.position]">
+    <div class="z-9999 fixed-x-c" :class="messageBoxConfig[messageBox.position]">
       <Transition name="fade-scale">
         <div v-if="messageBox.visible" :class="[messageBoxConfig.common, messageBoxConfig[messageBox.type][0]]">
           <div v-if="messageBoxConfig[messageBox.type][1]" inline-block :class="messageBoxConfig[messageBox.type][1]" />
