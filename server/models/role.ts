@@ -13,6 +13,7 @@ export const RoleSchema = defineMongooseModel('Role', {
   id: {
     type: Number,
     required: true,
+    unique: true,
   },
   createTime: {
     type: String,

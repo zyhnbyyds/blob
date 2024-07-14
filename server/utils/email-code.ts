@@ -33,6 +33,15 @@ export async function checkCodeValid(code: string, email: string): Promise<boole
     return false
   }
   catch (error) {
+    if (typeof error === 'string') {
+      logger.error(error)
+    }
+    else if (typeof error === 'object') {
+      logger.error(JSON.stringify(error))
+    }
+    else {
+      logger.error('Unknown error')
+    }
     return false
   }
 }

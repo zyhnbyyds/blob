@@ -20,3 +20,8 @@ export const mongo = {
   uri: import.meta.env.MONGODB_URI,
   dbName: import.meta.env.MONGODB_NAME,
 }
+
+export const email = {
+  email: import.meta.env.EMAIL,
+  password: import.meta.env.EMAIL_PASS,
+}

@@ -16,6 +16,7 @@ export const PermissionSchema = defineMongooseModel('Permission', {
   id: {
     type: Number,
     required: true,
+    unique: true,
   },
   createTime: {
     type: String,

@@ -85,37 +85,39 @@ export function shikiPlugin(options?: CodeToHastOptions): BytemdPlugin {
   return {
     viewerEffect(effect) {
       const { markdownBody } = effect
-
       const els = markdownBody.querySelectorAll<HTMLElement>('pre>code')
-      const titles = markdownBody.querySelectorAll<HTMLElement>('h1,h2,h3,h4,h5,h6')
 
-      if (titles.length !== 0) {
-        const titlesArr = Array.from(titles).map((title) => {
-          const titleText = title.textContent || ''
-          const titleId = titleText.replace(/\s+/g, '-').toLowerCase()
-          title.id = titleId
-          return {
-            id: titleId,
-            text: titleText,
-            level: title.tagName.replace('H', ''),
-            tag: title.tagName,
-          }
-        })
+      if (!markdownBody.parentElement?.classList.contains('bytemd-preview')) {
+        const titles = markdownBody.querySelectorAll<HTMLElement>('h1,h2,h3,h4,h5,h6')
 
-        const toRenders = renderTitle(transformTitleLowToHighChild(titlesArr))
-        const titlesEle = document.createElement('div')
-        titlesEle.innerHTML = toRenders
-        markdownBody.parentElement?.prepend(titlesEle)
-
-        markdownBody.parentElement?.querySelectorAll('.link').forEach((link) => {
-          link.addEventListener('click', (e) => {
-            e.preventDefault()
-            const id = (e.target as HTMLElement).getAttribute('href')?.replace('#', '')
-            const target = markdownBody.querySelector(`#${id}`)
-            if (target)
-              target.scrollIntoView({ behavior: 'smooth' })
+        if (titles.length !== 0) {
+          const titlesArr = Array.from(titles).map((title) => {
+            const titleText = title.textContent || ''
+            const titleId = titleText.replace(/\s+/g, '-').toLowerCase()
+            title.id = titleId
+            return {
+              id: titleId,
+              text: titleText,
+              level: title.tagName.replace('H', ''),
+              tag: title.tagName,
+            }
           })
-        })
+
+          const toRenders = renderTitle(transformTitleLowToHighChild(titlesArr))
+          const titlesEle = document.createElement('div')
+          titlesEle.innerHTML = toRenders
+          markdownBody.parentElement?.prepend(titlesEle)
+
+          markdownBody.parentElement?.querySelectorAll('.link').forEach((link) => {
+            link.addEventListener('click', (e) => {
+              e.preventDefault()
+              const id = (e.target as HTMLElement).getAttribute('href')?.replace('#', '')
+              const target = markdownBody.querySelector(`#${id}`)
+              if (target)
+                target.scrollIntoView({ behavior: 'smooth' })
+            })
+          })
+        }
       }
 
       if (els.length === 0)

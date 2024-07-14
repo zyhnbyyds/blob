@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer'
+import { email } from '~/config/env'
 
 class NodeMailerInstance {
   initNodemailer() {
@@ -7,8 +8,8 @@ class NodeMailerInstance {
       port: 465,
       secure: true,
       auth: {
-        user: '19939926438@163.com',
-        pass: 'zhang187332',
+        user: email.email,
+        pass: email.password,
       },
     })
   }

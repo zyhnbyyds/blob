@@ -76,10 +76,6 @@ export default defineNuxtConfig({
     storesDirs: ['~/store'],
   },
 
-  future: {
-    compatibilityVersion: 4,
-  },
-
   experimental: {
     clientFallback: true,
   },
@@ -89,5 +85,4 @@ export default defineNuxtConfig({
       scrollBehaviorType: 'smooth',
     },
   },
-
 })
