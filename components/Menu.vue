@@ -14,11 +14,11 @@ export interface MenuConfig {
 }
 
 const props = withDefaults(defineProps<
-{
-  menus: Menu[]
-  menuConfig?: MenuConfig
-  isFold?: boolean
-}
+  {
+    menus: Menu[]
+    menuConfig?: MenuConfig
+    isFold?: boolean
+  }
 >(), {
   menuConfig: () => ({
     active: 'border-1px border-solid rounded-3 border-#E4E4E7 text-#3981F7 bg-#FAFAFA dark:bg-dark-400 dark:border-dark-300 dark:text-gray-200',

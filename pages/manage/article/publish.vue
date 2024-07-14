@@ -3,7 +3,6 @@ import type { ApiResult } from '~/server/types'
 
 definePageMeta({
   layout: 'empty',
-  middleware: 'auth',
 })
 
 const [loading, load] = useToggle(false)
@@ -20,7 +19,7 @@ async function handlePublish(article: { title: string, content: string }) {
 </script>
 
 <template>
-  <div hw-full>
+  <div h-100vh hw-full>
     <ClientOnly>
       <ArticleEditor :loading="loading" @publish="handlePublish" />
     </ClientOnly>

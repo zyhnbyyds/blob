@@ -25,6 +25,7 @@ $table-border: 1px solid #e5e5e5;
     line-height: 1.5;
     padding-top: 20px;
     padding-bottom: 15px;
+    margin-bottom: 10px;
     font-weight: bold;
     transition: font-size $font-size-duration;
   }
@@ -81,8 +82,8 @@ $table-border: 1px solid #e5e5e5;
     overflow-x: auto;
     color: lightslategrey;
     font-size: 0.87em;
+    border-radius: 4px;
     padding: 0.065em 0.4em;
-    border: 1px solid #eaeef0;
   }
 
   pre {
@@ -102,10 +103,6 @@ $table-border: 1px solid #e5e5e5;
       overflow-x: auto;
       background-color: #e6f6f0;
     }
-  }
-
-  pre:hover {
-    box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.02);
   }
 
   a {
@@ -261,7 +258,6 @@ html.dark {
       background-color: #333;
       background-color: var(--shiki-dark-bg);
       color: gray;
-      border: 1px solid #444;
     }
 
     pre>code {
@@ -360,14 +356,14 @@ html.dark {
     }
   }
 
-  @media screen and (max-width: 1300px) {
-    display: none;
-  }
+  // @media screen and (max-width: 1200px) {
+  //   display: none;
+  // }
 }
 
 html.dark {
   .md-side-title {
-    background: #333;
+    background: rgb(34 34 34 / 4);
     color: #fff;
 
     >h1,

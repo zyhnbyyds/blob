@@ -11,7 +11,7 @@ const { data: detail } = apiGet<ArticleItem>('/api/article/detail', { id: query.
 
 <template>
   <div flex-row-center>
-    <div my-5 w-2xl rounded-1 bg-light-600 dark:bg-dark:400>
+    <div my-5 class="<sm:w-full sm:w-2xl" rounded-1 bg-light-500 px-2 dark:bg-dark:400>
       <ClientOnly>
         <ArticleViewer :content="detail?.content ?? ''" />
       </ClientOnly>

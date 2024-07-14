@@ -22,9 +22,9 @@ function goTop() {
 </script>
 
 <template>
-  <div class="relative bg-common text-common" scrollbar="~ w-12px dark:thumb-color-dark-100 dark:track-color-#1a1a1a">
+  <div class="relative min-h-full bg-common text-common" scrollbar="~ w-12px dark:thumb-color-dark-100 dark:track-color-#1a1a1a">
     <NuxtLayout>
-      <NuxtPage keepalive :page-key="route => route.fullPath" />
+      <NuxtPage keepalive />
     </NuxtLayout>
     <MessageBox />
     <ToTop :top="Math.abs(y)" @go-top="goTop()" />

@@ -9,9 +9,9 @@ export interface PaginationProps {
 const props = defineProps<PaginationProps>()
 
 defineEmits<
-{
-  change: [page: number]
-}
+  {
+    change: [page: number]
+  }
 >()
 
 // 最多展示10页，要根据总页数来计算， 而且要根据当前页数来展示对应范围的页码, 大于10页的情况下，要展示省略号

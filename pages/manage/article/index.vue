@@ -5,7 +5,6 @@ import type { PageRes } from '~/server/types/common'
 
 definePageMeta({
   layout: 'master',
-  middleware: 'auth',
 })
 
 const page = reactive({

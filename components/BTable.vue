@@ -19,9 +19,9 @@ const props = defineProps<{
 }>()
 
 defineEmits<
-{
-  change: [page: number]
-}
+  {
+    change: [page: number]
+  }
 >()
 </script>
 
