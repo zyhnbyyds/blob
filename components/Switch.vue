@@ -24,7 +24,7 @@ const switchVal = computed(() => {
       class="absolute h-4 w-4 flex-center rounded-full transition-all duration-200 transition-ease"
     >
       <slot>
-        <div flex-center text-2 text-shadow-md>
+        <div flex-center select-none text-2 text-shadow-md>
           {{ switchVal ? 'L' : 'D' }}
         </div>
       </slot>

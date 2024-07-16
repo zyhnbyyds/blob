@@ -13,7 +13,7 @@ export interface MessageBoxOptions {
 }
 
 const messageBoxConfig = {
-  common: ' dark:bg-dark-400 px-6 font-bold flex-center gap-4 text-center transition-all rounded-full shadow-sm py-3 dark:text-gray-4',
+  common: ' dark:bg-dark-700 px-6 font-bold flex-center gap-4 text-center transition-all rounded-lg shadow-sm py-3 dark:text-gray-4',
   success: ['bg-green-500 text-white'],
   error: ['bg-red-500 text-white'],
   loading: ['bg-gradient-to-r from-cyan-500 shadow-blue-400 to-blue-500 text-white', 'i-svg-spinners:180-ring text-5'],

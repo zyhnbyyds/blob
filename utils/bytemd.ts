@@ -43,29 +43,6 @@ interface Title {
   children?: Title[]
 }
 
-function transformTitleLowToHighChild(titles: Title[]) {
-  if (titles.length === 0)
-    return []
-  const result: Title[] = []
-  let lastTitle: Title | undefined
-  for (const title of titles) {
-    if (!lastTitle) {
-      lastTitle = title
-      result.push(title)
-    }
-    else if (title.level === lastTitle.level) {
-      lastTitle = title
-      result.push(title)
-    }
-    else {
-      if (!lastTitle.children)
-        lastTitle.children = []
-      lastTitle.children.push(title)
-    }
-  }
-  return result
-}
-
 function renderTitle(titles: Title[]) {
   let result = ''
   for (const title of titles) {
@@ -89,7 +66,6 @@ export function shikiPlugin(options?: CodeToHastOptions): BytemdPlugin {
 
       if (!markdownBody.parentElement?.classList.contains('bytemd-preview')) {
         const titles = markdownBody.querySelectorAll<HTMLElement>('h1,h2,h3,h4,h5,h6')
-
         if (titles.length !== 0) {
           const titlesArr = Array.from(titles).map((title) => {
             const titleText = title.textContent || ''
@@ -103,20 +79,22 @@ export function shikiPlugin(options?: CodeToHastOptions): BytemdPlugin {
             }
           })
 
-          const toRenders = renderTitle(transformTitleLowToHighChild(titlesArr))
-          const titlesEle = document.createElement('div')
-          titlesEle.innerHTML = toRenders
-          markdownBody.parentElement?.prepend(titlesEle)
+          const toRenders = renderTitle(titlesArr)
 
-          markdownBody.parentElement?.querySelectorAll('.link').forEach((link) => {
-            link.addEventListener('click', (e) => {
-              e.preventDefault()
-              const id = (e.target as HTMLElement).getAttribute('href')?.replace('#', '')
-              const target = markdownBody.querySelector(`#${id}`)
-              if (target)
-                target.scrollIntoView({ behavior: 'smooth' })
+          const mdSideTitlesEle = markdownBody.parentElement?.parentElement?.querySelector('.md-side-title')
+
+          if (mdSideTitlesEle) {
+            mdSideTitlesEle.innerHTML = toRenders
+            mdSideTitlesEle.querySelectorAll('.link').forEach((link) => {
+              link.addEventListener('click', (e) => {
+                e.preventDefault()
+                const id = (e.target as HTMLElement).getAttribute('href')?.replace('#', '')
+                const target = markdownBody.querySelector(`#${id}`)
+                if (target)
+                  target.scrollIntoView({ behavior: 'smooth' })
+              })
             })
-          })
+          }
         }
       }
 
@@ -126,6 +104,7 @@ export function shikiPlugin(options?: CodeToHastOptions): BytemdPlugin {
         const lang = el.className.replace('language-', '')
         el.className = `${el.className} shiki-code`
         const codeGet = el.textContent || ''
+
         const code = await codeToHtml(codeGet, useAssign(options, {
           lang,
           themes: {
@@ -134,8 +113,25 @@ export function shikiPlugin(options?: CodeToHastOptions): BytemdPlugin {
           },
         }))
 
-        if (el.parentElement)
-          el.parentElement.innerHTML = code
+        if (el.parentElement) {
+          // add code header to the code block & add copy button & add {lang} to the code block
+          const codeHeader = `<div class="shiki-code-header"><span class="code-lang">${lang}</span><span class="copy-btn">Copy</button></div>`
+          el.innerHTML = code
+          el.children[0].children[0].insertAdjacentHTML('beforebegin', codeHeader)
+
+          // add copy event
+          const copyBtn = el.parentElement?.querySelector('.copy-btn')
+          copyBtn?.addEventListener('click', () => {
+            const textArea = document.createElement('textarea')
+            textArea.value = codeGet
+            document.body.appendChild(textArea)
+            textArea.select()
+            navigator.clipboard.writeText(codeGet)
+            document.body.removeChild(textArea)
+
+            showMessage({ type: 'success', message: 'Copy success' })
+          })
+        }
       },
       )
     },

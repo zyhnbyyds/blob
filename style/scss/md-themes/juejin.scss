@@ -26,11 +26,14 @@ $table-border: 1px solid #e5e5e5;
     padding-top: 20px;
     padding-bottom: 15px;
     margin-bottom: 10px;
-    font-weight: bold;
     transition: font-size $font-size-duration;
   }
 
   h1 {
+    font-size: 30px;
+  }
+
+  h2 {
     font-size: 24px;
   }
 
@@ -86,6 +89,33 @@ $table-border: 1px solid #e5e5e5;
     padding: 0.065em 0.4em;
   }
 
+  // add code header to the code block & add copy button & add {lang} to the code block
+  .shiki-code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 15px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom: 1px solid #e5e5e5;
+    user-select: none;
+    margin-bottom: 5px;
+
+    .code-lang {
+      color: #666;
+    }
+
+    .copy-btn {
+      cursor: pointer;
+      color: #666 !important;
+      transition: color 0.3s;
+
+      &:hover {
+        color: #999 !important;
+      }
+    }
+  }
+
   pre {
     font-family: $monospace-font;
     overflow: auto;
@@ -94,14 +124,27 @@ $table-border: 1px solid #e5e5e5;
     border-radius: 3px;
     transition: box-shadow 0.3s;
 
+    ::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #e5e5e5;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
     >code {
       font-size: 12px;
       padding: 15px;
+      padding-top: 0;
       margin: 0;
       word-break: normal;
       display: block;
       overflow-x: auto;
-      background-color: #e6f6f0;
     }
   }
 
@@ -263,6 +306,15 @@ html.dark {
     pre>code {
       background: #333;
       background-color: var(--shiki-dark-bg);
+
+      ::-webkit-scrollbar-thumb {
+        background: #444;
+        border-radius: 4px;
+      }
+    }
+
+    .shiki-code-header {
+      border-bottom: 1px solid #444;
     }
 
     table {
@@ -325,13 +377,17 @@ html.dark {
 }
 
 .md-side-title {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 10px;
-  width: 200px;
-  background: rgb(246 246 246);
   transition: all 0.3s;
+  text-align: left;
+
+  .link {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 100%;
+    width: 100%;
+  }
 
   >h1,
   h2,
@@ -340,14 +396,16 @@ html.dark {
   h5,
   h6 {
     color: gray;
-    font-weight: 600;
-    padding: 5px 10px;
     cursor: pointer;
+    height: 30px;
+    padding: 0px 10px;
+    line-height: 30px;
     transition: all 0.3s;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+    padding-left: 20px;
     border-radius: 5px;
 
     &:hover {
@@ -356,9 +414,20 @@ html.dark {
     }
   }
 
-  // @media screen and (max-width: 1200px) {
-  //   display: none;
-  // }
+  h1 {
+    padding-left: 10px;
+    font-size: 0.75rem;
+  }
+
+  h2 {
+    padding-left: 20px;
+    font-size: 0.7rem;
+  }
+
+  h3 {
+    padding-left: 30px;
+    font-size: 0.65rem;
+  }
 }
 
 html.dark {
@@ -375,15 +444,9 @@ html.dark {
       color: gray;
 
       &:hover {
-        background-color: #444;
+        background-color: #333;
         color: #fff;
       }
     }
   }
-}
-
-.link {
-  display: inline-block;
-  height: 100%;
-  width: 100%;
 }
