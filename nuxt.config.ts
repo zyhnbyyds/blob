@@ -18,6 +18,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxt/image',
     'nuxt-auth-utils',
+    'nuxt-typed-router',
   ],
 
   colorMode: {

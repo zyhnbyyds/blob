@@ -53,6 +53,7 @@ export default defineConfig({
         ljmc: 'Liu Jian Mao Cao',
       },
     }),
+    // @ts-expect-error missing types
     presetScrollbar(),
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
