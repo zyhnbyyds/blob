@@ -2,37 +2,52 @@
 const menuList = [
   {
     title: 'Home',
-    path: '/manage',
+    key: '/manage',
     icon: 'solar:home-angle-2-bold',
   },
   {
     title: 'Blob',
-    path: '/manage/article',
+    key: '/manage/article',
     icon: 'solar:file-text-bold',
   },
   {
     title: 'User',
-    path: '/manage/user',
+    key: '/manage/user',
     icon: 'solar:user-bold',
+  },
+
+  {
+    title: 'Permission',
+    key: '/manage/permission',
+    icon: 'solar:shield-bold',
   },
   {
     title: 'Setting',
-    path: '/manage/setting',
+    key: '/manage/setting',
+    icon: 'solar:settings-bold',
+  },
+  {
+    title: 'Docs',
+    key: '/manage/docs',
     icon: 'solar:settings-bold',
   },
 ]
 
-const activeMenu = ref<string>(menuList[0].path)
+const activeMenu = ref<string>(menuList[0].key)
 
 const isFold = ref<boolean>(false)
 
 const { width } = useWindowSize()
 
-watchEffect(() => {
-  if (width.value < 768)
+watch(width, () => {
+  if (isFold.value)
+    return
+  if (width.value < 1000) {
     isFold.value = true
-
-  else isFold.value = false
+  }
+  else {
+    isFold.value = false
+  }
 })
 
 defineExpose({
@@ -42,9 +57,9 @@ defineExpose({
 </script>
 
 <template>
-  <div :class="!isFold ? 'w-200px' : 'w-[calc(28px+4rem)]'" border-r="1px solid #E4E4E7 dark:gray-700 dark:op60" relative h-full px-4 transition-all duration-300>
+  <div :class="!isFold ? 'w-220px' : 'w-90px'" border-r="1px solid #E4E4E7 dark:gray-700 dark:op60" relative h-full px-4 transition-all duration-300>
     <ManageLeftHeader :is-fold="isFold" />
-    <Menu v-model="activeMenu" :menus="menuList" :is-fold="isFold" />
+    <BMenu v-model="activeMenu" route :menus="menuList" :is-fold="isFold" />
 
     <div
       :class="!isFold ? '' : 'rotate-y-180deg'"

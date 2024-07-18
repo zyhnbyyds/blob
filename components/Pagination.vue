@@ -14,13 +14,14 @@ defineEmits<
   }
 >()
 
-// 最多展示10页，要根据总页数来计算， 而且要根据当前页数来展示对应范围的页码, 大于10页的情况下，要展示省略号
 const pages = computed(() => {
-  const totalPage = Math.ceil(1000 / props.size)
+  const totalPage = Math.ceil(props.total / props.size)
   const start = Math.max(1, props.page - 5)
   const end = Math.min(totalPage, start + 9)
 
-  return Array.from({ length: end - start + 1 }, (_, i) => i + start)
+  const showPages = Array.from({ length: end - start + 1 }, (_, i) => i + start)
+
+  return showPages.length >= 1 ? showPages : 1
 })
 
 const common = {

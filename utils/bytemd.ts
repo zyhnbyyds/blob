@@ -51,7 +51,7 @@ function renderTitle(titles: Title[]) {
     else
       result += `<${title.tag} id="${title.id}"><a class="link" href="#${title.id}">${title.text}</a></${title.tag}>`
   }
-  return `<div class="md-side-title">${result}</div>`
+  return result
 }
 
 /**
@@ -67,12 +67,11 @@ export function shikiPlugin(options?: CodeToHastOptions): BytemdPlugin {
       if (!markdownBody.parentElement?.classList.contains('bytemd-preview')) {
         const titles = markdownBody.querySelectorAll<HTMLElement>('h1,h2,h3,h4,h5,h6')
         if (titles.length !== 0) {
-          const titlesArr = Array.from(titles).map((title) => {
+          const titlesArr = Array.from(titles).map((title, index) => {
             const titleText = title.textContent || ''
-            const titleId = titleText.replace(/\s+/g, '-').toLowerCase()
-            title.id = titleId
+            title.id = title.tagName + index
             return {
-              id: titleId,
+              id: title.tagName + index,
               text: titleText,
               level: title.tagName.replace('H', ''),
               tag: title.tagName,
@@ -90,6 +89,7 @@ export function shikiPlugin(options?: CodeToHastOptions): BytemdPlugin {
                 e.preventDefault()
                 const id = (e.target as HTMLElement).getAttribute('href')?.replace('#', '')
                 const target = markdownBody.querySelector(`#${id}`)
+
                 if (target)
                   target.scrollIntoView({ behavior: 'smooth' })
               })

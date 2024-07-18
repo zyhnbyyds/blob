@@ -22,9 +22,9 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 })
 
 const configPresets = {
-  common: 'rounded-full inline-flex flex-center text-nowrap shadow-sm dark:shadow-gray-700 bg-[#3981F7] text-white cursor-pointer active:scale-99 hover:bg-op70 transition-colors duration-200 ease-in-out',
+  common: 'rounded-full inline-flex gap-2 flex-center text-nowrap shadow-sm dark:shadow-gray-700 bg-[#3981F7] text-white cursor-pointer active:scale-99 hover:bg-op70 transition-colors duration-200 ease-in-out',
   size: {
-    sm: 'text-3 px-5 py-2',
+    sm: 'text-2.8 px-3 py-1',
     md: 'text-3.5 px-6 py-2.5',
     lg: 'text-lg px-7 py-5',
   },
@@ -44,7 +44,7 @@ const classes = computed(() => {
     <slot />
     <Transition>
       <div v-if="$props.loading" i-svg-spinners:180-ring ml-3 />
-      <div v-else-if="props.icon" ml-3 scale-120 :class="props.icon" />
+      <div v-else-if="props.icon" scale-120 :class="props.icon" />
     </Transition>
   </button>
 </template>

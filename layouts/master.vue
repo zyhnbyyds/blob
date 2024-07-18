@@ -2,11 +2,11 @@
 </script>
 
 <template>
-  <div scrollbar="~ w-1" class="h-100vh w-full flex overflow-hidden bg-common text-common">
-    <ManageLeftSideBar />
+  <div class="h-100vh w-full flex bg-common text-common">
+    <ManageLeftSideBar shrink-0 />
 
-    <div h-full min-w-3xl flex-1 overflow-hidden>
-      <ManageMain>
+    <div h-full min-w-3xl flex-1>
+      <ManageMain shrink-0>
         <slot />
       </ManageMain>
     </div>

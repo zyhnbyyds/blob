@@ -1,4 +1,4 @@
-<script lang='ts' setup>
+<script lang='ts' setup generic="T extends object">
 import type { PaginationProps } from './Pagination.vue'
 
 export interface TableColumns {
@@ -11,7 +11,7 @@ export interface TableColumns {
 
 const props = defineProps<{
   columns: TableColumns[]
-  data: any[]
+  data: T[]
   page?: PaginationProps
   loading?: boolean
   headerClass?: string
@@ -43,28 +43,31 @@ defineEmits<
             </th>
           </tr>
         </thead>
-        <Transition name="fade" mode="out-in">
-          <div v-if="props.loading" i-svg-spinners:180-ring z-3 text-10 text-light-900 ab-c dark:text-gray-500 />
-          <tbody v-else>
-            <tr
-              v-for="row in props.data"
-              :key="row.id" h-48px flex-col overflow-hidden
-              hover="bg-light-100 dark:bg-dark-400 bg-op70"
-              class="border-b-1 border-gray-2 border-solid bg-light-100 dark:bg-dark-500"
+        <tbody v-if="props.data.length !== 0">
+          <tr
+            v-for="row, index in props.data"
+            :key="index" h-48px flex-col overflow-hidden
+            hover="bg-light-100 dark:bg-dark-400 bg-op70"
+            class="border-b-1 border-gray-2 border-solid bg-light-100 dark:bg-dark-500"
+          >
+            <td
+              v-for="column in props.columns"
+              :key="column.key"
+              :style="{ width: column.widthClass }" border="1px solid gray-2 dark:dark-2"
+              text-sm text-gray-500 dark:text-gray-400
+              class="overflow-hidden text-ellipsis px-4 py-1 text-center text-nowrap first:border-l-0 last:border-r-0"
             >
-              <td
-                v-for="column in props.columns"
-                :key="column.key"
-                :style="{ width: column.widthClass }" border="1px solid gray-2 dark:dark-2"
-                text-gray-500 dark:text-gray-400
-                class="h-48px max-w-20 overflow-hidden text-ellipsis px-4 py-3 text-center text-nowrap first:border-l-0 last:border-r-0"
-              >
-                {{ row[column.key] }}
-              </td>
-            </tr>
-          </tbody>
-        </Transition>
+              <slot :name="column.key" :row="row">
+                {{ (row as any)[column.key] }}
+              </slot>
+            </td>
+          </tr>
+        </tbody>
       </table>
+
+      <div v-if="props.data.length === 0" w-full flex-center pt-30>
+        数据为空
+      </div>
     </div>
 
     <div h-60px flex-col-center>

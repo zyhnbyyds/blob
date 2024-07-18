@@ -21,7 +21,7 @@ const props = withDefaults(
 
 const { width, top, bgTransparent, header, title } = toRefs(props)
 
-const modelVisible = defineModel<boolean>('modelVisible', {
+const modelVisible = defineModel<boolean>({
   required: true,
   default: false,
 })
@@ -37,12 +37,12 @@ const modelVisible = defineModel<boolean>('modelVisible', {
     >
       <div
         v-if="modelVisible"
-        class="absolute-0 z-999 h-full max-h-100vh w-full overflow-hidden bg-gray-800 bg-op50"
+        class="ab-0 z-999 h-full max-h-100vh w-full overflow-hidden bg-gray-800 bg-op50"
         @click.self.prevent="modelVisible = false"
       >
         <div
           :style="{ width: styleTypeReduce(width), top: styleTypeReduce(top) }"
-          class="border-com bg-com absolute-x-center z-1000 rounded-md shadow-md"
+          class="absolute left-1/2 z-1000 rounded-md shadow-md -translate-x-1/2 bg-common"
           :class="{ '!bg-op-0 !border-op-0 !shadow-none': bgTransparent }"
         >
           <slot v-if="header" name="footer">
@@ -59,9 +59,7 @@ const modelVisible = defineModel<boolean>('modelVisible', {
               </div>
             </div>
           </slot>
-          <div p-com>
-            <slot />
-          </div>
+          <slot />
           <!-- JustForImgPre -->
           <div class="absolute-x-center bottom-10 z-9999">
             <slot name="footer" />

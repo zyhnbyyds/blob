@@ -6,6 +6,7 @@ html,
 body,
 #__nuxt {
   height: 100%;
+  width: 100%;
 }
 
 html.dark ::selection {
@@ -24,6 +25,10 @@ html ::selection {
 
 .markdown-body ol {
   list-style: decimal;
+}
+
+#teleports {
+  position: relative;
 }
 
 .markdown-body ul {

@@ -29,7 +29,7 @@ const { loggedIn, user } = useUserSession()
       </NuxtLink>
 
       <div v-else>
-        <HoverBox position="bottom">
+        <HoverBox position="right" trigger="hover">
           <NuxtLink external to="/api/auth/github">
             <Button size="sm" bg-gray-500>
               Sign In
@@ -37,8 +37,8 @@ const { loggedIn, user } = useUserSession()
           </NuxtLink>
 
           <template #box>
-            <div class="absolute rounded-lg p-2 text-white shadow-sm -bottom-100% bg-common">
-              <p text-sm>
+            <div>
+              <p>
                 Sign in with GitHub
               </p>
             </div>

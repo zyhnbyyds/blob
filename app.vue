@@ -22,7 +22,7 @@ function goTop() {
 </script>
 
 <template>
-  <div class="relative min-h-full bg-common text-common" scrollbar="~ w-12px dark:thumb-color-dark-100 dark:track-color-#1a1a1a">
+  <div class="relative z-1 min-h-full bg-common text-common" scrollbar="~ w-12px dark:thumb-color-dark-100 dark:track-color-#1a1a1a">
     <NuxtLayout>
       <NuxtPage keepalive />
     </NuxtLayout>

@@ -1,6 +1,5 @@
-<!-- eslint-disable unused-imports/no-unused-vars -->
 <script lang="ts" setup>
-import type { ArticleItem } from '~/server/types/article'
+import type { RoleItem } from '~/server/types/role'
 import type { PageRes } from '~/server/types/common'
 
 definePageMeta({
@@ -13,19 +12,24 @@ const page = reactive({
   type: 'normal',
 })
 
-const { data, status, refresh } = apiGet<PageRes<ArticleItem>>(
-  '/api/article/list',
+const { data, status, refresh } = apiGet<PageRes<RoleItem>>(
+  '/api/role/list',
   page,
 )
 
 const columns = [
   {
-    title: '标题',
-    key: 'title',
-    widthClass: '500px',
+    title: '角色名称',
+    key: 'roleName',
+    widthClass: '200px',
   },
   {
-    title: '发布时间',
+    title: '角色描述',
+    key: 'roleDesc',
+    widthClass: '300px',
+  },
+  {
+    title: '创建时间',
     key: 'createTime',
     widthClass: '300px',
   },
@@ -36,12 +40,12 @@ const columns = [
   },
 ]
 
-function handleEdit(rowData: ArticleItem) {
-  window.open(`/manage/article/publish?id=${rowData.id}&type=edit`, '_blank')
+function handleEdit(rowData: RoleItem) {
+  window.open(`/manage/role/edit?id=${rowData.id}&type=edit`, '_blank')
 }
 
-async function handleDelete(rowData: ArticleItem) {
-  await useFetch('/api/article/del', {
+async function handleDelete(rowData: RoleItem) {
+  await useFetch('/api/role/del', {
     method: 'DELETE',
     params: { id: rowData.id },
   })
@@ -54,7 +58,7 @@ async function handleDelete(rowData: ArticleItem) {
 }
 
 function handleAdd() {
-  window.open(`/manage/article/publish?type=add`, '_blank')
+  window.open(`/manage/role/add?type=add`, '_blank')
 }
 
 function handlePageChange(pageGet: number) {
@@ -66,7 +70,7 @@ function handlePageChange(pageGet: number) {
   <div hw-full p-30px>
     <div class="h-50px flex-col-center justify-between gap-3">
       <Button icon="solar:add-square-broken text-2.7" size="sm" @click="handleAdd">
-        Add
+        Add Role
       </Button>
       <Button icon="solar:refresh-circle-outline text-2.7" size="sm" bg-green-6 dark="bg-gray-700" @click="refresh" />
     </div>
@@ -88,4 +92,4 @@ function handlePageChange(pageGet: number) {
   </div>
 </template>
 
-<style scoped></style>~/components/blob/table/type
+<style scoped></style>
