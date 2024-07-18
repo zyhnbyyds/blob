@@ -46,7 +46,7 @@ export default defineEventHandler(async (event) => {
     refreshToken: createToken({ email, userId: userInfo.id }, 60 * 60 * 48),
     user: userInfo,
   }
-  await setUserSession(event, response as any)
+  await setUserSession(event, userInfo)
   await getUserSession(event)
   return {
     success: true,

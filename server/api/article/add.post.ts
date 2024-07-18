@@ -32,12 +32,15 @@ export default defineEventHandler(async (event) => {
     logger.error(e)
   })
 
+  const userSession = await getUserSession(event)
+
   await new ArticleSchema({
     ...result.data,
     id: snowFlakeId,
     createTime: timeNow,
     updateTime: timeNow,
     isDelete: false,
+    user: userSession._id,
   }).save()
 
   return {

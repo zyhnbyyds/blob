@@ -18,6 +18,7 @@ export const ArticleSchema = defineMongooseModel('Article', {
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
+    required: true,
   },
   createTime: {
     type: String,
