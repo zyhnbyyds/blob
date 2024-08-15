@@ -9,7 +9,6 @@ definePageMeta({
 const page = reactive({
   size: 10,
   page: 1,
-  type: 'normal',
 })
 
 const { data, status, refresh } = apiGet<PageRes<RoleItem>>(
@@ -39,10 +38,6 @@ const columns = [
     widthClass: '200px',
   },
 ]
-
-function handleEdit(rowData: RoleItem) {
-  window.open(`/manage/role/edit?id=${rowData.id}&type=edit`, '_blank')
-}
 
 async function handleDelete(rowData: RoleItem) {
   await useFetch('/api/role/del', {
@@ -74,13 +69,14 @@ function handlePageChange(pageGet: number) {
       </Button>
       <Button icon="solar:refresh-circle-outline text-2.7" size="sm" bg-green-6 dark="bg-gray-700" @click="refresh" />
     </div>
+    {{ data }}
     <div class="h-[calc(100%-50px)]">
       <BTable
         :columns="columns" :data="data?.list ?? []" :loading="status === 'pending'" :page="{ ...page, total: data?.total ?? 0 }"
         @change="handlePageChange"
       >
         <template #action="{ row }">
-          <Button mr-2 size="sm" @click="handleEdit(row)">
+          <Button mr-2 size="sm">
             Edit
           </Button>
           <Button size="sm" bg-green-6 @click="handleDelete(row)">

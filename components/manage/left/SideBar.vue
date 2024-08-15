@@ -15,7 +15,11 @@ const menuList = [
     key: '/manage/user',
     icon: 'solar:user-bold',
   },
-
+  {
+    title: 'Role',
+    key: '/manage/role',
+    icon: 'solar:shield-bold',
+  },
   {
     title: 'Permission',
     key: '/manage/permission',

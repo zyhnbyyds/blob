@@ -22,58 +22,62 @@ useEventListener(boxRef, props.trigger === 'hover' ? 'mouseenter' : 'click', () 
 })
 
 const commonConfig = {
-  common: 'p-2 absolute rounded-lg bg-green-200 hidden shadow-sm right-0 min-w-40  transition-all w-auto',
-  top: '-top-100%',
-  bottom: 'top-[calc(100%)]',
-  left: '-left-100%',
-  right: '-right-100%',
+  common: 'p-2  rounded-lg bg-green-200 hidden shadow-sm  min-w-40  transition-all w-auto',
 }
+
+const { x: boxX, y: boxY, height: boxH, width: boxW } = useElementBounding(boxRef)
+const { height: boxConH, width: boxConW } = useElementBounding(boxConRef)
+const { width, height } = useWindowSize()
 
 /**
  * 动态计算 box 的位置、并规避 box 超出window边界
  */
 const boxStyle = computed(() => {
-  if (!boxConRef.value || !boxRef.value)
-    return {}
-  const boxConRect = boxConRef.value.getBoundingClientRect()
-  const boxRect = boxRef.value.getBoundingClientRect()
-  const { height: windowHeight, width: windowWidth } = useWindowSize()
-  const style: Record<string, string> = {}
-
-  switch (props.position) {
-    case 'top':
-      style.top = `-${boxRect.height}px`
-      if (boxConRect.top - boxRect.height < 0) {
-        style.top = `${boxConRect.height}px` // 调整到下方
-      }
-      break
-    case 'bottom':
-      style.top = `${boxConRect.height}px`
-      if (boxConRect.bottom + boxRect.height > windowHeight.value) {
-        style.top = `-${boxRect.height}px` // 调整到上方
-      }
-      break
-    case 'left':
-      style.left = `-${boxRect.width}px`
-      if (boxConRect.left - boxRect.width < 0) {
-        style.left = `${boxConRect.width}px` // 调整到右侧
-      }
-      break
-    case 'right':
-      style.left = `${boxConRect.width}px`
-      if (boxConRect.right + boxRect.width > windowWidth.value) {
-        style.left = `-${boxRect.width}px` // 调整到左侧
-      }
-      break
+  if (boxVisible.value) {
+    let top = 0
+    let left = 0
+    switch (props.position) {
+      case 'top':
+        top = boxY.value - boxConH.value
+        left = boxX.value + boxW.value / 2 - boxConW.value / 2
+        break
+      case 'bottom':
+        top = boxY.value + boxH.value
+        left = boxX.value + boxW.value / 2 - boxConW.value / 2
+        break
+      case 'left':
+        top = boxY.value + boxH.value / 2 - boxConH.value / 2
+        left = boxX.value - boxConW.value
+        break
+      case 'right':
+        top = boxY.value + boxH.value / 2 - boxConH.value / 2
+        left = boxX.value + boxW.value
+        break
+    }
+    if (top < 0) {
+      top = 0
+    }
+    if (left < 0) {
+      left = 0
+    }
+    if (top + boxConH.value > height.value) {
+      top = height.value - boxConH.value
+    }
+    if (left + boxConW.value > width.value) {
+      left = width.value - boxConW.value
+    }
+    return {
+      top: `${top}px`,
+      left: `${left}px`,
+    }
   }
-
-  return style
+  return {}
 })
 </script>
 
 <template>
   <div class="group" relative>
-    <div ref="boxConRef" :style="boxStyle" class="group-hover:block" :class="[commonConfig.common, commonConfig[props.position]]">
+    <div ref="boxConRef" :style="boxStyle" class="group-hover:block" :class="[commonConfig.common]">
       <slot name="box" />
     </div>
     <div ref="boxRef">
