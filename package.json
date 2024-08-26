@@ -40,7 +40,7 @@
     "@unocss/eslint-config": "^0.60.4",
     "@unocss/nuxt": "^0.60.4",
     "@unocss/preset-tagify": "^0.60.4",
-    "@unocss/reset": "^0.60.4",
+    "@unocss/reset": "^0.62.3",
     "@vite-pwa/nuxt": "^0.8.1",
     "@vueuse/nuxt": "^10.11.0",
     "dayjs": "^1.11.11",
