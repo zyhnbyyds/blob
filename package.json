@@ -52,7 +52,7 @@
     "lint-staged": "^15.2.7",
     "nodemailer": "^6.9.14",
     "nuxt": "^3.12.3",
-    "nuxt-auth-utils": "^0.0.25",
+    "nuxt-auth-utils": "^0.4.4",
     "nuxt-lodash": "^2.5.3",
     "nuxt-mongoose": "^1.0.6",
     "nuxt-typed-router": "^3.6.5",
