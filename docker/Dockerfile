@@ -1,4 +1,4 @@
-FROM node:22.1.0
+FROM node:22.10.0
 
 WORKDIR /usr/app/blob
 
