@@ -46,7 +46,7 @@
     "dayjs": "^1.11.11",
     "eslint": "^9.7.0",
     "eslint-plugin-format": "^0.1.2",
-    "happy-dom": "^14.12.3",
+    "happy-dom": "^15.10.2",
     "husky": "^9.0.11",
     "jsonwebtoken": "^9.0.2",
     "lint-staged": "^15.2.7",
